@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {ScrollView, View, Text, Image, TouchableOpacity, StyleSheet, LayoutAnimation } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '../theme/colors';
 
 // Dummy data for charts and lists
 const chartData = {
@@ -15,7 +16,13 @@ const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];  // day labels for chart
 const categoryUnits = {
   Distance: 'km',
   Calories: 'kcal',
-  Hydration: 'L'
+  Hydration: 'ml'
+};
+
+const CATEGORY_BACKGROUNDS = {
+  Calories: colors.orangeSecondary,
+  Hydration: colors.cyanSecondary,
+  Distance: colors.blueSecondary,
 };
 
 const favoriteRecipes = [
@@ -29,14 +36,11 @@ const favoriteActivities = [
 ];
 
 // Theme colors
-const bluePrimary = '#1F4C77';       // dark blue
-const ORANGE = '#F2994A';              // orange accent
-const LIGHT_ORANGE = 'rgba(242,153,74,0.1)';  // light orange background for buttons
 const LIGHT_BLUE = 'rgba(31,76,119,0.1)';     // light blue background for buttons
 const CATEGORY_COLORS = {
-  Distance: bluePrimary,
-  Calories: ORANGE,
-  Hydration: '#2D9CDB'                // medium blue for hydration category
+  Distance: colors.bluePrimary,
+  Calories: colors.orangePrimary,
+  Hydration: colors.cyanPrimary,               // medium blue for hydration category
 };
 
 export default function ProfileScreen({ navigation }) {
@@ -48,6 +52,7 @@ export default function ProfileScreen({ navigation }) {
 
   const unit = categoryUnits[selectedCategory];
   const isHydration = selectedCategory === 'Hydration';
+  const categoryBackgroundColor = CATEGORY_BACKGROUNDS[selectedCategory] || '#fff';
 
   const displayData = isHydration
     ? currentData.map(val => val / 1000)
@@ -73,11 +78,11 @@ export default function ProfileScreen({ navigation }) {
         {/* Header Row */}
         <View style={styles.headerRow}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Ionicons name="arrow-back" size={24} color={bluePrimary} />
+            <Ionicons name="arrow-back" size={24} color={colors.bluePrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Profile</Text>
           <TouchableOpacity onPress={() => { /* Settings icon pressed (no action) */ }}>
-            <Ionicons name="settings-outline" size={24} color={bluePrimary} />
+            <Ionicons name="settings-outline" size={24} color={colors.bluePrimary} />
           </TouchableOpacity>
         </View>
 
@@ -146,7 +151,7 @@ export default function ProfileScreen({ navigation }) {
 </View>
 
 {/* Chart Section */}
-<View style={styles.statsSection}>
+<View style={[styles.statsSection, { backgroundColor: categoryBackgroundColor }]}>
   <View style={styles.chartGridContainer}>
 
     {/* Grid Lines + Y-axis Labels */}
@@ -186,9 +191,12 @@ export default function ProfileScreen({ navigation }) {
 
         {/* Favorite Recipes Section */}
         <View style={[styles.sectionCard, { marginTop: 16 }]}>
-          <View style={[styles.sectionHeader, { backgroundColor: ORANGE }]}>
-            <Text style={styles.sectionHeaderText}>Favorite recipes</Text>
+          <View style={[styles.sectionRecipesHeader]}>
           </View>
+          <View style={styles.headerContent}>
+            <Text style={styles.sectionHeaderTextRecipes}>Favorite recipes</Text>
+          </View>
+          <View style={styles.sectionRecipesHeaderUnderline} />
           <View style={styles.sectionContent}>
             {favoriteRecipes.map(item => (
               <View key={item.id} style={styles.favoriteItem}>
@@ -198,23 +206,26 @@ export default function ProfileScreen({ navigation }) {
                   <Text style={styles.itemTitle}>{item.title}</Text>
                   <Text style={styles.itemSubtitle}>{item.kcal} kcal   {item.time}</Text>
                 </View>
-                <Ionicons name="heart" size={20} color={ORANGE} />
+                <Ionicons name="heart" size={20} color={colors.orangePrimary} />
               </View>
             ))}
           </View>
           <TouchableOpacity 
-            style={[styles.showAllButton, { backgroundColor: LIGHT_ORANGE }]} 
+            style={[styles.showAllButton, { backgroundColor: colors.orangeSecondary }]} 
             onPress={() => { /* Show all recipes (navigate or action) */ }}
           >
-            <Text style={[styles.showAllButtonText, { color: ORANGE }]}>Show all favorite Recipes</Text>
+            <Text style={[styles.showAllButtonText, { color: colors.orangePrimary }]}>Show all favorite Recipes</Text>
           </TouchableOpacity>
         </View>
 
         {/* Favorite Sport Activities Section */}
         <View style={[styles.sectionCard, { marginTop: 16, marginBottom: 24 }]}>
-          <View style={[styles.sectionHeader, { backgroundColor: bluePrimary }]}>
-            <Text style={styles.sectionHeaderText}>Favorite sport activities</Text>
+          <View style={[styles.sectioActivitiesnHeader]}>
           </View>
+          <View style={styles.headerContent}>
+            <Text style={styles.sectionHeaderTextActivities}>Favorite sport activities</Text>
+          </View>
+          <View style={styles.sectionActivitiesHeaderUnderline} />
           <View style={styles.sectionContent}>
             {favoriteActivities.map(item => (
               <View key={item.id} style={styles.favoriteItem}>
@@ -224,15 +235,15 @@ export default function ProfileScreen({ navigation }) {
                   <Text style={styles.itemTitle}>{item.title}</Text>
                   <Text style={styles.itemSubtitle}>{item.time}</Text>
                 </View>
-                <Ionicons name="heart" size={20} color={bluePrimary} />
+                <Ionicons name="heart" size={20} color={colors.bluePrimary} />
               </View>
             ))}
           </View>
           <TouchableOpacity 
-            style={[styles.showAllButton, { backgroundColor: LIGHT_BLUE }]} 
+            style={[styles.showAllButton, { backgroundColor: colors.blueSecondary }]} 
             onPress={() => { /* Show all activities (navigate or action) */ }}
           >
-            <Text style={[styles.showAllButtonText, { color: bluePrimary }]}>Show all favorite Sport Activities</Text>
+            <Text style={[styles.showAllButtonText, { color: colors.bluePrimary }]}>Show all favorite Sport Activities</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -258,11 +269,11 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: bluePrimary
+    color: colors.bluePrimary
   },
   profileSection: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     marginBottom: 24
   },
   profileImage: {
@@ -277,7 +288,8 @@ const styles = StyleSheet.create({
   profileName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: bluePrimary,
+    color: colors.bluePrimary,
+    alignItems: 'center',
     marginBottom: 4
   },
   profileDetailRow: {
@@ -308,10 +320,10 @@ const styles = StyleSheet.create({
     height: 160,
     paddingHorizontal: 8,
     paddingBottom: 10,
-    backgroundColor: '#D3DEE5',
     borderRadius: 8,
     position: 'relative'
   },
+
   levelContainer: {
     marginRight: 16,
     alignItems: 'center',
@@ -322,56 +334,59 @@ const styles = StyleSheet.create({
     backgroundColor: '#AAC4DA',
   },
 
-chartLineLabel: {
-  width: 60,
-  textAlign: 'right',
-  fontSize: 12,
-  color: '#1F4C77'
-},
+  chartLineLabel: {
+    width: 60,
+    textAlign: 'right',
+    fontSize: 12,
+  },
 
-barChart: {
-  flexDirection: 'row',
-  alignItems: 'flex-end',
-  justifyContent: 'space-around',
-  height: '100%',
-},
+  barChart: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-around',
+    height: '100%',
+    alignItems: 'center'
+  },
 
-barContainer: {
-  flex: 1,
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  marginHorizontal: 2,
-  
-},
+  barContainer: {
+    flexDirection: 'row',
+    alignItems: 'right',
+    justifyContent: 'flex-end',
+    marginHorizontal: 1,
+  },
 
-bar: {
-  width: 12,
-  borderRadius: 6
-},
+  bar: {
+    width: 12,
+    borderRadius: 6
+  },
 
-chartLabelsRow: {
-  flexDirection: 'row',
-  justifyContent: 'space-around',
-  marginTop: 4
-},
+  chartLabelsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginTop: 4
+  },
 
-chartLabel: {
-  fontSize: 12,
-  color: '#1F4C77',
-  fontWeight: '600'
-},
+  chartLabel: {
+    fontSize: 12,
+    color: '#1F4C77',
+    alignItems: 'center',
+    fontWeight: '600'
+  },
 
   levelNumber: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: bluePrimary,
+    color: colors.bluePrimary,
     lineHeight: 28,
     marginLeft: 16,
   },
+
   levelLabel: {
     fontSize: 16,
     left: 10,
     color: '#555',
+    color: colors.bluePrimary,
     marginBottom: 4,
   },
   xpBarContainer: {
@@ -397,7 +412,7 @@ chartLabel: {
     justifyContent: 'center'
   },
   xpBarFill: {
-    backgroundColor: ORANGE,
+    backgroundColor: colors.orangePrimary,
     height: '100%',
     borderRadius: 20,
     justifyContent: 'center',
@@ -416,15 +431,14 @@ chartLabel: {
  
 
   statsSection: {
-    backgroundColor: '#D3DEE5',
     marginBottom: 20,
     borderRadius: 20,
+    elevation: 4,
   },
 
   statsTabs: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center',
     marginBottom: 12
   },
   statsTabText: {
@@ -459,11 +473,25 @@ chartLabel: {
   },
   barContainer: {
     flex: 1,
-    marginHorizontal: 7,
+    marginHorizontal: 10,
     alignItems: 'left'
   },
+  sectionRecipesHeaderUnderline: {
+    height: 1,
+    alignSelf: 'center',
+    backgroundColor: colors.orangePrimary,
+    width: '93%',
+    borderRadius: 2,
+  },
+  sectionActivitiesHeaderUnderline: {
+    height: 1,
+    alignSelf: 'center',
+    backgroundColor: colors.bluePrimary,
+    width: '93%',
+    borderRadius: 2,
+  },
   bar: {
-    width: 30,
+    width: 24,
     borderRadius: 2
   },
   chartLabelsRow: {
@@ -471,6 +499,7 @@ chartLabel: {
     justifyContent: 'space-between',
     marginTop: 4,
     paddingHorizontal: 18,
+
     marginBottom: 10
   },
   chartGridLine: {
@@ -481,7 +510,7 @@ chartLabel: {
   },
   chartLabel: {
     fontSize: 12,
-    color: '#555'
+    color: colors.bluePrimary
   },
 
 
@@ -489,31 +518,54 @@ chartLabel: {
   sectionCard: {
     backgroundColor: '#fff',
     borderRadius: 16,
-    paddingBottom: 12,
     overflow: 'hidden',
-    elevation: 3,
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
   },
-  sectionHeader: {
-    padding: 12,
+  sectionRecipesHeader: {
+    backgroundColor: colors.orangePrimary, // solid orange bar
+    padding: 10,
+    paddingBottom: 12,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
   },
-  sectionHeaderText: {
-    color: '#fff',
+  sectioActivitiesnHeader: {
+    backgroundColor: colors.bluePrimary, // solid orange bar
+    padding: 10,
+    paddingBottom: 12,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+  },
+
+  headerContent: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 12,
+    paddingTop: 8,
+    paddingBottom: 12,
+    borderTopLeftRadius: 16,  
+    borderTopRightRadius: 16,
+    marginTop: -11,
+  },
+  sectionHeaderTextRecipes: {
+    color: colors.orangePrimary,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+
+  sectionHeaderTextActivities: {
+    color: colors.bluePrimary,
     fontWeight: 'bold',
     fontSize: 16,
   },
   sectionContent: {
-    padding: 12,
+    padding: 11,
   },
   favoriteItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 10,
   },
   itemImagePlaceholder: {
     width: 48,
@@ -526,20 +578,22 @@ chartLabel: {
     flex: 1,
   },
   itemTitle: {
-    fontWeight: 'bold',
     fontSize: 14,
     marginBottom: 2,
+    color : colors.bluePrimary
   },
   itemSubtitle: {
     fontSize: 12,
     color: '#555',
+    color : colors.bluePrimary
   },
   showAllButton: {
     marginHorizontal: 12,
-    marginTop: 4,
     paddingVertical: 10,
     borderRadius: 16,
     alignItems: 'center',
+    marginBottom: 15,
+    elevation: 4,
   },
   showAllButtonText: {
     fontWeight: 'bold',
