@@ -29,12 +29,12 @@ const favoriteActivities = [
 ];
 
 // Theme colors
-const PRIMARY_COLOR = '#1F4C77';       // dark blue
+const bluePrimary = '#1F4C77';       // dark blue
 const ORANGE = '#F2994A';              // orange accent
 const LIGHT_ORANGE = 'rgba(242,153,74,0.1)';  // light orange background for buttons
 const LIGHT_BLUE = 'rgba(31,76,119,0.1)';     // light blue background for buttons
 const CATEGORY_COLORS = {
-  Distance: PRIMARY_COLOR,
+  Distance: bluePrimary,
   Calories: ORANGE,
   Hydration: '#2D9CDB'                // medium blue for hydration category
 };
@@ -73,11 +73,11 @@ export default function ProfileScreen({ navigation }) {
         {/* Header Row */}
         <View style={styles.headerRow}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Ionicons name="arrow-back" size={24} color={PRIMARY_COLOR} />
+            <Ionicons name="arrow-back" size={24} color={bluePrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Profile</Text>
           <TouchableOpacity onPress={() => { /* Settings icon pressed (no action) */ }}>
-            <Ionicons name="settings-outline" size={24} color={PRIMARY_COLOR} />
+            <Ionicons name="settings-outline" size={24} color={bluePrimary} />
           </TouchableOpacity>
         </View>
 
@@ -212,7 +212,7 @@ export default function ProfileScreen({ navigation }) {
 
         {/* Favorite Sport Activities Section */}
         <View style={[styles.sectionCard, { marginTop: 16, marginBottom: 24 }]}>
-          <View style={[styles.sectionHeader, { backgroundColor: PRIMARY_COLOR }]}>
+          <View style={[styles.sectionHeader, { backgroundColor: bluePrimary }]}>
             <Text style={styles.sectionHeaderText}>Favorite sport activities</Text>
           </View>
           <View style={styles.sectionContent}>
@@ -224,7 +224,7 @@ export default function ProfileScreen({ navigation }) {
                   <Text style={styles.itemTitle}>{item.title}</Text>
                   <Text style={styles.itemSubtitle}>{item.time}</Text>
                 </View>
-                <Ionicons name="heart" size={20} color={PRIMARY_COLOR} />
+                <Ionicons name="heart" size={20} color={bluePrimary} />
               </View>
             ))}
           </View>
@@ -232,7 +232,7 @@ export default function ProfileScreen({ navigation }) {
             style={[styles.showAllButton, { backgroundColor: LIGHT_BLUE }]} 
             onPress={() => { /* Show all activities (navigate or action) */ }}
           >
-            <Text style={[styles.showAllButtonText, { color: PRIMARY_COLOR }]}>Show all favorite Sport Activities</Text>
+            <Text style={[styles.showAllButtonText, { color: bluePrimary }]}>Show all favorite Sport Activities</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: PRIMARY_COLOR
+    color: bluePrimary
   },
   profileSection: {
     flexDirection: 'row',
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
   profileName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: PRIMARY_COLOR,
+    color: bluePrimary,
     marginBottom: 4
   },
   profileDetailRow: {
@@ -364,7 +364,7 @@ chartLabel: {
   levelNumber: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: PRIMARY_COLOR,
+    color: bluePrimary,
     lineHeight: 28,
     marginLeft: 16,
   },
