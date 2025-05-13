@@ -6,10 +6,11 @@ import HubsScreen from '../screens/HubsScreen';
 import IdeasScreen from '../screens/IdeasScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { colors } from '../theme/colors';
 
 const Tab = createBottomTabNavigator();
 
-function PlusButton({ children, onPress }) {
+function PlusButton({ onPress }) {
   return (
     <TouchableOpacity style={styles.plusButton} onPress={onPress}>
       <Text style={styles.plusIcon}>＋</Text>
@@ -23,8 +24,8 @@ export default function TabNavigation() {
       screenOptions={({ route }) => ({
         tabBarShowLabel: true,
         tabBarLabelStyle: { fontSize: 12 },
-        tabBarActiveTintColor: '#1F4C77',  // TODO colors in 1 place
-        tabBarInactiveTintColor: '#487696',
+        tabBarActiveTintColor: colors.bluePrimary,  // TODO colors in 1 place
+        tabBarInactiveTintColor: colors.blueTertiary,
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           switch (route.name) {
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center', // centers horizontally within tab bar slot
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1F4C77',
+    backgroundColor: colors.bluePrimary,
     width: 70,
     height: 70,
     borderRadius: 35,

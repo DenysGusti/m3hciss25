@@ -9,6 +9,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { colors } from '../theme/colors';
 
 export default function HomeScreen() {
   return (
@@ -42,7 +43,7 @@ export default function HomeScreen() {
               size={180}
               width={14}
               fill={60}
-              tintColor="#01416D"
+              tintColor={colors.bluePrimary}
               backgroundColor="#eee"
               rotation={0}
               lineCap="round"
@@ -52,7 +53,7 @@ export default function HomeScreen() {
               size={140}
               width={13}
               fill={80}
-              tintColor="#FF8C42"
+              tintColor={colors.orangePrimary}
               backgroundColor="#eee"
               rotation={0}
               lineCap="round"
@@ -62,7 +63,7 @@ export default function HomeScreen() {
               size={100}
               width={12}
               fill={95}
-              tintColor="#00B4D8"
+              tintColor={colors.cyanPrimary}
               backgroundColor="#eee"
               rotation={0}
               lineCap="round"
@@ -73,22 +74,31 @@ export default function HomeScreen() {
           {/* METRICS */}
           <View style={styles.metricsRow}>
             <View style={styles.metric}>
-              <MaterialIcons name="route" size={24} color="#01416D" />
+              <MaterialIcons name="route" size={24} color={colors.bluePrimary} />
               <Text style={styles.metricLabel}>Distance</Text>
               <Text style={styles.metricValue}>4.3 / 7 km</Text>
             </View>
             <View style={styles.metric}>
-              <Ionicons name="flame-outline" size={24} color="#FF8C42" />
+              <Ionicons name="flame-outline" size={24} color={colors.orangePrimary} />
               <Text style={styles.metricLabel}>Calories</Text>
               <Text style={styles.metricValue}>1800 / 2000 kcal</Text>
             </View>
             <View style={styles.metric}>
-              <Ionicons name="water-outline" size={24} color="#00B4D8" />
+              <Ionicons name="water-outline" size={24} color={colors.cyanPrimary} />
               <Text style={styles.metricLabel}>Hydration</Text>
               <Text style={styles.metricValue}>1.9 / 2 l</Text>
             </View>
           </View>
         </View>
+      </View>
+
+      {/* XP Level and Progress Bar */}
+      <View style={styles.xpContainer}>
+        <Text style={styles.xpLabel}>Today's xp</Text>
+        <View style={styles.xpBarBackground}>
+          <View style={[styles.xpBarFill, { width: `${(15 / 60) * 100}%` }]} />
+        </View>
+        <Text style={styles.xpValue}>15 / 60 xp</Text>
       </View>
     </View>
   );
@@ -111,7 +121,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#01416D'
+    color: colors.bluePrimary
   },
   dateRow: {
     flexDirection: 'row',
@@ -121,7 +131,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   dateBox: {
-    backgroundColor: '#01416D',
+    backgroundColor: colors.bluePrimary,
     paddingVertical: 8,
     paddingHorizontal: 24,
     borderRadius: 14,
@@ -170,7 +180,46 @@ const styles = StyleSheet.create({
   metricValue: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#01416D',
+    color: colors.bluePrimary,
     marginTop: 1,
+  },
+  xpContainer: {
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 20,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 20,
+    padding: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    marginBottom: 20
+  },
+  xpLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.bluePrimary,
+    marginBottom: 6,
+  },
+  xpBarBackground: {
+    width: '100%',
+    height: 10,
+    backgroundColor: '#ddd',
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  xpBarFill: {
+    height: '100%',
+    backgroundColor: colors.orangePrimary,
+    borderRadius: 5,
+  },
+  xpValue: {
+    marginTop: 6,
+    fontSize: 12,
+    fontWeight: '500',
+    color: colors.bluePrimary,
+    alignSelf: 'flex-end',
   },
 });
