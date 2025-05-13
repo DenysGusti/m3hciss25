@@ -243,7 +243,6 @@ export default function ProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
-    backgroundColor: '#FFF'
   },
   scrollContainer: {
     paddingHorizontal: 16,
@@ -488,64 +487,61 @@ chartLabel: {
 
 
   sectionCard: {
-    backgroundColor: '#FFF',
-    borderRadius: 12,
-    // Shadow for iOS
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    paddingBottom: 12,
+    overflow: 'hidden',
+    elevation: 3,
     shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
-    // Elevation for Android
-    elevation: 2,
-    width: '100%'
+    shadowRadius: 6,
   },
   sectionHeader: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12
+    padding: 12,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
   sectionHeaderText: {
-    fontSize: 16,
+    color: '#fff',
     fontWeight: 'bold',
-    color: '#FFF'
+    fontSize: 16,
   },
   sectionContent: {
-    paddingHorizontal: 12,
-    paddingVertical: 8
+    padding: 12,
   },
   favoriteItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12
+    marginBottom: 16,
   },
   itemImagePlaceholder: {
-    width: 40,
-    height: 40,
-    borderRadius: 8,
-    backgroundColor: '#CCC',
-    marginRight: 12
+    width: 48,
+    height: 48,
+    borderRadius: 12,
+    backgroundColor: '#ccc',
+    marginRight: 12,
   },
   itemInfo: {
-    flex: 1
+    flex: 1,
   },
   itemTitle: {
+    fontWeight: 'bold',
     fontSize: 14,
-    fontWeight: '600',
-    marginBottom: 2
+    marginBottom: 2,
   },
   itemSubtitle: {
     fontSize: 12,
-    color: '#555'
+    color: '#555',
   },
   showAllButton: {
-    paddingVertical: 8,
+    marginHorizontal: 12,
+    marginTop: 4,
+    paddingVertical: 10,
+    borderRadius: 16,
     alignItems: 'center',
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12
   },
   showAllButtonText: {
-    fontSize: 14,
-    fontWeight: '600'
-  }
+    fontWeight: 'bold',
+  },
 });
