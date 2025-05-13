@@ -1,40 +1,67 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import React, { useState } from 'react';
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-const TABS = ['Recipes', 'Activites'];
+const TABS = ['Recipes', 'Activities'];
+
+const bodyFocusOptions = [
+  { label: 'Face', image: require('../../assets/IdeasImages/face.jpg') },
+  { label: 'Back', image: require('../../assets/IdeasImages/Back.jpg') },
+  { label: 'Abs', image: require('../../assets/IdeasImages/abs.jpg') },
+  { label: 'Arm', image: require('../../assets/IdeasImages/Arm.jpg') },
+  { label: 'Leg', image: require('../../assets/IdeasImages/Leg.jpg') },
+  
+  
+ 
+];
+const levelOptions = ['Beginner', 'Intermidiate', 'Advanced', 'Expert'];
+const durationOptions = ['5–10 min', '10–15 min', '15–20 min', '20–30 min'];
 
 const breakfast = [
-
-  {id: 'r1', title: 'Scrambled Egg & Avocado Tacos', subtitle: '400 kcal', image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg')},
-  {id: 'r2', title: 'Apple-Cranberry Oatmeal with Pecans', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Breakfast_Oatmeal.jpg')},
-  {id: 'r3', title: 'Cottage Cheese Bowl with Berries & Walnuts', subtitle: '300 kcal', image: require('../../assets/IdeasImages/Breakfast_Cottage_Cheese_Fruit_Bowl.jpg')},
+  { id: 'r1', title: 'Scrambled Egg & Avocado Tacos', subtitle: '400 kcal', image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg') },
+  { id: 'r2', title: 'Apple-Cranberry Oatmeal with Pecans', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Breakfast_Oatmeal.jpg') },
+  { id: 'r3', title: 'Cottage Cheese Bowl with Berries & Walnuts', subtitle: '300 kcal', image: require('../../assets/IdeasImages/Breakfast_Cottage_Cheese_Fruit_Bowl.jpg') },
 ];
-const snack = [
 
-  {id: 'n1', title: 'Mango Salsa Dips', subtitle: '130 kcal', image: require('../../assets/IdeasImages/Snack_Salsa.jpg')},
-  {id: 'n2', title: 'Chia Pudding', subtitle: '200 kcal', image: require('../../assets/IdeasImages/Chia_Pudding.jpg')},
-  {id: 'n3', title: 'Homemade Oat Bars', subtitle: '190 kcal', image: require('../../assets/IdeasImages/Snack_Bars.jpg')},
+const snack = [
+  { id: 'n1', title: 'Mango Salsa Dips', subtitle: '130 kcal', image: require('../../assets/IdeasImages/Snack_Salsa.jpg') },
+  { id: 'n2', title: 'Chia Pudding', subtitle: '200 kcal', image: require('../../assets/IdeasImages/Chia_Pudding.jpg') },
+  { id: 'n3', title: 'Homemade Oat Bars', subtitle: '190 kcal', image: require('../../assets/IdeasImages/Snack_Bars.jpg') },
 ];
 
 const lunch = [
-
-  {id: 'n1', title: 'Tomato-lentil Soup ', subtitle: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg')},
-  {id: 'n2', title: 'Teriyaki Chicken Rice Bowl', subtitle: '470 kcal', image: require('../../assets/IdeasImages/Lunch_Rice_Bowl.jpg')},
-  {id: 'n3', title: 'Chickpea Quinoa Salad', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Lunch_Chickpea_Quinoa_Salad_8.jpg')},
+  { id: 'n1', title: 'Tomato-lentil Soup ', subtitle: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
+  { id: 'n2', title: 'Teriyaki Chicken Rice Bowl', subtitle: '470 kcal', image: require('../../assets/IdeasImages/Lunch_Rice_Bowl.jpg') },
+  { id: 'n3', title: 'Chickpea Quinoa Salad', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Lunch_Chickpea_Quinoa_Salad_8.jpg') },
 ];
 
-const activites = [
-  
-  {id: 'n1', title: 'XXXX', subtitle: 'XXXX', image: require('../../assets/IdeasImages/Lunch_Soup.jpg')},
-  {id: 'n2', title: 'XXXX', subtitle: 'XXXX', image: require('../../assets/IdeasImages/Lunch_Soup.jpg')},
-  {id: 'n3', title: 'XXXX', subtitle: 'XXXX', image: require('../../assets/IdeasImages/Lunch_Soup.jpg')},
-];
-
+const activities = {
+  pilates: [
+    { id: 'a1', title: 'Pilates Ball Worout', subtitle: '20 minutes', image: require('../../assets/IdeasImages/pilates.jpg') },
+    { id: 'a2', title: 'Pilates Sculpt', subtitle: '30 minutes', image: require('../../assets/IdeasImages/pilates_2.jpg') },
+    { id: 'a3', title: 'Dynamic Pilates', subtitle: '30 minutes', image: require('../../assets/IdeasImages/pilates_3.jpg') },
+  ],
+  yoga: [
+    { id: 'a4', title: 'Sunrise Yoga', subtitle: '25 minutes', image: require('../../assets/IdeasImages/Yoga.jpg') },
+    { id: 'a5', title: 'Night Meditation', subtitle: '20 minutes', image: require('../../assets/IdeasImages/yoga2.jpg') },
+    { id: 'a6', title: 'Stretch & Flow', subtitle: '20 minutes', image: require('../../assets/IdeasImages/yoga3.jpg') },
+  ],
+};
 
 export default function IdeasScreen() {
   const [activeTab, setActiveTab] = useState('Recipes');
+  const [selectedBodyFocus, setSelectedBodyFocus] = useState(null);
+  const [selectedLevel, setSelectedLevel] = useState(null);
+  const [selectedDuration, setSelectedDuration] = useState(null);
 
   return (
     <View style={styles.container}>
@@ -44,7 +71,6 @@ export default function IdeasScreen() {
         <TouchableOpacity><MaterialIcons name="tune" size={24} color="#01416D" /></TouchableOpacity>
       </View>
 
-      
       <View style={styles.tabsRow}>
         {TABS.map(tab => (
           <TouchableOpacity key={tab} onPress={() => setActiveTab(tab)}>
@@ -58,7 +84,7 @@ export default function IdeasScreen() {
       <ScrollView contentContainerStyle={styles.list}>
         {activeTab === 'Recipes' && (
           <>
-            <SectionHeader title="Breakfast" />
+            <SectionHeaderRecipes title="Breakfast" />
             <FlatList
               data={breakfast}
               keyExtractor={item => item.id}
@@ -67,7 +93,7 @@ export default function IdeasScreen() {
               renderItem={({ item }) => <ClubCard {...item} />}
             />
 
-            <SectionHeader title="Snack" />
+            <SectionHeaderRecipes title="Snack" />
             <FlatList
               data={snack}
               keyExtractor={item => item.id}
@@ -76,7 +102,7 @@ export default function IdeasScreen() {
               renderItem={({ item }) => <ClubCard {...item} />}
             />
 
-            <SectionHeader title="Lunch" />
+            <SectionHeaderRecipes title="Lunch" />
             <FlatList
               data={lunch}
               keyExtractor={item => item.id}
@@ -87,41 +113,61 @@ export default function IdeasScreen() {
           </>
         )}
 
-        {activeTab === 'Activites' && (
-          <>
-            <SectionHeader title="Activities" />
-            <FlatList
-              data={activites}
-              keyExtractor={item => item.id}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => <ClubCard {...item} />}
-            />
-          </>
-        )}
+      {activeTab === 'Activities' && (
+      <>
+        <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
+        <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
+        <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
+            
+        <SectionHeaderActivities title="Pilates" />
+        <FlatList
+          data={activities.pilates}
+          keyExtractor={item => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => <ClubCard {...item} />}
+        />
+
+        <SectionHeaderActivities title="Yoga" />
+        <FlatList
+          data={activities.yoga}
+          keyExtractor={item => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => <ClubCard {...item} />}
+        />
+      </>
+      )}
       </ScrollView>
     </View>
   );
 }
 
-function SectionHeader({ title, onPress }) {
+function SectionHeaderRecipes({ title, onPress }) {
   return (
     <View style={styles.sectionHeader}>
-      <Text style={styles.sectionTitle}>{title}</Text>
+      <Text style={styles.sectionTitleRecipes}>{title}</Text>
       <TouchableOpacity onPress={onPress}>
         <Text style={styles.viewAll}>View all ›</Text>
       </TouchableOpacity>
     </View>
   );
 }
+function SectionHeaderActivities({ title, onPress }) {
+  return (
+    <View style={styles.SectionHeader}>
+      <Text style={styles.sectionTitleActivities}>{title}</Text>
+    </View>
+  );
+}
 
-export function ClubCard({ title, subtitle, image }) {
+function ClubCard({ title, subtitle, image }) {
   return (
     <View style={[styles.card, styles.clubCard]}>
       <View style={styles.imageWrapper}>
         <Image source={image} style={styles.cardImage} resizeMode="cover" />
         <View style={styles.heartIconContainer}>
-          <AntDesign name="hearto" color="#01416D"/>
+          <AntDesign name="hearto" color="#01416D" />
         </View>
       </View>
 
@@ -134,6 +180,83 @@ export function ClubCard({ title, subtitle, image }) {
     </View>
   );
 }
+
+function FilterGroup({ title, options, selected, onSelect }) {
+  const isIconGroup = typeof options[0] === 'object';
+
+  const renderItem = ({ item }) => {
+    const value = isIconGroup ? item.label : item;
+    const isSelected = selected === value;
+
+    return (
+      <TouchableOpacity
+        onPress={() => onSelect(isSelected ? null : value)}
+        style={
+          isIconGroup
+            ? {
+                width: 64,
+                height: 64,
+                borderRadius: 30,
+                overflow: 'hidden',
+                marginRight: 8,
+                backgroundColor: '#E5F1F8',
+              }
+            : {
+                paddingVertical: 6,
+                paddingHorizontal: 14,
+                backgroundColor: isSelected ? '#01416D' : '#E5F1F8',
+                borderRadius: 20,
+                marginRight: 8,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }
+        }
+      >
+        {isIconGroup ? (
+          <>
+            <Image
+              source={item.image}
+              style={{
+                width: '100%',
+                height: '100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+              }}
+              resizeMode="cover"
+            />
+            <View
+              style={{
+                ...StyleSheet.absoluteFillObject,
+                backgroundColor: 'rgba(0,0,0,0.3)',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Text style={{ color: 'white', fontWeight: '600', fontSize: 10 }}>{item.label}</Text>
+            </View>
+          </>
+        ) : (
+          <Text style={{ color: isSelected ? 'white' : '#01416D', fontWeight: '500' }}>{item}</Text>
+        )}
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <View style={{ marginVertical: 10 }}>
+      <Text style={{ fontWeight: '600', color: '#01416D', marginBottom: 6 }}>{title}</Text>
+      <FlatList
+        data={options}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => (typeof item === 'string' ? item : item.label)}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
+    </View>
+  );
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -186,7 +309,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     marginTop: 16,
   },
-  sectionTitle: {
+  sectionTitleActivities: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#01416D',
+  },
+  sectionTitleRecipes: {
     fontSize: 16,
     fontWeight: '600',
     color: '#FF7C12',
