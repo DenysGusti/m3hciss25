@@ -92,13 +92,22 @@ export default function HomeScreen() {
         </View>
       </View>
 
-      {/* XP Level and Progress Bar */}
-      <View style={styles.xpContainer}>
-        <Text style={styles.xpLabel}>Today's xp</Text>
-        <View style={styles.xpBarBackground}>
-          <View style={[styles.xpBarFill, { width: `${(15 / 60) * 100}%` }]} />
+      <View style={styles.todayXpSection}>
+        {/* Rocket Icon */}
+        <View style={styles.iconContainer}>
+          <Ionicons name="rocket-outline" size={28} color={colors.bluePrimary} />
         </View>
-        <Text style={styles.xpValue}>15 / 60 xp</Text>
+
+        {/* XP Bar and Text */}
+        <View style={styles.todayXpContent}>
+          <Text style={styles.todayXpLabel}>Today's XP</Text>
+          <View style={styles.todayXpBarBackground}>
+            <View style={styles.todayXpBarInner}>
+              <View style={[styles.todayXpBarFill, { width: `${(15 / 60) * 100}%` }]} />
+              <Text style={styles.todayXpTextOnBar}>15 / 60 xp</Text>
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -183,43 +192,70 @@ const styles = StyleSheet.create({
     color: colors.bluePrimary,
     marginTop: 1,
   },
-  xpContainer: {
-    width: '90%',
-    alignSelf: 'center',
-    marginTop: 20,
-    backgroundColor: '#f0f0f0',
+  todayXpSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.blueSecondary,
     borderRadius: 20,
+    marginHorizontal: 16,
+    marginTop: 10,
     padding: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
-    marginBottom: 20
+    marginBottom: 20,
   },
-  xpLabel: {
+  iconContainer: {
+    marginRight: 12,
+    marginLeft: 4,
+  },
+  todayXpContent: {
+    flex: 1,
+  },
+  todayXpLabel: {
     fontSize: 14,
     fontWeight: '600',
     color: colors.bluePrimary,
     marginBottom: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  xpBarBackground: {
-    width: '100%',
-    height: 10,
-    backgroundColor: '#ddd',
-    borderRadius: 5,
+  todayXpBarBackground: {
+    backgroundColor: '#fff',
+    height: 28,
+    borderRadius: 20,
     overflow: 'hidden',
+    position: 'relative',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  xpBarFill: {
-    height: '100%',
+  todayXpBarInner: {
+    flex: 1,
+    paddingHorizontal: 3,
+    paddingVertical: 3,
+    justifyContent: 'center'
+  },
+  todayXpBarFill: {
     backgroundColor: colors.orangePrimary,
-    borderRadius: 5,
+    height: '100%',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'flex-end', 
+    paddingRight: 8,  
   },
-  xpValue: {
-    marginTop: 6,
+  todayXpTextOnBar: {
+    position: 'absolute',
+    right: 30,
     fontSize: 12,
-    fontWeight: '500',
     color: colors.bluePrimary,
-    alignSelf: 'flex-end',
+    fontWeight: '600',
   },
 });
