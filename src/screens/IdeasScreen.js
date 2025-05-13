@@ -18,7 +18,7 @@ const bodyFocusOptions = [
   { label: 'Back', image: require('../../assets/IdeasImages/Back.jpg') },
   { label: 'Abs', image: require('../../assets/IdeasImages/abs.jpg') },
   { label: 'Arm', image: require('../../assets/IdeasImages/Arm.jpg') },
-  { label: 'Leg', image: require('../../assets/IdeasImages/Leg.jpg') },
+  { label: 'Leg', image: require('../../assets/IdeasImages/leg1.jpg') },
   
   
  
