@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'right',
     justifyContent: 'flex-end',
-    marginHorizontal: 1,
+    marginHorizontal: 0.5,
   },
 
   bar: {
