@@ -29,7 +29,7 @@ const durationOptions = ['5–10 min', '10–15 min', '15–20 min', '20–30 mi
 const breakfast = [
   { id: 'r1', title: 'Scrambled Egg & Avocado Tacos', subtitle: '400 kcal', image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg') },
   { id: 'r2', title: 'Apple-Cranberry Oatmeal with Pecans', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Breakfast_Oatmeal.jpg') },
-  { id: 'r3', title: 'Cottage Cheese Bowl with Berries & Walnuts', subtitle: '300 kcal', image: require('../../assets/IdeasImages/Breakfast_Cottage_Cheese_Fruit_Bowl.jpg') },
+  { id: 'r3', title: 'Cottage Cheese Bowl with Berries', subtitle: '300 kcal', image: require('../../assets/IdeasImages/Breakfast_Cottage_Cheese_Fruit_Bowl.jpg') },
 ];
 
 const snack = [
@@ -39,7 +39,7 @@ const snack = [
 ];
 
 const lunch = [
-  { id: 'n1', title: 'Tomato-lentil Soup ', subtitle: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
+  { id: 'n1', title: 'Tomato-lentil Soup & Bread', subtitle: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
   { id: 'n2', title: 'Teriyaki Chicken Rice Bowl', subtitle: '470 kcal', image: require('../../assets/IdeasImages/Lunch_Rice_Bowl.jpg') },
   { id: 'n3', title: 'Chickpea Quinoa Salad', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Lunch_Chickpea_Quinoa_Salad_8.jpg') },
 ];
@@ -90,7 +90,7 @@ export default function IdeasScreen() {
               keyExtractor={item => item.id}
               horizontal
               showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => <ClubCard {...item} />}
+              renderItem={({ item }) => <ClubCard {...item} type="recipes" />}
             />
 
             <SectionHeaderRecipes title="Snack" />
@@ -99,7 +99,7 @@ export default function IdeasScreen() {
               keyExtractor={item => item.id}
               horizontal
               showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => <ClubCard {...item} />}
+              renderItem={({ item }) => <ClubCard {...item} type="recipes" />}
             />
 
             <SectionHeaderRecipes title="Lunch" />
@@ -108,7 +108,7 @@ export default function IdeasScreen() {
               keyExtractor={item => item.id}
               horizontal
               showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => <ClubCard {...item} />}
+              renderItem={({ item }) => <ClubCard {...item} type="recipes" />}
             />
           </>
         )}
@@ -125,7 +125,7 @@ export default function IdeasScreen() {
           keyExtractor={item => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => <ClubCard {...item} />}
+          renderItem={({ item }) => <ClubCard {...item} type="activities" />}
         />
 
         <SectionHeaderActivities title="Yoga" />
@@ -134,7 +134,7 @@ export default function IdeasScreen() {
           keyExtractor={item => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => <ClubCard {...item} />}
+          renderItem={({ item }) => <ClubCard {...item} type="activities"/>}
         />
       </>
       )}
@@ -161,14 +161,20 @@ function SectionHeaderActivities({ title, onPress }) {
   );
 }
 
-function ClubCard({ title, subtitle, image }) {
+function ClubCard({ title, subtitle, image, type = "recipes" }) {
+  const [liked, setLiked] = useState(false);
+
+  const toggleLike = () => {
+    setLiked(prev => !prev);
+  };
+
+  // Farblogik je nach Tab
+  const heartColor = type === "recipes" ? "#FF7C12" : "#01416D";
+
   return (
     <View style={[styles.card, styles.clubCard]}>
       <View style={styles.imageWrapper}>
         <Image source={image} style={styles.cardImage} resizeMode="cover" />
-        <View style={styles.heartIconContainer}>
-          <AntDesign name="hearto" color="#01416D" />
-        </View>
       </View>
 
       <View style={styles.cardFooter}>
@@ -176,6 +182,14 @@ function ClubCard({ title, subtitle, image }) {
           <Text style={styles.cardTitle}>{title}</Text>
           <Text style={styles.cardSubtitle}>{subtitle}</Text>
         </View>
+
+        <TouchableOpacity style={styles.heartIconContainer} onPress={toggleLike}>
+          <AntDesign
+            name={liked ? "heart" : "hearto"}
+            size={12}
+            color={heartColor}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
