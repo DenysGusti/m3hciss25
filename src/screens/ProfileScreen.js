@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
   chartLine: {
     flex: 1,
     height: 1,
-    backgroundColor: '#AAC4DA',
+    backgroundColor: colors.bluePrimary,
   },
 
   chartLineLabel: {
@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
 
   chartLabel: {
     fontSize: 12,
-    color: '#1F4C77',
+    color: colors.bluePrimary,
     alignItems: 'center',
     fontWeight: '600'
   },
@@ -378,7 +378,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 'bold',
     color: colors.bluePrimary,
-    lineHeight: 28,
+    lineHeight: 40,
     marginLeft: 16,
   },
 
