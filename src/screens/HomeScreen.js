@@ -1,163 +1,307 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet
-} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { colors } from '../theme/colors';
 import { ScrollView } from 'react-native-gesture-handler';
 
+const metrics = [
+  {
+    label: 'Distance',
+    value: 4.3,
+    goal: 7,
+    unit: 'km',
+    icon: <MaterialIcons name="route" size={24} color={colors.bluePrimary} />,
+    color: colors.bluePrimary,
+    ringSize: 280,
+  },
+  {
+    label: 'Calories',
+    value: 1800,
+    goal: 2000,
+    unit: 'kcal',
+    icon: <Ionicons name="flame-outline" size={24} color={colors.orangePrimary} />,
+    color: colors.orangePrimary,
+    ringSize: 220,
+  },
+  {
+    label: 'Hydration',
+    value: 1.9,
+    goal: 2,
+    unit: 'l',
+    icon: <Ionicons name="water-outline" size={24} color={colors.cyanPrimary} />,
+    color: colors.cyanPrimary,
+    ringSize: 160,
+  },
+];
+
+const initialTasks = [
+  { label: 'Drink 2 liters of water', completed: false, xp: 10 },
+  { label: 'Eat 5 servings of vegetables', completed: false, xp: 20 },
+  { label: 'Walk 10,000 steps', completed: false, xp: 25 },
+  { label: 'Avoid sugary snacks', completed: false, xp: 15 },
+  { label: 'Sleep at least 7 hours', completed: false, xp: 30 },
+  { label: 'Do 30 minutes of exercise', completed: false, xp: 35 },
+];
+
+const XP_GOAL = initialTasks.reduce((total, task) => total + task.xp, 0);
+
+const mealData = [
+  {
+    label: 'Breakfast',
+    icon: 'egg-fried',
+    dishes: [
+      { name: 'Oatmeal with berries', kcal: 150, protein: 5, carbs: 30, fat: 3 },
+      { name: 'Scrambled eggs', kcal: 170, protein: 12, carbs: 2, fat: 12 },
+      { name: 'Orange juice', kcal: 100, protein: 2, carbs: 22, fat: 0 },
+    ],
+  },
+  {
+    label: 'Snack',
+    icon: 'food-croissant',
+    dishes: [
+      { name: 'Greek yogurt', kcal: 100, protein: 10, carbs: 8, fat: 0 },
+      { name: 'Almonds', kcal: 100, protein: 4, carbs: 4, fat: 9 },
+    ],
+  },
+  {
+    label: 'Lunch',
+    icon: 'hamburger',
+    dishes: [
+      { name: 'Grilled chicken breast', kcal: 250, protein: 40, carbs: 0, fat: 5 },
+      { name: 'Brown rice', kcal: 200, protein: 5, carbs: 45, fat: 2 },
+      { name: 'Steamed broccoli', kcal: 150, protein: 5, carbs: 10, fat: 0 },
+    ],
+  },
+  {
+    label: 'Dinner',
+    icon: 'noodles',
+    dishes: [
+      { name: 'Pasta with tomato sauce', kcal: 400, protein: 15, carbs: 60, fat: 7 },
+      { name: 'Side salad', kcal: 150, protein: 3, carbs: 10, fat: 10 },
+    ],
+  }
+];
+
 export default function HomeScreen() {
+  const [tasks, setTasks] = useState(initialTasks);
+  const totalXp = tasks.reduce(
+    (acc, task) => acc + (task.completed ? task.xp : 0),
+    0
+  );
+
   return (
     <ScrollView style={styles.container}>
-      {/* HEADER */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Day 1</Text>
-        <TouchableOpacity>
-          <MaterialCommunityIcons name="calendar-month-outline" size={24} color={colors.bluePrimary} />
-        </TouchableOpacity>
-      </View>
-
-      {/* DATE */}
-      <View style={styles.dateRow}>
-        <TouchableOpacity>
-          <MaterialCommunityIcons name="chevron-left" size={40} color={colors.bluePrimary} />
-        </TouchableOpacity>
-        <View style={styles.dateBox}>
-          <Text style={styles.dateText}>Mon, 14 Apr</Text>
-        </View>
-        <TouchableOpacity>
-          <MaterialCommunityIcons name="chevron-right" size={40} color={colors.bluePrimary} />
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.wrapper}>
-        {/* RINGS */}
-        <View style={styles.centerBlock}>
-          <View style={styles.ringWrapper}>
-            <AnimatedCircularProgress
-              size={180}
-              width={14}
-              fill={60}
-              tintColor={colors.bluePrimary}
-              backgroundColor="#eee"
-              rotation={0}
-              lineCap="round"
-              style={styles.absolute}
-            />
-            <AnimatedCircularProgress
-              size={140}
-              width={13}
-              fill={80}
-              tintColor={colors.orangePrimary}
-              backgroundColor="#eee"
-              rotation={0}
-              lineCap="round"
-              style={styles.absolute}
-            />
-            <AnimatedCircularProgress
-              size={100}
-              width={12}
-              fill={95}
-              tintColor={colors.cyanPrimary}
-              backgroundColor="#eee"
-              rotation={0}
-              lineCap="round"
-              style={styles.absolute}
-            />
-          </View>
-
-          {/* METRICS */}
-          <View style={styles.metricsRow}>
-            <View style={styles.metric}>
-              <MaterialIcons name="route" size={24} color={colors.bluePrimary} />
-              <Text style={styles.metricLabel}>Distance</Text>
-              <Text style={styles.metricValue}>4.3 / 7 km</Text>
-            </View>
-            <View style={styles.metric}>
-              <Ionicons name="flame-outline" size={24} color={colors.orangePrimary} />
-              <Text style={styles.metricLabel}>Calories</Text>
-              <Text style={styles.metricValue}>1800 / 2000 kcal</Text>
-            </View>
-            <View style={styles.metric}>
-              <Ionicons name="water-outline" size={24} color={colors.cyanPrimary} />
-              <Text style={styles.metricLabel}>Hydration</Text>
-              <Text style={styles.metricValue}>1.9 / 2 l</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      {/* XP Section */}
-      <View style={styles.todayXpSection}>
-        <View style={styles.iconContainer}>
-          <Ionicons name="rocket-outline" size={28} color={colors.bluePrimary} />
-        </View>
-
-        <View style={styles.todayXpContent}>
-          <Text style={styles.todayXpLabel}>Today's XP</Text>
-          <View style={styles.todayXpBarBackground}>
-            <View style={styles.todayXpBarInner}>
-              <View style={[styles.todayXpBarFill, { width: `${(15 / 60) * 100}%` }]} />
-              <Text style={styles.todayXpTextOnBar}>15 / 60 xp</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      {/* Tasks for Today */}
-      <View style={[styles.sectionCard]}>
-        <View style={[styles.sectionHeader, { backgroundColor: colors.bluePrimary }]}>
-        </View>
-        <View style={styles.headerContent}>
-          <Text style={styles.sectionHeaderText}>Tasks for today</Text>
-        </View>
-        <View style={styles.sectionHeaderUnderline} />
-        <View style={styles.sectionContent}>
-          {['Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum', 'Lorem ipsum'].map((task, i) => (
-            <View key={i} style={styles.sectionRow}>
-              <Ionicons
-                name={i === 1 ? 'checkmark-circle' : 'ellipse-outline'}
-                size={30}
-                color={i === 1 ? colors.cyanPrimary : colors.blueTertiary}
-              />
-              <Text style={styles.taskText}>{task}</Text>
-              <Text style={styles.taskXp}>+ 15 xp</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {/* Calories Counter */}
-      <View style={[styles.sectionCard, { marginTop: 20, marginBottom: 20 }]}>
-        <View style={[styles.sectionHeader, { backgroundColor: colors.orangePrimary }]}>
-        </View>
-        <View style={styles.headerContent}>
-          <Text style={styles.sectionHeaderText}>Calories counter</Text>
-        </View>
-        <View style={styles.sectionHeaderUnderline} />
-        <View style={styles.sectionContent}>
-          {[
-            { label: 'Breakfast', icon: 'magnify' },
-            { label: 'Snack', icon: 'bread-slice-outline' },
-            { label: 'Lunch', icon: 'silverware-fork-knife' },
-            { label: 'Dinner', icon: 'food' }
-          ].map((item, i) => (
-            <View key={i} style={styles.sectionRow}>
-              <View style={styles.iconWrapper}>
-                <MaterialCommunityIcons name={item.icon} size={32} color={colors.orangePrimary} />
-              </View>
-              <Text style={styles.mealText}>{item.label}</Text>
-              <Text style={styles.kcalText}>320 kcal</Text>
-              <Ionicons name="chevron-up" size={24} color={colors.orangePrimary} />
-            </View>
-          ))}
-        </View>
-      </View>
+      <Header />
+      <Date />
+      <RingsMetrics />
+      <XPSection totalXp={totalXp} />
+      <TodayTasks tasks={tasks} setTasks={setTasks} />
+      <CaloriesCounter />
     </ScrollView>
+  );
+}
+
+function Header() {
+  return (<View style={styles.header}>
+    <Text style={styles.headerTitle}>Day 1</Text>
+    <TouchableOpacity>
+      <MaterialCommunityIcons name="calendar-month-outline" size={24} color={colors.bluePrimary} />
+    </TouchableOpacity>
+  </View>);
+}
+
+function Date() {
+  return (
+    <View style={styles.dateRow}>
+      <TouchableOpacity>
+        <MaterialCommunityIcons name="chevron-left" size={40} color={colors.bluePrimary} />
+      </TouchableOpacity>
+      <View style={styles.dateBox}>
+        <Text style={styles.dateText}>Mon, 14 Apr</Text>
+      </View>
+      <TouchableOpacity>
+        <MaterialCommunityIcons name="chevron-right" size={40} color={colors.bluePrimary} />
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function RingsMetrics() {
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.centerBlock}>
+        <View style={styles.ringWrapper}>
+          {metrics.map((m, index) => (
+            <AnimatedCircularProgress
+              key={index}
+              size={m.ringSize}
+              width={24}
+              fill={m.value / m.goal * 100}
+              tintColor={m.color}
+              backgroundColor="#eee"
+              rotation={0}
+              lineCap="round"
+              style={styles.absolute}
+            />
+          ))}
+        </View>
+
+        <View style={styles.metricsRow}>
+          {metrics.map((m, index) => (
+            <View key={index} style={styles.metric}>
+              {m.icon}
+              <Text style={styles.metricLabel}>{m.label}</Text>
+              <Text style={[styles.metricValue, { color: colors.bluePrimary }]}>
+                {m.value}
+                <Text style={[styles.metricValue, { color: colors.blueTertiary }]}> / {m.goal} {m.unit}</Text>
+              </Text>
+            </View>
+          ))}
+        </View>
+      </View>
+    </View>
+  );
+}
+
+function XPSection({ totalXp }) {
+  const xpFillPercent = Math.max((totalXp / XP_GOAL) * 100, 7.5);
+
+  return (
+    <View style={styles.todayXpSection}>
+      <View style={styles.iconContainer}>
+        <Ionicons name="rocket-outline" size={28} color={colors.bluePrimary} />
+      </View>
+
+      <View style={styles.todayXpContent}>
+        <Text style={styles.todayXpLabel}>Today's XP</Text>
+        <View style={styles.todayXpBarBackground}>
+          <View style={styles.todayXpBarInner}>
+            <View style={[styles.todayXpBarFill, { width: `${xpFillPercent}%` }]} />
+            <Text style={styles.todayXpTextOnBar}>{totalXp} / {XP_GOAL} xp</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+function TodayTasks({ tasks, setTasks }) {
+  return (
+    <View style={[styles.sectionCard]}>
+      <View style={[styles.sectionHeader, { backgroundColor: colors.bluePrimary }]}>
+      </View>
+      <View style={styles.headerContent}>
+        <Text style={styles.sectionHeaderText}>Tasks for today</Text>
+      </View>
+      <View style={styles.sectionHeaderUnderline} />
+      <View style={styles.sectionContent}>
+        {tasks.map((task, i) => (
+          <TouchableOpacity
+            key={i}
+            onPress={() => {
+              const updated = [...tasks];
+              updated[i].completed = !updated[i].completed;
+              setTasks(updated);
+            }}
+            style={styles.sectionRow}
+          >
+            <Ionicons
+              name={task.completed ? 'checkmark-circle' : 'ellipse-outline'}
+              size={30}
+              color={task.completed ? colors.cyanPrimary : colors.blueTertiary}
+            />
+            <Text style={styles.taskText}>{task.label}</Text>
+            <Text style={styles.taskXp}>+ {task.xp} xp</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+function CaloriesCounter() {
+  const [expandedMeal, setExpandedMeal] = useState(null);
+  const [animations] = useState(
+    mealData.map(() => new Animated.Value(0))
+  );
+
+  const toggleMeal = (index) => {
+    const isExpanding = expandedMeal !== index;
+
+    Animated.timing(animations[index], {
+      toValue: isExpanding ? 1 : 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start(() => {
+      setExpandedMeal(isExpanding ? index : null);
+    });
+
+    // Collapse other panels (if only one should be open)
+    mealData.forEach((_, i) => {
+      if (i !== index) {
+        animations[i].setValue(0);
+      }
+    });
+  };
+
+  return (
+    <View style={[styles.sectionCard, { marginTop: 20, marginBottom: 20 }]}>
+      <View style={[styles.sectionHeader, { backgroundColor: colors.orangePrimary }]}>
+      </View>
+      <View style={styles.headerContent}>
+        <Text style={styles.sectionHeaderText}>Calories counter</Text>
+      </View>
+      <View style={styles.sectionHeaderUnderline} />
+      <View style={styles.sectionContent}>
+        {mealData.map((item, i) => {
+          const animatedHeight = animations[i].interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, item.dishes.length * 55], // Approx height per dish
+            extrapolate: 'clamp',
+          });
+
+          return (
+            <View key={i}>
+              <TouchableOpacity
+                style={styles.sectionRow}
+                onPress={() => toggleMeal(i)}
+              >
+                <View style={styles.iconWrapper}>
+                  <MaterialCommunityIcons name={item.icon} size={32} color={colors.orangePrimary} />
+                </View>
+                <Text style={styles.mealText}>{item.label}</Text>
+                <Text style={styles.kcalText}>{item.dishes.reduce((sum, dish) => sum + dish.kcal, 0)} kcal</Text>
+                <Ionicons
+                  name={expandedMeal === i ? 'chevron-up' : 'chevron-down'}
+                  size={24}
+                  color={colors.orangePrimary}
+                />
+              </TouchableOpacity>
+
+              <Animated.View style={[styles.expandedSectionContent, { height: animatedHeight }]}>
+                {item.dishes.map((dish, j) => (
+                  <View
+                    key={j}
+                    style={[styles.dishContainer, { borderTopWidth: j !== 0 ? 1 : 0 }]}
+                  >
+                    <View style={styles.dishRow}>
+                      <Text style={{ color: colors.bluePrimary }}>{dish.name}</Text>
+                      <Text style={{ color: colors.bluePrimary }}>{dish.kcal} kcal</Text>
+                    </View>
+                    <Text style={styles.dishMacros}>
+                      <Text style={{ fontWeight: 'bold' }}>Protein:</Text> {dish.protein} gr{'   '}
+                      <Text style={{ fontWeight: 'bold' }}>Carbs:</Text> {dish.carbs} gr{'   '}
+                      <Text style={{ fontWeight: 'bold' }}>Fat:</Text> {dish.fat} gr
+                    </Text>
+                  </View>
+                ))}
+              </Animated.View>
+            </View>
+          );
+        })}
+      </View>
+    </View>
   );
 }
 
@@ -196,12 +340,13 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#eee',
+    color: '#fff',
   },
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 12,
+    marginTop: 64,
+    marginBottom: 12,
   },
   centerBlock: {
     alignItems: 'center',
@@ -222,22 +367,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 32,
-    marginTop: 8,
+    gap: 24,
+    marginTop: 64,
   },
   metric: {
     alignItems: 'center',
     width: 110,
   },
   metricLabel: {
-    fontSize: 12,
-    color: '#777',
+    fontSize: 14,
+    color: colors.bluePrimary,
+    fontWeight: 'bold',
     marginTop: 2,
   },
   metricValue: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '600',
-    color: colors.bluePrimary,
     marginTop: 1,
   },
   todayXpSection: {
@@ -344,7 +489,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 8,
-    borderTopWidth: 0.8,
+    borderTopWidth: 1,
     borderTopColor: colors.blueTertiary,
   },
   taskText: {
@@ -377,5 +522,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.orangePrimary,
     marginRight: 8,
+  },
+  expandedSectionContent: {
+    overflow: 'hidden',
+    backgroundColor: colors.blueSecondary,
+    paddingHorizontal: 16,
+    marginHorizontal: -11,
+  },
+  dishContainer: {
+    paddingVertical: 8,
+    borderTopWidth: 1,
+    borderTopColor: colors.blueTertiary,
+  },
+  dishRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  dishMacros: {
+    fontSize: 12,
+    color: colors.bluePrimary,
+    marginTop: 2,
   },
 });
