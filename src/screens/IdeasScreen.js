@@ -23,7 +23,7 @@ const bodyFocusOptions = [
   
  
 ];
-const levelOptions = ['Beginner', 'Intermidiate', 'Advanced', 'Expert'];
+const levelOptions = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 const durationOptions = ['5–10 min', '10–15 min', '15–20 min', '20–30 min'];
 
 const breakfast = [
@@ -33,9 +33,9 @@ const breakfast = [
 ];
 
 const snack = [
-  { id: 'n1', title: 'Mango Salsa Dips', subtitle: '130 kcal', image: require('../../assets/IdeasImages/Snack_Salsa.jpg') },
-  { id: 'n2', title: 'Chia Pudding', subtitle: '200 kcal', image: require('../../assets/IdeasImages/Chia_Pudding.jpg') },
-  { id: 'n3', title: 'Homemade Oat Bars', subtitle: '190 kcal', image: require('../../assets/IdeasImages/Snack_Bars.jpg') },
+  { id: 'n1', title: 'Mango Salsa Dips with Veggis', subtitle: '130 kcal', image: require('../../assets/IdeasImages/Snack_Salsa.jpg') },
+  { id: 'n2', title: 'Chia Pudding with Berries', subtitle: '200 kcal', image: require('../../assets/IdeasImages/Chia_Pudding.jpg') },
+  { id: 'n3', title: 'Homemade Oat    Bars', subtitle: '190 kcal', image: require('../../assets/IdeasImages/Snack_Bars.jpg') },
 ];
 
 const lunch = [
@@ -46,22 +46,35 @@ const lunch = [
 
 const activities = {
   pilates: [
-    { id: 'a1', title: 'Pilates Ball Worout', subtitle: '20 minutes', image: require('../../assets/IdeasImages/pilates.jpg') },
-    { id: 'a2', title: 'Pilates Sculpt', subtitle: '30 minutes', image: require('../../assets/IdeasImages/pilates_2.jpg') },
-    { id: 'a3', title: 'Dynamic Pilates', subtitle: '30 minutes', image: require('../../assets/IdeasImages/pilates_3.jpg') },
+    { id: 'a1', title: 'Pilates Ball Worout', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Arm'], image: require('../../assets/IdeasImages/pilates.jpg')},
+    { id: 'a2',title: 'Pilates Sculpt',subtitle: '30 minutes',level: 'Advanced',duration: '20–30 min',bodyFocus: ['Abs'],image: require('../../assets/IdeasImages/pilates_2.jpg') },
+    { id: 'a3', title: 'Dynamic Pilates', subtitle: '30 minutes', level: 'Beginner', duration: '20–30 min', bodyFocus: ['Back'], image: require('../../assets/IdeasImages/pilates_3.jpg') },
   ],
-  yoga: [
-    { id: 'a4', title: 'Sunrise Yoga', subtitle: '25 minutes', image: require('../../assets/IdeasImages/Yoga.jpg') },
-    { id: 'a5', title: 'Night Meditation', subtitle: '20 minutes', image: require('../../assets/IdeasImages/yoga2.jpg') },
-    { id: 'a6', title: 'Stretch & Flow', subtitle: '20 minutes', image: require('../../assets/IdeasImages/yoga3.jpg') },
+  yoga: [ 
+    { id: 'a4', title: 'Sunrise Yoga', subtitle: '25 minutes', level: 'Beginner', duration: '20–30 min', bodyFocus: ['Abs', 'Back'], image: require('../../assets/IdeasImages/Yoga.jpg') },
+    { id: 'a5', title: 'Night Meditation', subtitle: '20 minutes', level: 'Expert', duration: '15–20 min', bodyFocus: ['Face'], image: require('../../assets/IdeasImages/yoga2.jpg') },
+    { id: 'a6',title: 'Stretch & Flow', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Back'], image: require('../../assets/IdeasImages/yoga3.jpg') },
   ],
 };
 
 export default function IdeasScreen() {
   const [activeTab, setActiveTab] = useState('Recipes');
-  const [selectedBodyFocus, setSelectedBodyFocus] = useState(null);
-  const [selectedLevel, setSelectedLevel] = useState(null);
-  const [selectedDuration, setSelectedDuration] = useState(null);
+  const [selectedBodyFocus, setSelectedBodyFocus] = useState([]);
+  const [selectedLevel, setSelectedLevel] = useState([]);
+  const [selectedDuration, setSelectedDuration] = useState([]);
+  const filterActivities = (list) => {
+  return list.filter(item => {
+    const matchesLevel =
+      selectedLevel.length === 0 || selectedLevel.includes(item.level);
+    const matchesDuration =
+      selectedDuration.length === 0 || selectedDuration.includes(item.duration);
+    const matchesBodyFocus =
+      selectedBodyFocus.length === 0 ||
+      selectedBodyFocus.some(focus => item.bodyFocus.includes(focus));
+
+    return matchesLevel && matchesDuration && matchesBodyFocus;
+  });
+};
 
   return (
     <View style={styles.container}>
@@ -85,6 +98,7 @@ export default function IdeasScreen() {
         {activeTab === 'Recipes' && (
           <>
             <SectionHeaderRecipes title="Breakfast" />
+            <View style={{ marginTop: 7 }}>
             <FlatList
               data={breakfast}
               keyExtractor={item => item.id}
@@ -92,8 +106,10 @@ export default function IdeasScreen() {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => <ClubCard {...item} type="recipes" />}
             />
+            </View>
 
             <SectionHeaderRecipes title="Snack" />
+            <View style={{ marginTop: 7 }}>
             <FlatList
               data={snack}
               keyExtractor={item => item.id}
@@ -101,8 +117,10 @@ export default function IdeasScreen() {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => <ClubCard {...item} type="recipes" />}
             />
+            </View>
 
             <SectionHeaderRecipes title="Lunch" />
+            <View style={{ marginTop: 7 }}>
             <FlatList
               data={lunch}
               keyExtractor={item => item.id}
@@ -110,34 +128,39 @@ export default function IdeasScreen() {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => <ClubCard {...item} type="recipes" />}
             />
+            </View>
           </>
         )}
 
       {activeTab === 'Activities' && (
-      <>
-        <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
-        <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
-        <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
-            
-        <SectionHeaderActivities title="Pilates" />
-        <FlatList
-          data={activities.pilates}
-          keyExtractor={item => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => <ClubCard {...item} type="activities" />}
-        />
+  <>
+    <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
+    <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
+    <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
+    
+    <SectionHeaderActivities title="Pilates" />
+    <View style={{ marginTop: 10 }}>
+      <FlatList
+        data={filterActivities(activities.pilates)}
+        keyExtractor={item => item.id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => <ClubCard {...item} type="activities" />}
+      />
+    </View>
 
-        <SectionHeaderActivities title="Yoga" />
-        <FlatList
-          data={activities.yoga}
-          keyExtractor={item => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => <ClubCard {...item} type="activities"/>}
-        />
-      </>
-      )}
+    <SectionHeaderActivities title="Yoga" />
+    <View style={{ marginTop: 10 }}>
+    <FlatList
+      data={filterActivities(activities.yoga)}
+      keyExtractor={item => item.id}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      renderItem={({ item }) => <ClubCard {...item} type="activities" />}
+    />
+    </View>
+  </>
+)}
       </ScrollView>
     </View>
   );
@@ -168,7 +191,6 @@ function ClubCard({ title, subtitle, image, type = "recipes" }) {
     setLiked(prev => !prev);
   };
 
-  // Farblogik je nach Tab
   const heartColor = type === "recipes" ? "#FF7C12" : "#01416D";
 
   return (
@@ -186,7 +208,7 @@ function ClubCard({ title, subtitle, image, type = "recipes" }) {
         <TouchableOpacity style={styles.heartIconContainer} onPress={toggleLike}>
           <AntDesign
             name={liked ? "heart" : "hearto"}
-            size={12}
+            size={20}
             color={heartColor}
           />
         </TouchableOpacity>
@@ -197,14 +219,29 @@ function ClubCard({ title, subtitle, image, type = "recipes" }) {
 
 function FilterGroup({ title, options, selected, onSelect }) {
   const isIconGroup = typeof options[0] === 'object';
+  const isMultiSelect = Array.isArray(selected);
 
   const renderItem = ({ item }) => {
     const value = isIconGroup ? item.label : item;
-    const isSelected = selected === value;
+    const isSelected = isMultiSelect
+      ? Array.isArray(selected) && selected.includes(value)
+      : selected === value;
+
+    const handleSelect = () => {
+      if (isMultiSelect) {
+        if (Array.isArray(selected) && selected.includes(value)) {
+          onSelect(selected.filter(v => v !== value));
+        } else {
+          onSelect([...(selected || []), value]);
+        }
+      } else {
+        onSelect(selected === value ? null : value); 
+      }
+    };
 
     return (
       <TouchableOpacity
-        onPress={() => onSelect(isSelected ? null : value)}
+        onPress={handleSelect}
         style={
           isIconGroup
             ? {
@@ -214,6 +251,8 @@ function FilterGroup({ title, options, selected, onSelect }) {
                 overflow: 'hidden',
                 marginRight: 8,
                 backgroundColor: '#E5F1F8',
+                borderWidth: isSelected ? 2 : 0,
+                borderColor: isSelected ? 'white' : 'transparent',
               }
             : {
                 paddingVertical: 6,
@@ -242,12 +281,14 @@ function FilterGroup({ title, options, selected, onSelect }) {
             <View
               style={{
                 ...StyleSheet.absoluteFillObject,
-                backgroundColor: 'rgba(0,0,0,0.3)',
+                backgroundColor: isSelected ? 'rgba(0,0,0,0.6)' : 'rgba(0,0,0,0.3)',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
-              <Text style={{ color: 'white', fontWeight: '600', fontSize: 10 }}>{item.label}</Text>
+              <Text style={{ color: 'white', fontWeight: isSelected ? '700' : '600', fontSize: 10 }}>
+                {item.label}
+              </Text>
             </View>
           </>
         ) : (
@@ -270,6 +311,7 @@ function FilterGroup({ title, options, selected, onSelect }) {
     </View>
   );
 }
+
 
 
 const styles = StyleSheet.create({
@@ -378,12 +420,13 @@ const styles = StyleSheet.create({
     color: '#487696',
     marginTop: 4,
   },
+
   heartIconContainer: {
     position: 'absolute',
-    top: 8,
-    right: 8,
-    width: 12,
-    height: 11,
+    top: 25,
+    right: 3,
+    width: 32,          
+    height: 32,
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
