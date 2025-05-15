@@ -38,9 +38,14 @@ const snack = [
 ];
 
 const lunch = [
-  { id: 'n1', title: 'Tomato-lentil   Soup & Bread', subtitle: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
-  { id: 'n2', title: 'Teriyaki Chicken Rice Bowl', subtitle: '470 kcal', image: require('../../assets/IdeasImages/Lunch_Rice_Bowl.jpg') },
-  { id: 'n3', title: 'Chickpea Quinoa Salad', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Lunch_Chickpea_Quinoa_Salad_8.jpg') },
+  { id: 'b1', title: 'Tomato-lentil   Soup & Bread', subtitle: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
+  { id: 'b2', title: 'Teriyaki Chicken Rice Bowl', subtitle: '470 kcal', image: require('../../assets/IdeasImages/Lunch_Rice_Bowl.jpg') },
+  { id: 'b3', title: 'Chickpea Quinoa Salad', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Lunch_Chickpea_Quinoa_Salad_8.jpg') },
+];
+const dinner = [
+  { id: 'c1', title: 'Quiche with Mushrooms', subtitle: '490 kcal', image: require('../../assets/IdeasImages/dinner1.jpg') },
+  { id: 'c2', title: 'Lasagna with     Beef', subtitle: '510 kcal', image: require('../../assets/IdeasImages/dinner2.jpg') },
+  { id: 'c3', title: 'Ceaser Salad with Chicken', subtitle: '370 kcal', image: require('../../assets/IdeasImages/dinner3.jpg') },
 ];
 
 const activities = {
@@ -56,11 +61,12 @@ const activities = {
   ],
 };
 
-export default function IdeasScreen() {
+export default function IdeasScreen({ navigation }) {
   const [activeTab, setActiveTab] = useState('Recipes');
   const [selectedBodyFocus, setSelectedBodyFocus] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState([]);
   const [selectedDuration, setSelectedDuration] = useState([]);
+  const [expandedCategory, setExpandedCategory] = useState(null);
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold });
   if (!fontsLoaded) {
     return null;
@@ -80,6 +86,21 @@ export default function IdeasScreen() {
   });
 };
 
+  const handleViewAll = (category) => {
+    setExpandedCategory(category === expandedCategory ? null : category);
+  };
+
+  const handleGoBack = () => {
+    setExpandedCategory(null);
+  };
+
+  const allRecipeSections = [
+  { title: 'Breakfast', data: breakfast },
+  { title: 'Snack', data: snack },
+  { title: 'Lunch', data: lunch },
+  { title: 'Dinner', data: dinner },
+];
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -98,52 +119,87 @@ export default function IdeasScreen() {
         ))}
       </View>
 
-      <ScrollView contentContainerStyle={styles.list}>
+     <ScrollView contentContainerStyle={styles.list}>
         {activeTab === 'Recipes' && (
-          <>
-            <SectionHeaderRecipes title="Breakfast" />
-            <View style={{ marginTop: 7 }}>
-            <FlatList
-              data={breakfast}
-              keyExtractor={item => item.id}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => <ClubCard {...item} type="recipes" />}
-            />
-            </View>
+        <>
+        {expandedCategory === null && (
+        <>
+            <SectionHeaderRecipes title="Breakfast" onPress={() => handleViewAll('Breakfast')} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {  breakfast.map(item => (
+                <ClubCard key={item.id} {...item} type="recipes" />
+              ))}
+            </ScrollView>
 
-            <SectionHeaderRecipes title="Snack" />
-            <View style={{ marginTop: 7 }}>
-            <FlatList
-              data={snack}
-              keyExtractor={item => item.id}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => <ClubCard {...item} type="recipes" />}
-            />
-            </View>
+            <SectionHeaderRecipes title="Snack" onPress={() => handleViewAll('Snack')} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {snack.map(item => (
+                <ClubCard key={item.id} {...item} type="recipes" />
+              ))}
+            </ScrollView>
 
-            <SectionHeaderRecipes title="Lunch" />
-            <View style={{ marginTop: 7 }}>
-            <FlatList
-              data={lunch}
-              keyExtractor={item => item.id}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => <ClubCard {...item} type="recipes" />}
-            />
-            </View>
+            <SectionHeaderRecipes title="Lunch" onPress={() => handleViewAll('Lunch')} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {lunch.map(item => (
+                <ClubCard key={item.id} {...item} type="recipes" />
+              ))}
+            </ScrollView>
+
+            <SectionHeaderRecipes title="Dinner" onPress={() => handleViewAll('Dinner')} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {dinner.map(item => (
+                <ClubCard key={item.id} {...item} type="recipes" />
+             ))}
+            </ScrollView>
           </>
         )}
 
-      {activeTab === 'Activities' && (
-  <>
-    <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
-    <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
-    <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
+        {expandedCategory === 'Breakfast' && (
+          <>
+            <SectionHeaderRecipes title="Breakfast" onPress={handleGoBack} back />
+              {breakfast.map(item => (
+            <ClubCard key={item.id} {...item} type="recipes" />
+            ))}
+          </>
+        )}
+
+        {expandedCategory === 'Snack' && (
+          <>
+            <SectionHeaderRecipes title="Snack" onPress={handleGoBack} back />
+              {snack.map(item => (
+            <ClubCard key={item.id} {...item} type="recipes" />
+            ))}
+          </>
+        )}
+
+        {expandedCategory === 'Lunch' && (
+          <>
+            <SectionHeaderRecipes title="Lunch" onPress={handleGoBack} back />
+              {lunch.map(item => (
+            <ClubCard key={item.id} {...item} type="recipes" />
+            ))}
+          </>
+        )}
+
+        {expandedCategory === 'Dinner' && (
+          <>
+            <SectionHeaderRecipes title="Dinner" onPress={handleGoBack} back />
+              {dinner.map(item => (
+            <ClubCard key={item.id} {...item} type="recipes" />
+            ))}
+          </>
+        )}
+      </>
+    )}
+
+        {activeTab === 'Activities' && (
+          <>
+        <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
+        <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
+        <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
     
-    <SectionHeaderActivities title="Pilates" />
-    <View style={{ marginTop: 10 }}>
+      <SectionHeaderActivities title="Pilates" />
+      <View style={{ marginTop: 10 }}>
       <FlatList
         data={filterActivities(activities.pilates)}
         keyExtractor={item => item.id}
@@ -151,35 +207,36 @@ export default function IdeasScreen() {
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => <ClubCard {...item} type="activities" />}
       />
-    </View>
+      </View>
 
-    <SectionHeaderActivities title="Yoga" />
-    <View style={{ marginTop: 10 }}>
-    <FlatList
-      data={filterActivities(activities.yoga)}
-      keyExtractor={item => item.id}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      renderItem={({ item }) => <ClubCard {...item} type="activities" />}
-    />
-    </View>
-  </>
-)}
-      </ScrollView>
+      <SectionHeaderActivities title="Yoga" />
+      <View style={{ marginTop: 10 }}>
+      <FlatList
+        data={filterActivities(activities.yoga)}
+        keyExtractor={item => item.id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => <ClubCard {...item} type="activities" />}
+      />
+      </View>
+    </>
+  )}
+    </ScrollView>
     </View>
   );
 }
 
-function SectionHeaderRecipes({ title, onPress }) {
+function SectionHeaderRecipes({ title, onPress, back = false }) {
   return (
     <View style={styles.sectionHeader}>
       <Text style={styles.sectionTitleRecipes}>{title}</Text>
       <TouchableOpacity onPress={onPress}>
-        <Text style={styles.viewAll}>View all ›</Text>
+        <Text style={styles.viewAll}>{back ? '‹ Back' : 'View all ›'}</Text>
       </TouchableOpacity>
     </View>
   );
 }
+
 function SectionHeaderActivities({ title, onPress }) {
   return (
     <View style={styles.SectionHeader}>
