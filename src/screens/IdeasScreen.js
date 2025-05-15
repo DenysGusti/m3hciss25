@@ -1,5 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import React, { useState } from 'react';
 import {
   FlatList,
@@ -19,10 +20,8 @@ const bodyFocusOptions = [
   { label: 'Abs', image: require('../../assets/IdeasImages/abs.jpg') },
   { label: 'Arm', image: require('../../assets/IdeasImages/Arm.jpg') },
   { label: 'Leg', image: require('../../assets/IdeasImages/leg1.jpg') },
-  
-  
- 
 ];
+
 const levelOptions = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 const durationOptions = ['5–10 min', '10–15 min', '15–20 min', '20–30 min'];
 
@@ -39,7 +38,7 @@ const snack = [
 ];
 
 const lunch = [
-  { id: 'n1', title: 'Tomato-lentil Soup & Bread', subtitle: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
+  { id: 'n1', title: 'Tomato-lentil   Soup & Bread', subtitle: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
   { id: 'n2', title: 'Teriyaki Chicken Rice Bowl', subtitle: '470 kcal', image: require('../../assets/IdeasImages/Lunch_Rice_Bowl.jpg') },
   { id: 'n3', title: 'Chickpea Quinoa Salad', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Lunch_Chickpea_Quinoa_Salad_8.jpg') },
 ];
@@ -62,6 +61,11 @@ export default function IdeasScreen() {
   const [selectedBodyFocus, setSelectedBodyFocus] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState([]);
   const [selectedDuration, setSelectedDuration] = useState([]);
+  const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   const filterActivities = (list) => {
   return list.filter(item => {
     const matchesLevel =
@@ -80,7 +84,7 @@ export default function IdeasScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity><MaterialIcons name="search" size={24} color="#01416D" /></TouchableOpacity>
-        <Text style={styles.headerTitle}>Ideas</Text>
+        <Text style={styles.headerTitle} >Ideas</Text>
         <TouchableOpacity><MaterialIcons name="tune" size={24} color="#01416D" /></TouchableOpacity>
       </View>
 
@@ -286,13 +290,13 @@ function FilterGroup({ title, options, selected, onSelect }) {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ color: 'white', fontWeight: isSelected ? '700' : '600', fontSize: 10 }}>
+              <Text style={{ color: 'white', fontWeight: isSelected ? '700' : '600', fontSize: 10, fontFamily: isSelected ? 'Poppins_700Bold' : 'Poppins_600SemiBold'}}>
                 {item.label}
               </Text>
             </View>
           </>
         ) : (
-          <Text style={{ color: isSelected ? 'white' : '#01416D', fontWeight: '500' }}>{item}</Text>
+          <Text style={{ color: isSelected ? 'white' : '#01416D', fontWeight: '500' , fontFamily: isSelected ? 'Poppins_600SemiBold' : 'Poppins_400Regular'}}>{item}</Text>
         )}
       </TouchableOpacity>
     );
@@ -300,7 +304,7 @@ function FilterGroup({ title, options, selected, onSelect }) {
 
   return (
     <View style={{ marginVertical: 10 }}>
-      <Text style={{ fontWeight: '600', color: '#01416D', marginBottom: 6 }}>{title}</Text>
+      <Text style={{ fontFamily: 'Poppins_600SemiBold', fontWeight: '600', color: '#01416D', marginBottom: 6 }}>{title}</Text>
       <FlatList
         data={options}
         renderItem={renderItem}
@@ -330,6 +334,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#01416D',
   },
@@ -343,10 +348,12 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#487696',
   },
   activeTab: {
     color: '#01416D',
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '700',
   },
   list: {
@@ -367,16 +374,19 @@ const styles = StyleSheet.create({
   },
   sectionTitleActivities: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#01416D',
   },
   sectionTitleRecipes: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#FF7C12',
   },
   viewAll: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#FF7C12',
   },
   card: {
@@ -412,11 +422,13 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#01416D',
   },
   cardSubtitle: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#487696',
     marginTop: 4,
   },
