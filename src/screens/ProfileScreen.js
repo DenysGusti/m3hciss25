@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import {ScrollView, View, Text, Image, TouchableOpacity, StyleSheet, LayoutAnimation } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold, Poppins_500Medium } from '@expo-google-fonts/poppins';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../theme/colors';
 
@@ -32,11 +33,11 @@ const CATEGORY_COLORS = {
 };
 
 const favoriteRecipes = [
-  { id: 1, title: 'Scrambled Egg & Avocado Tacos', kcal: '400 kcal', image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg') },,
-  { id: 2, title: 'Tomato-lentil   Soup & Bread', kcal: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
-  { id: 3, title: 'Chia Pudding with Berries', kcal: '200 kcal', image: require('../../assets/IdeasImages/Chia_Pudding.jpg') },
-  { id: 4, title: 'Quiche with Mushrooms', kcal: '490 kcal', image: require('../../assets/IdeasImages/dinner1.jpg')},
-  { id: 5, title: 'Ceaser Salad with Chicken', kcal: '370 kcal', image: require('../../assets/IdeasImages/dinner3.jpg') },
+  { id: 1, title: 'Scrambled Egg & Avocado Tacos', kcal: '400', image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg') },,
+  { id: 2, title: 'Tomato-lentil   Soup & Bread', kcal: '270', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
+  { id: 3, title: 'Chia Pudding with Berries', kcal: '200', image: require('../../assets/IdeasImages/Chia_Pudding.jpg') },
+  { id: 4, title: 'Quiche with Mushrooms', kcal: '490', image: require('../../assets/IdeasImages/dinner1.jpg')},
+  { id: 5, title: 'Ceaser Salad with Chicken', kcal: '370', image: require('../../assets/IdeasImages/dinner3.jpg') },
 ];
 const favoriteActivities = [
   { id: 1, title: 'Pilates Ball Worout', time: '20 min', image: require('../../assets/IdeasImages/pilates.jpg')},
@@ -49,6 +50,10 @@ export default function ProfileScreen({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState('Calories');
   const [showAllRecipes, setShowAllRecipes] = useState(false);
   const [showAllActivities, setShowAllActivities] = useState(false);
+  const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold });
+    if (!fontsLoaded) {
+      return null;
+    }
 
   const currentData = chartData[selectedCategory];
   const categoryColor = CATEGORY_COLORS[selectedCategory];
@@ -268,8 +273,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: colors.bluePrimary
+    color: colors.bluePrimary,
+    fontFamily: 'Poppins_600SemiBold',
   },
   profileSection: {
     flexDirection: 'row',
@@ -289,7 +294,7 @@ const styles = StyleSheet.create({
   },
   profileName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins_700Bold',
     color: colors.bluePrimary,
     alignItems: 'center',
     marginBottom: 4
@@ -304,6 +309,7 @@ const styles = StyleSheet.create({
   },
   profileDetailText: {
     fontSize: 14,
+    fontFamily: 'Poppins_500Medium',
     color: '#555'
   },
   xpSection: {
@@ -364,17 +370,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontWeight: '600'
   },
-
   levelNumber: {
     fontSize: 36,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins_500Medium',
     color: colors.bluePrimary,
     lineHeight: 40,
     marginLeft: 16,
   },
-
   levelLabel: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     left: 10,
     color: '#555',
     color: colors.bluePrimary,
@@ -388,9 +393,10 @@ const styles = StyleSheet.create({
     width: '80%',         
     alignSelf: 'center',  
     marginTop: 10,
+    elevation: 3,
   },
   xpBarBackground: {
-    backgroundColor: '#EEE',
+    backgroundColor: '#fff',
     height: 30,
     borderRadius: 20,
     overflow: 'hidden', 
@@ -414,8 +420,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 30,
     fontSize: 12,
-    color: '#555',
+    color: colors.bluePrimary,
     fontWeight: '600',
+    fontFamily: 'Poppins_500Medium',
   },
   statsSection: {
     marginBottom: 20,
@@ -429,6 +436,7 @@ const styles = StyleSheet.create({
   },
   statsTabText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     fontWeight: '600'
   },
   tabUnderline: {
@@ -530,12 +538,12 @@ const styles = StyleSheet.create({
   },
   sectionHeaderTextRecipes: {
     color: colors.orangePrimary,
-    fontWeight: 'bold',
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
   },
   sectionHeaderTextActivities: {
     color: colors.bluePrimary,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 16,
   },
   sectionContent: {
@@ -546,24 +554,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
   },
-  itemImagePlaceholder: {
-    width: 48,
-    height: 48,
-    borderRadius: 12,
-    backgroundColor: '#ccc',
-    marginRight: 12,
-  },
   itemInfo: {
     flex: 1,
   },
   itemTitle: {
     fontSize: 14,
     marginBottom: 2,
+    fontFamily: 'Poppins_400Regular',
     color : colors.bluePrimary
   },
   itemSubtitle: {
     fontSize: 12,
     color: '#555',
+    fontFamily: 'Poppins_400Regular',
     color : colors.bluePrimary
   },
   recipeImage: {
@@ -587,6 +590,6 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   showAllButtonText: {
-    fontWeight: 'bold',
+    fontFamily: 'Poppins_600SemiBold',
   },
 });
