@@ -95,15 +95,15 @@ export default function ProfileScreen({ navigation }) {
           <View style={styles.profileInfo}>
             <Text style={styles.profileName}>Dubovis Olivia</Text>
             <View style={styles.profileDetailRow}>
-              <Ionicons name="mail-outline" size={16} color="#555" style={styles.profileDetailIcon} />
+              <Ionicons name="mail-outline" size={16} color = {colors.bluePrimary} style={styles.profileDetailIcon} />
               <Text style={styles.profileDetailText}>dubovsliliha@gmail.com</Text>
             </View>
             <View style={styles.profileDetailRow}>
-              <Ionicons name="school-outline" size={16} color="#555" style={styles.profileDetailIcon} />
+              <Ionicons name="school-outline" size={16} color = {colors.bluePrimary} style={styles.profileDetailIcon} />
               <Text style={styles.profileDetailText}>University of Vienna</Text>
             </View>
             <View style={styles.profileDetailRow}>
-              <Ionicons name="calendar-outline" size={16} color="#555" style={styles.profileDetailIcon} />
+              <Ionicons name="calendar-outline" size={16} color = {colors.bluePrimary} style={styles.profileDetailIcon} />
               <Text style={styles.profileDetailText}>22 years</Text>
             </View>
           </View>
@@ -134,7 +134,7 @@ export default function ProfileScreen({ navigation }) {
               <View style={styles.statsTab}>
                 <Text
                   style={[styles.statsTabText, {
-                    color: selectedCategory === category ? CATEGORY_COLORS[category] : '#555'
+                    color: selectedCategory === category ? CATEGORY_COLORS[category] : colors.blueTertiary
                   }]}
                 >
                   {category}
@@ -217,7 +217,7 @@ export default function ProfileScreen({ navigation }) {
 
         {/* Favorite Sport Activities Section */}
         <View style={[styles.sectionCard, { marginTop: 16, marginBottom: 24 }]}>
-          <View style={[styles.sectioActivitiesnHeader]}>
+          <View style={[styles.sectionActivitiesHeader]}>
           </View>
           <View style={styles.headerContent}>
             <Text style={styles.sectionHeaderTextActivities}>Favorite sport activities</Text>
@@ -310,15 +310,19 @@ const styles = StyleSheet.create({
   profileDetailText: {
     fontSize: 14,
     fontFamily: 'Poppins_500Medium',
-    color: '#555'
+    color: colors.bluePrimary
   },
   xpSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#D3DEE5',
+    backgroundColor: colors.blueSecondary,
     borderRadius: 20,
     marginBottom: 20,
-    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 6,
   },
   chartGridContainer: {
     height: 160,
@@ -388,19 +392,33 @@ const styles = StyleSheet.create({
   xpBarContainer: {
     flex: 1,
     marginBottom: 14,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 6,
   },
   xpContainer: {
     width: '80%',         
     alignSelf: 'center',  
     marginTop: 10,
-    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 6,
   },
   xpBarBackground: {
     backgroundColor: '#fff',
     height: 30,
     borderRadius: 20,
     overflow: 'hidden', 
-    position: 'relative'
+    position: 'relative',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 6,
   },
   xpBarInner: {
     flex: 1,
@@ -427,6 +445,10 @@ const styles = StyleSheet.create({
   statsSection: {
     marginBottom: 20,
     borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
     elevation: 3,
   },
   statsTabs: {
@@ -461,7 +483,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    marginTop: 15
+    marginTop: 14
   },
   barContainer: {
     flex: 1,
@@ -508,10 +530,11 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
     shadowColor: '#000',
-    shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    elevation: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 6,
+    marginBottom: 18
   },
   sectionRecipesHeader: {
     backgroundColor: colors.orangePrimary, // solid orange bar
@@ -520,7 +543,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
-  sectioActivitiesnHeader: {
+  sectionActivitiesHeader: {
     backgroundColor: colors.bluePrimary, // solid orange bar
     padding: 10,
     paddingBottom: 12,
@@ -587,7 +610,11 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: 'center',
     marginBottom: 20,
-    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 6,
   },
   showAllButtonText: {
     fontFamily: 'Poppins_600SemiBold',
