@@ -9,8 +9,27 @@ import {
   Image,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins';
-
+import {
+  useFonts,
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+} from '@expo-google-fonts/poppins';
 
 const TABS = ['Joined', 'Challenges', 'Clubs', 'Forum'];
 
@@ -91,6 +110,31 @@ const trendingClubs = [
 ];
 
 export default function HubsScreen() {
+
+
+  let [] = useFonts({
+    Poppins_100Thin,
+    Poppins_100Thin_Italic,
+    Poppins_200ExtraLight,
+    Poppins_200ExtraLight_Italic,
+    Poppins_300Light,
+    Poppins_300Light_Italic,
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
+    Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    Poppins_600SemiBold,
+    Poppins_600SemiBold_Italic,
+    Poppins_700Bold,
+    Poppins_700Bold_Italic,
+    Poppins_800ExtraBold,
+    Poppins_800ExtraBold_Italic,
+    Poppins_900Black,
+    Poppins_900Black_Italic
+  });
+
+
+
   const [activeTab, setActiveTab] = useState('Challenges');
 
   return (
@@ -105,7 +149,10 @@ export default function HubsScreen() {
       
       <View style={styles.tab_location}>
         {TABS.map(tab => (
-          <TouchableOpacity key={tab} onPress={() => setActiveTab(tab)}>
+          <TouchableOpacity key={tab} 
+          onPress={() => setActiveTab(tab)}
+          style={styles.tab_button}  
+          >
             <Text style={[styles.tab_title, activeTab === tab && styles.active_tab]}>
               {tab}
             </Text>
@@ -238,9 +285,8 @@ const styles = StyleSheet.create({
     paddingBottom: 8
   },
   hubs_title: { 
-    fontSize: 18, 
-    fontFamily: 'Poppins_600SemiBold',
-    fontWeight: '600', 
+    fontSize: 16, 
+    fontFamily: 'Poppins_700Bold',
     color: '#01416D' 
   },
 
@@ -249,21 +295,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     borderBottomWidth: 1, 
     borderColor: '#ECECEC',
-    paddingVertical: 12, 
+    paddingVertical: 12,
+   //paddingHorizontal: 16,  
     marginTop: 16
+    
   },
 
   tab_title: { 
     fontSize: 16, 
     fontFamily: 'Poppins_600SemiBold',
-    
     color: '#487696' 
   },
 
   active_tab: { 
     color: '#01416D',
+    fontSize: 16, 
     fontFamily: 'Poppins_600SemiBold',
-    fontWeight: '700',
   },
 
   scroll: { 
@@ -282,13 +329,14 @@ const styles = StyleSheet.create({
 
   category_club_title: { 
     fontSize: 16, 
-    fontWeight: '600', 
+    fontFamily: 'Poppins_600SemiBold',
+
     color: '#01416D' 
   },
 
   text_view_all: { 
-    fontSize: 14, 
-    fontFamily: 'Poppins_400Regular',
+    fontSize: 12, 
+    fontFamily: 'Poppins_600SemiBold',
     color: '#487696' 
   },
 
@@ -329,14 +377,13 @@ const styles = StyleSheet.create({
 
   }, 
   card_text_title: { 
-    fontSize: 16, 
+    fontSize: 14, 
     fontFamily: 'Poppins_600SemiBold',
-    fontWeight: '600', 
     color: '#01416D' 
   },
   card_text_subtitle: { 
-    fontSize: 14, 
-    fontFamily: 'Poppins_400Regular',
+    fontSize: 12, 
+    fontFamily: 'Poppins_500Medium',
     color: '#487696', 
     marginTop: 4 
   },
@@ -354,5 +401,11 @@ const styles = StyleSheet.create({
        flex: 1,          
        marginRight: 8,    
      },
+
+     tab_button: {
+      flex: 1,                  // кожна кнопка займає по рівному шматку
+      alignItems: 'center',     // текст по центру всередині цього шматка
+      paddingVertical: 12,
+    },
 
 });
