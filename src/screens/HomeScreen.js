@@ -181,7 +181,7 @@ function RingsMetrics() {
               width={24}
               fill={m.value / m.goal * 100}
               tintColor={m.color}
-              backgroundColor="#eee"
+              backgroundColor={colors.blueSecondary}
               rotation={0}
               lineCap="round"
               style={styles.absolute}
@@ -350,7 +350,7 @@ function CaloriesCounter() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: colors.background,
   },
   header: {
     marginTop: 45,
@@ -359,7 +359,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingTop: 16,
-    paddingBottom: 16
+    paddingBottom: 16,
   },
   headerTitle: {
     fontSize: 16,
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
-    color: '#fff',
+    color: colors.background,
   },
   wrapper: {
     alignItems: 'center',
@@ -461,7 +461,7 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   todayXpBarBackground: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     height: 28,
     borderRadius: 20,
     overflow: 'hidden',
@@ -495,7 +495,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   sectionCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     marginHorizontal: 16,
     borderRadius: 16,
     overflow: 'hidden',
@@ -512,7 +512,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 16,
   },
   headerContent: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     paddingHorizontal: 12,
     paddingTop: 12,
     paddingBottom: 2,
@@ -548,6 +548,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins_400Regular',
     marginTop: 4,
+    marginRight: 2,
   },
   iconWrapper: {
     width: 48,
@@ -571,7 +572,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins_400Regular',
     marginTop: 4,
-    marginRight: 8,
+    marginRight: 10,
   },
   expandedSectionContent: {
     overflow: 'hidden',

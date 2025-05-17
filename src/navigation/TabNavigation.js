@@ -34,7 +34,7 @@ const Tab = createBottomTabNavigator();
 function PlusButton({ onPress }) {
   return (
     <TouchableOpacity style={styles.plusButton} onPress={onPress}>
-      <Ionicons name="add" size={48} color="white" />
+      <Ionicons name="add" size={48} color={colors.background} />
     </TouchableOpacity>
   );
 }
@@ -78,8 +78,9 @@ function NavigationTab({ setModalVisible }) {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarShowLabel: true,
+        tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.tabBarLabel,
-        tabBarItemStyle: { minWidth: 79 },
+        tabBarItemStyle: styles.tabBarItem,
         tabBarActiveTintColor: colors.bluePrimary,
         tabBarInactiveTintColor: colors.blueTertiary,
         headerShown: false,
@@ -171,11 +172,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bluePrimary,
     width: 60,
     height: 60,
-    borderRadius: 35,
+    borderRadius: 60,
+  },
+  tabBar: {
+    backgroundColor: colors.background,
+    // marginLeft: '-3%',
   },
   tabBarLabel: {
     fontSize: 12,
     fontFamily: 'Poppins_500Medium',
+  },
+  tabBarItem: {
+    marginHorizontal: -1,
   },
   modalOverlay: {
     flex: 1,
@@ -184,7 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.3)',
   },
   styledModal: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     width: '100%',
     height: 420,
     borderTopLeftRadius: 20,
