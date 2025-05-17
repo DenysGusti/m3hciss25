@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold, Poppins_500Medium } from '@expo-google-fonts/poppins';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../theme/colors';
+import { shadow } from '../theme/shadow';
 
 // Dummy data for charts and lists
 const chartData = {
@@ -316,11 +317,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.blueSecondary,
     borderRadius: 20,
     marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 6,
+    ...shadow,
   },
   chartGridContainer: {
     height: 160,
@@ -390,21 +387,13 @@ const styles = StyleSheet.create({
   xpBarContainer: {
     flex: 1,
     marginBottom: 14,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 6,
+    ...shadow,
   },
   xpContainer: {
     width: '80%',
     alignSelf: 'center',
     marginTop: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 6,
+    ...shadow,
   },
   xpBarBackground: {
     backgroundColor: colors.background,
@@ -412,11 +401,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
     position: 'relative',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 6,
+    ...shadow,
   },
   xpBarInner: {
     flex: 1,
@@ -443,11 +428,7 @@ const styles = StyleSheet.create({
   statsSection: {
     marginBottom: 20,
     borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    ...shadow,
   },
   statsTabs: {
     flexDirection: 'row',
@@ -527,12 +508,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     borderRadius: 16,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 6,
-    marginBottom: 18
+    marginBottom: 18,
+    ...shadow,
   },
   sectionRecipesHeader: {
     backgroundColor: colors.orangePrimary,
@@ -608,11 +585,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: 'center',
     marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 6,
+    ...shadow,
   },
   showAllButtonText: {
     fontFamily: 'Poppins_600SemiBold',

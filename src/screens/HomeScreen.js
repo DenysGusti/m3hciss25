@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { colors } from '../theme/colors';
+import { shadow } from '../theme/shadow';
 import { ScrollView } from 'react-native-gesture-handler';
 import {
   useFonts,
@@ -383,7 +384,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
     color: colors.background,
-    marginHorizontal: -5,
   },
   wrapper: {
     alignItems: 'center',
@@ -422,13 +422,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins_600SemiBold',
     marginTop: 2,
-    marginHorizontal: -5,
   },
   metricValue: {
     fontSize: 14,
     fontFamily: 'Poppins_500Medium',
     marginTop: 1,
-    marginHorizontal: -5,
   },
   todayXpSection: {
     flexDirection: 'row',
@@ -438,12 +436,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 10,
     padding: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
     marginBottom: 20,
+    ...shadow,
   },
   iconContainer: {
     marginRight: 12,
@@ -457,11 +451,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins_600SemiBold',
     marginBottom: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 6,
+    ...shadow,
   },
   todayXpBarBackground: {
     backgroundColor: colors.background,
@@ -469,11 +459,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
     position: 'relative',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    ...shadow,
   },
   todayXpBarInner: {
     flex: 1,
@@ -502,11 +488,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     borderRadius: 16,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    ...shadow,
   },
   sectionHeader: {
     padding: 10,
@@ -551,7 +533,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins_400Regular',
     marginTop: 4,
-    marginRight: 1,
   },
   iconWrapper: {
     width: 48,
@@ -575,7 +556,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins_400Regular',
     marginTop: 4,
-    marginRight: 9,
+    marginRight: 8,
   },
   expandedSectionContent: {
     overflow: 'hidden',

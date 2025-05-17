@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 import { colors } from '../theme/colors';
+import { shadow } from '../theme/shadow';
 
 const TABS = ['Recipes', 'Activities'];
 
@@ -447,11 +448,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     borderRadius: 12,
     marginBottom: 16,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
+    ...shadow,
   },
   imageWrapper: {
     height: 100,

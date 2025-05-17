@@ -7,6 +7,7 @@ import HubsScreen from '../screens/HubsScreen';
 import IdeasScreen from '../screens/IdeasScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { colors } from '../theme/colors';
+import { shadow } from '../theme/shadow';
 import {
   useFonts,
   Poppins_100Thin,
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_500Medium',
   },
   tabBarItem: {
-    marginHorizontal: -8,
+    marginHorizontal: -16,
   },
   modalOverlay: {
     flex: 1,
@@ -224,11 +225,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 6,
-    elevation: 5,
+    ...shadow,
   },
   buttonText: {
     fontSize: 16,

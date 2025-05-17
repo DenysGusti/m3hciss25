@@ -31,6 +31,7 @@ import {
   Poppins_900Black_Italic,
 } from '@expo-google-fonts/poppins';
 import { colors } from '../theme/colors';
+import { shadow } from '../theme/shadow';
 
 const TABS = ['Joined', 'Challenges', 'Clubs', 'Forum'];
 
@@ -337,11 +338,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     borderRadius: 12,
     marginBottom: 16,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
+    ...shadow,
   },
 
   clubs_card: {
