@@ -36,12 +36,12 @@ const TABS = ['Joined', 'Challenges', 'Clubs', 'Forum'];
 
 
 const challengesData = [
-  { id: '1', title: 'Morning Sip – A 21-Day Ritual', subtitle: '+120 xp', image: require('../../assets/sip.jpg') },
-  { id: '2', title: '7 days of protein breakfast', subtitle: '+70 xp', image: require('../../assets/protein_breakfast.jpg') },
-  { id: '3', title: '21 floors for 21 days', subtitle: '+240 xp', image: require('../../assets/stairs.jpg') },
-  { id: '4', title: '7 Days of Salad Creation', subtitle: '+60 xp', image: require('../../assets/salads.jpg') },
-  { id: '5', title: '10 days of morning walks', subtitle: '+100 xp', image: require('../../assets/morning_walk.jpg') },
-  { id: '6', title: '5 days 5 vegetables or fruits daily', subtitle: '+60 xp', image: require('../../assets/fruits_vegetables.jpg') },
+  { id: '1', title: 'Morning Sip – A 21-Day Ritual', subtitle: '+120 xp', image: require('../../assets/HubsImages/sip.jpg') },
+  { id: '2', title: '7 days of protein breakfast', subtitle: '+70 xp', image: require('../../assets/HubsImages/protein_breakfast.jpg') },
+  { id: '3', title: '21 floors for 21 days', subtitle: '+240 xp', image: require('../../assets/HubsImages/stairs.jpg') },
+  { id: '4', title: '7 Days of Salad Creation', subtitle: '+60 xp', image: require('../../assets/HubsImages/salads.jpg') },
+  { id: '5', title: '10 days of morning walks', subtitle: '+100 xp', image: require('../../assets/HubsImages/morning_walk.jpg') },
+  { id: '6', title: '5 days 5 vegetables or fruits daily', subtitle: '+60 xp', image: require('../../assets/HubsImages/fruits_vegetables.jpg') },
 ];
 
 
@@ -50,19 +50,19 @@ const recommendedClubs = [
     id: 'r1',
     title: 'Along the trails of Vienna',
     subtitle: 'The outskirts of Vienna',
-    image: require('../../assets/hiking.jpg'),
+    image: require('../../assets/HubsImages/hiking.jpg'),
   },
   {
     id: 'r2',
     title: 'Footsteps of Shaolin Warriors',
     subtitle: 'Linke Wienzeile 94, 1060 Vienna',
-    image: require('../../assets/karate.jpg'),
+    image: require('../../assets/HubsImages/karate.jpg'),
   },
   {
     id: 'r3',
     title: 'Roller-skating adventure',
     subtitle: 'Park Prater, 1020 Vienna',
-    image: require('../../assets/roller_skates.jpg'),
+    image: require('../../assets/HubsImages/roller_skates.jpg'),
   },
 ];
 
@@ -71,19 +71,19 @@ const nearbyClubs = [
     id: 'n1',
     title: 'Morning joggers',
     subtitle: 'Park Volksgarten, 1010 Vienna',
-    image: require('../../assets/jogging.jpg'),
+    image: require('../../assets/HubsImages/jogging.jpg'),
   },
   {
     id: 'n2',
     title: 'Stretch & Relax',
     subtitle: 'Park Augarten, 1020, Vienna ',
-    image: require('../../assets/stretch.jpg'),
+    image: require('../../assets/HubsImages/stretch.jpg'),
   },
   {
     id: 'n3',
     title: 'Sunrise yoga ',
     subtitle: 'Parkring 1, 1010 Vienna',
-    image: require('../../assets/yoga.jpg'),
+    image: require('../../assets/HubsImages/yoga.jpg'),
   },
 ];
 
@@ -92,13 +92,13 @@ const trendingClubs = [
     id: 't1',
     title: 'Calisthenic health',
     subtitle: 'Auf der Schmelz 6A, 1150 Vienna',
-    image: require('../../assets/calisthenic.jpg'),
+    image: require('../../assets/HubsImages/calisthenic.jpg'),
   },
   {
     id: 't2',
     title: 'Marathon pulse life',
     subtitle: 'Park Prater, 1020 Vienna',
-    image: require('../../assets/marathon.jpg'),
+    image: require('../../assets/HubsImages/marathon.jpg'),
   },
 ];
 

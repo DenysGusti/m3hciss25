@@ -90,7 +90,7 @@ export default function ProfileScreen({ navigation }) {
         <View style={styles.profileSection}>
           <Image
             style={styles.profileImage}
-            source={require('../../assets/student_avatar.jpg')}
+            source={require('../../assets/HubsImages/student_avatar.jpg')}
           />
           <View style={styles.profileInfo}>
             <Text style={styles.profileName}>Dubovis Olivia</Text>
