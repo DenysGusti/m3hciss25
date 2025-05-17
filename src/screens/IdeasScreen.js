@@ -163,14 +163,7 @@ export default function IdeasScreen({ navigation }) {
               <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
                 <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
               </TouchableOpacity>
-
-              <View style={{ flex: 1, alignItems: 'center' }}>
-              <Text style={[styles.sectionTitleRecipes, { fontFamily: 'Poppins_600SemiBold' }]}>Breakfast</Text>
             </View>
-
-            <View style={{ width: 60 }} />
-            </View>
-
                 {breakfast.map(item => (
               <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
               ))}
@@ -183,14 +176,7 @@ export default function IdeasScreen({ navigation }) {
               <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
                 <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
               </TouchableOpacity>
-
-              <View style={{ flex: 1, alignItems: 'center' }}>
-              <Text style={[styles.sectionTitleRecipes, { fontFamily: 'Poppins_600SemiBold' }]}>Snack</Text>
             </View>
-
-            <View style={{ width: 60 }} />
-            </View>
-
                 {snack.map(item => (
               <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
               ))}
@@ -203,14 +189,7 @@ export default function IdeasScreen({ navigation }) {
               <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
                 <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
               </TouchableOpacity>
-
-              <View style={{ flex: 1, alignItems: 'center' }}>
-              <Text style={[styles.sectionTitleRecipes, { fontFamily: 'Poppins_600SemiBold' }]}>Lunch</Text>
             </View>
-
-            <View style={{ width: 60 }} />
-            </View>
-
                 {lunch.map(item => (
               <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
               ))}
@@ -223,14 +202,7 @@ export default function IdeasScreen({ navigation }) {
               <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
                 <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
               </TouchableOpacity>
-
-              <View style={{ flex: 1, alignItems: 'center' }}>
-              <Text style={[styles.sectionTitleRecipes, { fontFamily: 'Poppins_600SemiBold' }]}>Dinner</Text>
             </View>
-
-            <View style={{ width: 60 }} />
-            </View>
-
                 {dinner.map(item => (
               <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
               ))}
