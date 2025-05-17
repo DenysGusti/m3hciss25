@@ -338,6 +338,7 @@ const styles = StyleSheet.create({
   },
   chartLineLabel: {
     width: 60,
+    color: colors.bluePrimary,
     textAlign: 'right',
     fontSize: 12,
   },
