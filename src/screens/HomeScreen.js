@@ -133,6 +133,10 @@ export default function HomeScreen() {
     Poppins_900Black_Italic
   });
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <ScrollView style={styles.container}>
       <Header />

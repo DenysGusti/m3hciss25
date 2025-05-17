@@ -87,13 +87,13 @@ function NavigationTab({ setModalVisible }) {
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           switch (route.name) {
-            case 'Home ':
+            case ' Home ':
               return <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />;
-            case 'Hubs ':
+            case ' Hubs ':
               return <Ionicons name={focused ? 'people' : 'people-outline'} size={size} color={color} />;
-            case 'Ideas ':
+            case ' Ideas ':
               return <Ionicons name={focused ? 'sparkles' : 'sparkles-outline'} size={size} color={color} />;
-            case 'Profile ':
+            case ' Profile ':
               return <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={color} />;
             default:
               return null;
@@ -101,8 +101,8 @@ function NavigationTab({ setModalVisible }) {
         },
       })}
     >
-      <Tab.Screen name="Home " component={HomeScreen} />
-      <Tab.Screen name="Hubs " component={HubsScreen} />
+      <Tab.Screen name=" Home " component={HomeScreen} />
+      <Tab.Screen name=" Hubs " component={HubsScreen} />
       <Tab.Screen
         name="Create"
         component={HomeScreen}
@@ -110,8 +110,8 @@ function NavigationTab({ setModalVisible }) {
           tabBarButton: () => <PlusButton onPress={openPopup} />,
         }}
       />
-      <Tab.Screen name="Ideas " component={IdeasScreen} />
-      <Tab.Screen name="Profile " component={ProfileScreen} />
+      <Tab.Screen name=" Ideas " component={IdeasScreen} />
+      <Tab.Screen name=" Profile " component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_500Medium',
   },
   tabBarItem: {
-    marginHorizontal: -16,
+    marginHorizontal: -15,
   },
   modalOverlay: {
     flex: 1,
