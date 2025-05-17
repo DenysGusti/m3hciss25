@@ -111,7 +111,7 @@ export default function HomeScreen() {
     0
   );
 
-  let [] = useFonts({
+  let [fontsLoaded] = useFonts({
     Poppins_100Thin,
     Poppins_100Thin_Italic,
     Poppins_200ExtraLight,
@@ -383,6 +383,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
     color: colors.background,
+    marginHorizontal: -5,
   },
   wrapper: {
     alignItems: 'center',
@@ -421,11 +422,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins_600SemiBold',
     marginTop: 2,
+    marginHorizontal: -5,
   },
   metricValue: {
     fontSize: 14,
     fontFamily: 'Poppins_500Medium',
     marginTop: 1,
+    marginHorizontal: -5,
   },
   todayXpSection: {
     flexDirection: 'row',
@@ -548,7 +551,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins_400Regular',
     marginTop: 4,
-    marginRight: 2,
+    marginRight: 1,
   },
   iconWrapper: {
     width: 48,
@@ -572,7 +575,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins_400Regular',
     marginTop: 4,
-    marginRight: 10,
+    marginRight: 9,
   },
   expandedSectionContent: {
     overflow: 'hidden',

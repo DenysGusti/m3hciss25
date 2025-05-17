@@ -30,6 +30,7 @@ import {
   Poppins_900Black,
   Poppins_900Black_Italic,
 } from '@expo-google-fonts/poppins';
+import { colors } from '../theme/colors';
 
 const TABS = ['Joined', 'Challenges', 'Clubs', 'Forum'];
 
@@ -50,7 +51,6 @@ const recommendedClubs = [
     title: 'Along the trails of Vienna',
     subtitle: 'The outskirts of Vienna',
     image: require('../../assets/hiking.jpg'),
-    
   },
   {
     id: 'r2',
@@ -58,13 +58,11 @@ const recommendedClubs = [
     subtitle: 'Linke Wienzeile 94, 1060 Vienna',
     image: require('../../assets/karate.jpg'),
   },
-  
   {
     id: 'r3',
     title: 'Roller-skating adventure',
     subtitle: 'Park Prater, 1020 Vienna',
     image: require('../../assets/roller_skates.jpg'),
-    
   },
 ];
 
@@ -74,21 +72,18 @@ const nearbyClubs = [
     title: 'Morning joggers',
     subtitle: 'Park Volksgarten, 1010 Vienna',
     image: require('../../assets/jogging.jpg'),
-    
   },
   {
     id: 'n2',
     title: 'Stretch & Relax',
     subtitle: 'Park Augarten, 1020, Vienna ',
     image: require('../../assets/stretch.jpg'),
-    
   },
   {
     id: 'n3',
     title: 'Sunrise yoga ',
     subtitle: 'Parkring 1, 1010 Vienna',
     image: require('../../assets/yoga.jpg'),
-    
   },
 ];
 
@@ -98,14 +93,12 @@ const trendingClubs = [
     title: 'Calisthenic health',
     subtitle: 'Auf der Schmelz 6A, 1150 Vienna',
     image: require('../../assets/calisthenic.jpg'),
-    
   },
   {
     id: 't2',
     title: 'Marathon pulse life',
     subtitle: 'Park Prater, 1020 Vienna',
     image: require('../../assets/marathon.jpg'),
-    
   },
 ];
 
@@ -139,19 +132,19 @@ export default function HubsScreen() {
 
   return (
     <View style={styles.screen_background}>
-      
+
       <View style={styles.hubs_title_location}>
-        <TouchableOpacity><MaterialIcons name="search" size={24} color="#01416D" /></TouchableOpacity>
+        <TouchableOpacity><MaterialIcons name="search" size={24} color={colors.bluePrimary} /></TouchableOpacity>
         <Text style={styles.hubs_title}>Hubs</Text>
-        <TouchableOpacity><MaterialIcons name="chat-bubble-outline" size={24} color="#01416D" /></TouchableOpacity>
+        <TouchableOpacity><MaterialIcons name="chat-bubble-outline" size={24} color={colors.bluePrimary} /></TouchableOpacity>
       </View>
 
-      
+
       <View style={styles.tab_location}>
         {TABS.map(tab => (
-          <TouchableOpacity key={tab} 
-          onPress={() => setActiveTab(tab)}
-          style={styles.tab_button}  
+          <TouchableOpacity key={tab}
+            onPress={() => setActiveTab(tab)}
+            style={styles.tab_button}
           >
             <Text style={[styles.tab_title, activeTab === tab && styles.active_tab]}>
               {tab}
@@ -160,7 +153,7 @@ export default function HubsScreen() {
         ))}
       </View>
 
-      
+
       {activeTab === 'Challenges' && (
         <FlatList
           data={challengesData}
@@ -172,8 +165,8 @@ export default function HubsScreen() {
 
       {activeTab === 'Clubs' && (
         <ScrollView contentContainerStyle={styles.scroll}>
-          
-          <SectionHeader title="Recommended Clubs" onPress={() => {/* future list */}} />
+
+          <SectionHeader title="Recommended Clubs" onPress={() => {/* future list */ }} />
           <FlatList
             data={recommendedClubs}
             keyExtractor={item => item.id}
@@ -182,8 +175,8 @@ export default function HubsScreen() {
             renderItem={({ item }) => <ClubCard {...item} />}
           />
 
-          
-          <SectionHeader title="Clubs near me" onPress={() => {/* future list*/}} />
+
+          <SectionHeader title="Clubs near me" onPress={() => {/* future list*/ }} />
           <FlatList
             data={nearbyClubs}
             keyExtractor={item => item.id}
@@ -192,8 +185,8 @@ export default function HubsScreen() {
             renderItem={({ item }) => <ClubCard {...item} />}
           />
 
-          
-          <SectionHeader title="Trending Clubs" onPress={() => {/* future list */}} />
+
+          <SectionHeader title="Trending Clubs" onPress={() => {/* future list */ }} />
           <FlatList
             data={trendingClubs}
             keyExtractor={item => item.id}
@@ -204,7 +197,7 @@ export default function HubsScreen() {
         </ScrollView>
       )}
 
-      
+
     </View>
   );
 }
@@ -235,7 +228,7 @@ function ChallengesCard({ title, subtitle, image }) {
 
 
         <TouchableOpacity style={styles.plus_button}>
-          <MaterialIcons name="add" size={20} color="#fff" />
+          <MaterialIcons name="add" size={20} color={colors.background} />
         </TouchableOpacity>
       </View>
     </View>
@@ -252,12 +245,12 @@ function ClubCard({ title, subtitle, image }) {
 
       </View>
       <View style={styles.text_coordination}>
-      <View style={styles.textContainer}>
+        <View style={styles.textContainer}>
           <Text style={styles.card_text_title}>{title}</Text>
           <Text style={styles.card_text_subtitle}>{subtitle}</Text>
         </View>
         <TouchableOpacity style={styles.plus_button}>
-          <MaterialIcons name="add" size={20} color="#fff" />
+          <MaterialIcons name="add" size={20} color={colors.background} />
         </TouchableOpacity>
       </View>
 
@@ -270,142 +263,142 @@ function ClubCard({ title, subtitle, image }) {
 
 const styles = StyleSheet.create({
 
-  screen_background: { 
-    flex: 1, 
-    backgroundColor: '#fff' 
+  screen_background: {
+    flex: 1,
+    backgroundColor: colors.background
   },
 
-    hubs_title_location: {
-    marginTop: 45, 
-    flexDirection: 'row', 
+  hubs_title_location: {
+    marginTop: 45,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between', 
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingTop: 16, 
+    paddingTop: 16,
     paddingBottom: 8
   },
-  hubs_title: { 
-    fontSize: 16, 
+  hubs_title: {
+    fontSize: 16,
     fontFamily: 'Poppins_700Bold',
-    color: '#01416D' 
+    color: colors.bluePrimary
   },
 
   tab_location: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     justifyContent: 'space-around',
-    borderBottomWidth: 1, 
+    borderBottomWidth: 1,
     borderColor: '#ECECEC',
     paddingVertical: 12,
-   //paddingHorizontal: 16,  
+    //paddingHorizontal: 16,  
     marginTop: 16
-    
+
   },
 
-  tab_title: { 
-    fontSize: 16, 
+  tab_title: {
+    fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
-    color: '#487696' 
+    color: colors.blueTertiary
   },
 
-  active_tab: { 
-    color: '#01416D',
-    fontSize: 16, 
+  active_tab: {
+    color: colors.bluePrimary,
+    fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
   },
 
-  scroll: { 
-    paddingHorizontal: 16, 
-    paddingTop: 16, 
-    paddingBottom: 24 
+  scroll: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 24
   },
 
   space_between_cat: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center', 
-    marginBottom: 8, 
+    alignItems: 'center',
+    marginBottom: 8,
     marginTop: 16
   },
 
-  category_club_title: { 
-    fontSize: 16, 
+  category_club_title: {
+    fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
 
-    color: '#01416D' 
+    color: colors.bluePrimary
   },
 
-  text_view_all: { 
-    fontSize: 12, 
+  text_view_all: {
+    fontSize: 12,
     fontFamily: 'Poppins_600SemiBold',
-    color: '#487696' 
+    color: colors.blueTertiary
   },
 
   basic_card: {
-    backgroundColor: '#fff', 
-    borderRadius: 12, 
+    backgroundColor: colors.background,
+    borderRadius: 12,
     marginBottom: 16,
-    elevation: 2, 
-    shadowColor: '#000', 
+    elevation: 2,
+    shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 }, 
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
   },
 
-  clubs_card: { 
-    width: 200, 
-    marginRight: 12 
-  }, 
+  clubs_card: {
+    width: 200,
+    marginRight: 12
+  },
 
   image_design: {
-    height: 140, 
+    height: 140,
     overflow: 'hidden',
-    borderTopLeftRadius: 12, 
+    borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
   },
 
   insert_image: {
-    width: '100%', 
-    height: '100%' 
+    width: '100%',
+    height: '100%'
   },
 
   text_coordination: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 12,
     paddingHorizontal: 16,
 
-  }, 
-  card_text_title: { 
-    fontSize: 14, 
-    fontFamily: 'Poppins_600SemiBold',
-    color: '#01416D' 
   },
-  card_text_subtitle: { 
-    fontSize: 12, 
+  card_text_title: {
+    fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
+    color: colors.bluePrimary
+  },
+  card_text_subtitle: {
+    fontSize: 12,
     fontFamily: 'Poppins_500Medium',
-    color: '#487696', 
-    marginTop: 4 
+    color: colors.blueTertiary,
+    marginTop: 4
   },
 
   plus_button: {
-    width: 32, 
-    height: 32, 
+    width: 32,
+    height: 32,
     borderRadius: 16,
-    backgroundColor: '#01416D', 
+    backgroundColor: colors.bluePrimary,
     justifyContent: 'center',
     alignItems: 'center',
-    
-  }, 
-  textContainer: {
-       flex: 1,          
-       marginRight: 8,    
-     },
 
-     tab_button: {
-      flex: 1,                  // кожна кнопка займає по рівному шматку
-      alignItems: 'center',     // текст по центру всередині цього шматка
-      paddingVertical: 12,
-    },
+  },
+  textContainer: {
+    flex: 1,
+    marginRight: 8,
+  },
+
+  tab_button: {
+    flex: 1,                  // кожна кнопка займає по рівному шматку
+    alignItems: 'center',     // текст по центру всередині цього шматка
+    paddingVertical: 12,
+  },
 
 });

@@ -176,14 +176,13 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     backgroundColor: colors.background,
-    // marginLeft: '-3%',
   },
   tabBarLabel: {
     fontSize: 12,
     fontFamily: 'Poppins_500Medium',
   },
   tabBarItem: {
-    marginHorizontal: -1,
+    marginHorizontal: -8,
   },
   modalOverlay: {
     flex: 1,

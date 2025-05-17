@@ -1,6 +1,6 @@
 // ProfileScreen.js
 import React, { useState } from 'react';
-import {ScrollView, View, Text, Image, TouchableOpacity, StyleSheet, LayoutAnimation } from 'react-native';
+import { ScrollView, View, Text, Image, TouchableOpacity, StyleSheet, LayoutAnimation } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold, Poppins_500Medium } from '@expo-google-fonts/poppins';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,11 +8,11 @@ import { colors } from '../theme/colors';
 
 // Dummy data for charts and lists
 const chartData = {
-  Distance: [2.5, 3.2, 1.8, 4.0, 5.5, 4.2, 3.0],   
-  Calories: [300, 450, 800, 650, 1000, 750, 900],  
-  Hydration: [1200, 1800, 1100, 2000, 1700, 2500, 1900] 
+  Distance: [2.5, 3.2, 1.8, 4.0, 5.5, 4.2, 3.0],
+  Calories: [300, 450, 800, 650, 1000, 750, 900],
+  Hydration: [1200, 1800, 1100, 2000, 1700, 2500, 1900]
 };
-const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S']; 
+const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
 const categoryUnits = {
   Distance: 'km',
@@ -29,20 +29,20 @@ const CATEGORY_BACKGROUNDS = {
 const CATEGORY_COLORS = {
   Distance: colors.bluePrimary,
   Calories: colors.orangePrimary,
-  Hydration: colors.cyanPrimary,   
+  Hydration: colors.cyanPrimary,
 };
 
 const favoriteRecipes = [
-  { id: 1, title: 'Scrambled Egg & Avocado Tacos', kcal: '400', image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg') },,
+  { id: 1, title: 'Scrambled Egg & Avocado Tacos', kcal: '400', image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg') }, ,
   { id: 2, title: 'Tomato-lentil   Soup & Bread', kcal: '270', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
   { id: 3, title: 'Chia Pudding with Berries', kcal: '200', image: require('../../assets/IdeasImages/Chia_Pudding.jpg') },
-  { id: 4, title: 'Quiche with Mushrooms', kcal: '490', image: require('../../assets/IdeasImages/dinner1.jpg')},
+  { id: 4, title: 'Quiche with Mushrooms', kcal: '490', image: require('../../assets/IdeasImages/dinner1.jpg') },
   { id: 5, title: 'Ceaser Salad with Chicken', kcal: '370', image: require('../../assets/IdeasImages/dinner3.jpg') },
 ];
 const favoriteActivities = [
-  { id: 1, title: 'Pilates Ball Worout', time: '20 min', image: require('../../assets/IdeasImages/pilates.jpg')},
-  { id: 2, title: 'Sunrise Yoga', time: '25 min', image: require('../../assets/IdeasImages/Yoga.jpg')},
-  { id: 3, title: 'Stretch & Flow', time: '20 min', image: require('../../assets/IdeasImages/yoga3.jpg')},
+  { id: 1, title: 'Pilates Ball Worout', time: '20 min', image: require('../../assets/IdeasImages/pilates.jpg') },
+  { id: 2, title: 'Sunrise Yoga', time: '25 min', image: require('../../assets/IdeasImages/Yoga.jpg') },
+  { id: 3, title: 'Stretch & Flow', time: '20 min', image: require('../../assets/IdeasImages/yoga3.jpg') },
 ];
 
 
@@ -51,15 +51,15 @@ export default function ProfileScreen({ navigation }) {
   const [showAllRecipes, setShowAllRecipes] = useState(false);
   const [showAllActivities, setShowAllActivities] = useState(false);
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold });
-    if (!fontsLoaded) {
-      return null;
-    }
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const currentData = chartData[selectedCategory];
   const categoryColor = CATEGORY_COLORS[selectedCategory];
   const unit = categoryUnits[selectedCategory];
   const isHydration = selectedCategory === 'Hydration';
-  const categoryBackgroundColor = CATEGORY_BACKGROUNDS[selectedCategory] || '#fff';
+  const categoryBackgroundColor = CATEGORY_BACKGROUNDS[selectedCategory] || colors.background;
 
   const displayData = isHydration ? currentData.map(val => val / 1000) : currentData;
   const maxChartValue = Math.max(...currentData);
@@ -95,15 +95,15 @@ export default function ProfileScreen({ navigation }) {
           <View style={styles.profileInfo}>
             <Text style={styles.profileName}>Dubovis Olivia</Text>
             <View style={styles.profileDetailRow}>
-              <Ionicons name="mail-outline" size={16} color = {colors.bluePrimary} style={styles.profileDetailIcon} />
+              <Ionicons name="mail-outline" size={16} color={colors.bluePrimary} style={styles.profileDetailIcon} />
               <Text style={styles.profileDetailText}>dubovsliliha@gmail.com</Text>
             </View>
             <View style={styles.profileDetailRow}>
-              <Ionicons name="school-outline" size={16} color = {colors.bluePrimary} style={styles.profileDetailIcon} />
+              <Ionicons name="school-outline" size={16} color={colors.bluePrimary} style={styles.profileDetailIcon} />
               <Text style={styles.profileDetailText}>University of Vienna</Text>
             </View>
             <View style={styles.profileDetailRow}>
-              <Ionicons name="calendar-outline" size={16} color = {colors.bluePrimary} style={styles.profileDetailIcon} />
+              <Ionicons name="calendar-outline" size={16} color={colors.bluePrimary} style={styles.profileDetailIcon} />
               <Text style={styles.profileDetailText}>22 years</Text>
             </View>
           </View>
@@ -203,15 +203,16 @@ export default function ProfileScreen({ navigation }) {
               </View>
             ))}
           </View>
-          <TouchableOpacity 
-            style={[styles.showAllButton, { backgroundColor: colors.orangeSecondary }]} 
-            onPress={() => { 
+          <TouchableOpacity
+            style={[styles.showAllButton, { backgroundColor: colors.orangeSecondary }]}
+            onPress={() => {
               LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-              setShowAllRecipes(!showAllRecipes); }}
+              setShowAllRecipes(!showAllRecipes);
+            }}
           >
             <Text style={[styles.showAllButtonText, { color: colors.orangePrimary }]}>
               {showAllRecipes ? 'Show less' : 'Show all favorite Recipes'}
-              </Text>
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -239,11 +240,12 @@ export default function ProfileScreen({ navigation }) {
               </View>
             ))}
           </View>
-          <TouchableOpacity 
-            style={[styles.showAllButton, { backgroundColor: colors.blueSecondary }]} 
-            onPress={() => { 
+          <TouchableOpacity
+            style={[styles.showAllButton, { backgroundColor: colors.blueSecondary }]}
+            onPress={() => {
               LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-              setShowAllActivities(!showAllActivities); }} 
+              setShowAllActivities(!showAllActivities);
+            }}
           >
             <Text style={[styles.showAllButtonText, { color: colors.bluePrimary }]}>
               {showAllActivities ? 'Show less' : 'Show all favorite Recipes'}</Text>
@@ -255,12 +257,8 @@ export default function ProfileScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    color: '#FFFFFF',
-    flex: 1, 
-  },
   scrollContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     paddingHorizontal: 16,
     paddingVertical: 16
   },
@@ -399,8 +397,8 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   xpContainer: {
-    width: '80%',         
-    alignSelf: 'center',  
+    width: '80%',
+    alignSelf: 'center',
     marginTop: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -409,10 +407,10 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   xpBarBackground: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     height: 30,
     borderRadius: 20,
-    overflow: 'hidden', 
+    overflow: 'hidden',
     position: 'relative',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -431,8 +429,8 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 20,
     justifyContent: 'center',
-    alignItems: 'flex-end', 
-    paddingRight: 8,        
+    alignItems: 'flex-end',
+    paddingRight: 8,
   },
   xpTextOnBar: {
     position: 'absolute',
@@ -471,7 +469,7 @@ const styles = StyleSheet.create({
     height: 3,
     width: '93%',
     borderRadius: 2,
-    alignSelf: 'center',  
+    alignSelf: 'center',
   },
   chartContainer: {
     height: '100%',
@@ -526,7 +524,7 @@ const styles = StyleSheet.create({
     color: colors.bluePrimary
   },
   sectionCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     borderRadius: 16,
     overflow: 'hidden',
     shadowColor: '#000',
@@ -537,25 +535,25 @@ const styles = StyleSheet.create({
     marginBottom: 18
   },
   sectionRecipesHeader: {
-    backgroundColor: colors.orangePrimary, // solid orange bar
+    backgroundColor: colors.orangePrimary,
     padding: 10,
     paddingBottom: 12,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
   sectionActivitiesHeader: {
-    backgroundColor: colors.bluePrimary, // solid orange bar
+    backgroundColor: colors.bluePrimary,
     padding: 10,
     paddingBottom: 12,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
   headerContent: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     paddingHorizontal: 12,
     paddingTop: 8,
     paddingBottom: 12,
-    borderTopLeftRadius: 16,  
+    borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
     marginTop: -11,
   },
@@ -584,26 +582,26 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 2,
     fontFamily: 'Poppins_400Regular',
-    color : colors.bluePrimary
+    color: colors.bluePrimary
   },
   itemSubtitle: {
     fontSize: 12,
     color: '#555',
     fontFamily: 'Poppins_400Regular',
-    color : colors.bluePrimary
+    color: colors.bluePrimary
   },
   recipeImage: {
     width: 48,
     height: 48,
     borderRadius: 12,
     marginRight: 12,
-   },
-   activitiesImage: {
+  },
+  activitiesImage: {
     width: 48,
     height: 48,
     borderRadius: 12,
     marginRight: 12,
-   },
+  },
   showAllButton: {
     marginHorizontal: 12,
     paddingVertical: 10,

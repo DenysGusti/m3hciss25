@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { colors } from '../theme/colors';
 
 const TABS = ['Recipes', 'Activities'];
 
@@ -50,14 +51,14 @@ const dinner = [
 
 const activities = {
   pilates: [
-    { id: 'a1', title: 'Pilates Ball Worout', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Arm'], image: require('../../assets/IdeasImages/pilates.jpg')},
-    { id: 'a2',title: 'Pilates Sculpt',subtitle: '30 minutes',level: 'Advanced',duration: '20–30 min',bodyFocus: ['Abs'],image: require('../../assets/IdeasImages/pilates_2.jpg') },
+    { id: 'a1', title: 'Pilates Ball Worout', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Arm'], image: require('../../assets/IdeasImages/pilates.jpg') },
+    { id: 'a2', title: 'Pilates Sculpt', subtitle: '30 minutes', level: 'Advanced', duration: '20–30 min', bodyFocus: ['Abs'], image: require('../../assets/IdeasImages/pilates_2.jpg') },
     { id: 'a3', title: 'Dynamic Pilates', subtitle: '30 minutes', level: 'Beginner', duration: '20–30 min', bodyFocus: ['Back'], image: require('../../assets/IdeasImages/pilates_3.jpg') },
   ],
-  yoga: [ 
+  yoga: [
     { id: 'a4', title: 'Sunrise Yoga', subtitle: '25 minutes', level: 'Beginner', duration: '20–30 min', bodyFocus: ['Abs', 'Back'], image: require('../../assets/IdeasImages/Yoga.jpg') },
     { id: 'a5', title: 'Night Meditation', subtitle: '20 minutes', level: 'Expert', duration: '15–20 min', bodyFocus: ['Face'], image: require('../../assets/IdeasImages/yoga2.jpg') },
-    { id: 'a6',title: 'Stretch & Flow', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Back'], image: require('../../assets/IdeasImages/yoga3.jpg') },
+    { id: 'a6', title: 'Stretch & Flow', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Back'], image: require('../../assets/IdeasImages/yoga3.jpg') },
   ],
 };
 
@@ -73,18 +74,18 @@ export default function IdeasScreen({ navigation }) {
   }
 
   const filterActivities = (list) => {
-  return list.filter(item => {
-    const matchesLevel =
-      selectedLevel.length === 0 || selectedLevel.includes(item.level);
-    const matchesDuration =
-      selectedDuration.length === 0 || selectedDuration.includes(item.duration);
-    const matchesBodyFocus =
-      selectedBodyFocus.length === 0 ||
-      selectedBodyFocus.some(focus => item.bodyFocus.includes(focus));
+    return list.filter(item => {
+      const matchesLevel =
+        selectedLevel.length === 0 || selectedLevel.includes(item.level);
+      const matchesDuration =
+        selectedDuration.length === 0 || selectedDuration.includes(item.duration);
+      const matchesBodyFocus =
+        selectedBodyFocus.length === 0 ||
+        selectedBodyFocus.some(focus => item.bodyFocus.includes(focus));
 
-    return matchesLevel && matchesDuration && matchesBodyFocus;
-  });
-};
+      return matchesLevel && matchesDuration && matchesBodyFocus;
+    });
+  };
 
   const handleViewAll = (category) => {
     setExpandedCategory(category === expandedCategory ? null : category);
@@ -95,18 +96,18 @@ export default function IdeasScreen({ navigation }) {
   };
 
   const allRecipeSections = [
-  { title: 'Breakfast', data: breakfast },
-  { title: 'Snack', data: snack },
-  { title: 'Lunch', data: lunch },
-  { title: 'Dinner', data: dinner },
-];
+    { title: 'Breakfast', data: breakfast },
+    { title: 'Snack', data: snack },
+    { title: 'Lunch', data: lunch },
+    { title: 'Dinner', data: dinner },
+  ];
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity><MaterialIcons name="search" size={24} color="#01416D" /></TouchableOpacity>
+        <TouchableOpacity><MaterialIcons name="search" size={24} color={colors.bluePrimary} /></TouchableOpacity>
         <Text style={styles.headerTitle} >Ideas</Text>
-        <TouchableOpacity><MaterialIcons name="tune" size={24} color="#01416D" /></TouchableOpacity>
+        <TouchableOpacity><MaterialIcons name="tune" size={24} color={colors.bluePrimary} /></TouchableOpacity>
       </View>
 
       <View style={styles.tabsRow}>
@@ -119,109 +120,109 @@ export default function IdeasScreen({ navigation }) {
         ))}
       </View>
 
-     <ScrollView contentContainerStyle={styles.list}>
+      <ScrollView contentContainerStyle={styles.list}>
         {activeTab === 'Recipes' && (
-        <>
-        {expandedCategory === null && (
-        <>
-            <SectionHeaderRecipes title="Breakfast" onPress={() => handleViewAll('Breakfast')} />
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {  breakfast.map(item => (
-                <ClubCard key={item.id} {...item} type="recipes" />
-              ))}
-            </ScrollView>
-
-            <SectionHeaderRecipes title="Snack" onPress={() => handleViewAll('Snack')} />
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {snack.map(item => (
-                <ClubCard key={item.id} {...item} type="recipes" />
-              ))}
-            </ScrollView>
-
-            <SectionHeaderRecipes title="Lunch" onPress={() => handleViewAll('Lunch')} />
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {lunch.map(item => (
-                <ClubCard key={item.id} {...item} type="recipes" />
-              ))}
-            </ScrollView>
-
-            <SectionHeaderRecipes title="Dinner" onPress={() => handleViewAll('Dinner')} />
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {dinner.map(item => (
-                <ClubCard key={item.id} {...item} type="recipes" />
-             ))}
-            </ScrollView>
-          </>
-        )}
-
-        {expandedCategory === 'Breakfast' && (
           <>
-            <SectionHeaderRecipes title="Breakfast" onPress={handleGoBack} back />
-              {breakfast.map(item => (
-            <ClubCard key={item.id} {...item} type="recipes" />
-            ))}
-          </>
-        )}
+            {expandedCategory === null && (
+              <>
+                <SectionHeaderRecipes title="Breakfast" onPress={() => handleViewAll('Breakfast')} />
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  {breakfast.map(item => (
+                    <ClubCard key={item.id} {...item} type="recipes" />
+                  ))}
+                </ScrollView>
 
-        {expandedCategory === 'Snack' && (
-          <>
-            <SectionHeaderRecipes title="Snack" onPress={handleGoBack} back />
-              {snack.map(item => (
-            <ClubCard key={item.id} {...item} type="recipes" />
-            ))}
-          </>
-        )}
+                <SectionHeaderRecipes title="Snack" onPress={() => handleViewAll('Snack')} />
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  {snack.map(item => (
+                    <ClubCard key={item.id} {...item} type="recipes" />
+                  ))}
+                </ScrollView>
 
-        {expandedCategory === 'Lunch' && (
-          <>
-            <SectionHeaderRecipes title="Lunch" onPress={handleGoBack} back />
-              {lunch.map(item => (
-            <ClubCard key={item.id} {...item} type="recipes" />
-            ))}
-          </>
-        )}
+                <SectionHeaderRecipes title="Lunch" onPress={() => handleViewAll('Lunch')} />
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  {lunch.map(item => (
+                    <ClubCard key={item.id} {...item} type="recipes" />
+                  ))}
+                </ScrollView>
 
-        {expandedCategory === 'Dinner' && (
-          <>
-            <SectionHeaderRecipes title="Dinner" onPress={handleGoBack} back />
-              {dinner.map(item => (
-            <ClubCard key={item.id} {...item} type="recipes" />
-            ))}
+                <SectionHeaderRecipes title="Dinner" onPress={() => handleViewAll('Dinner')} />
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  {dinner.map(item => (
+                    <ClubCard key={item.id} {...item} type="recipes" />
+                  ))}
+                </ScrollView>
+              </>
+            )}
+
+            {expandedCategory === 'Breakfast' && (
+              <>
+                <SectionHeaderRecipes title="Breakfast" onPress={handleGoBack} back />
+                {breakfast.map(item => (
+                  <ClubCard key={item.id} {...item} type="recipes" />
+                ))}
+              </>
+            )}
+
+            {expandedCategory === 'Snack' && (
+              <>
+                <SectionHeaderRecipes title="Snack" onPress={handleGoBack} back />
+                {snack.map(item => (
+                  <ClubCard key={item.id} {...item} type="recipes" />
+                ))}
+              </>
+            )}
+
+            {expandedCategory === 'Lunch' && (
+              <>
+                <SectionHeaderRecipes title="Lunch" onPress={handleGoBack} back />
+                {lunch.map(item => (
+                  <ClubCard key={item.id} {...item} type="recipes" />
+                ))}
+              </>
+            )}
+
+            {expandedCategory === 'Dinner' && (
+              <>
+                <SectionHeaderRecipes title="Dinner" onPress={handleGoBack} back />
+                {dinner.map(item => (
+                  <ClubCard key={item.id} {...item} type="recipes" />
+                ))}
+              </>
+            )}
           </>
         )}
-      </>
-    )}
 
         {activeTab === 'Activities' && (
           <>
-        <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
-        <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
-        <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
-    
-      <SectionHeaderActivities title="Pilates" />
-      <View style={{ marginTop: 10 }}>
-      <FlatList
-        data={filterActivities(activities.pilates)}
-        keyExtractor={item => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => <ClubCard {...item} type="activities" />}
-      />
-      </View>
+            <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
+            <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
+            <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
 
-      <SectionHeaderActivities title="Yoga" />
-      <View style={{ marginTop: 10 }}>
-      <FlatList
-        data={filterActivities(activities.yoga)}
-        keyExtractor={item => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => <ClubCard {...item} type="activities" />}
-      />
-      </View>
-    </>
-  )}
-    </ScrollView>
+            <SectionHeaderActivities title="Pilates" />
+            <View style={{ marginTop: 10 }}>
+              <FlatList
+                data={filterActivities(activities.pilates)}
+                keyExtractor={item => item.id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => <ClubCard {...item} type="activities" />}
+              />
+            </View>
+
+            <SectionHeaderActivities title="Yoga" />
+            <View style={{ marginTop: 10 }}>
+              <FlatList
+                data={filterActivities(activities.yoga)}
+                keyExtractor={item => item.id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => <ClubCard {...item} type="activities" />}
+              />
+            </View>
+          </>
+        )}
+      </ScrollView>
     </View>
   );
 }
@@ -239,7 +240,7 @@ function SectionHeaderRecipes({ title, onPress, back = false }) {
 
 function SectionHeaderActivities({ title, onPress }) {
   return (
-    <View style={styles.SectionHeader}>
+    <View style={styles.sectionHeader}>
       <Text style={styles.sectionTitleActivities}>{title}</Text>
     </View>
   );
@@ -252,7 +253,7 @@ function ClubCard({ title, subtitle, image, type = "recipes" }) {
     setLiked(prev => !prev);
   };
 
-  const heartColor = type === "recipes" ? "#FF7C12" : "#01416D";
+  const heartColor = type === "recipes" ? colors.orangePrimary : colors.bluePrimary;
 
   return (
     <View style={[styles.card, styles.clubCard]}>
@@ -296,7 +297,7 @@ function FilterGroup({ title, options, selected, onSelect }) {
           onSelect([...(selected || []), value]);
         }
       } else {
-        onSelect(selected === value ? null : value); 
+        onSelect(selected === value ? null : value);
       }
     };
 
@@ -306,24 +307,24 @@ function FilterGroup({ title, options, selected, onSelect }) {
         style={
           isIconGroup
             ? {
-                width: 64,
-                height: 64,
-                borderRadius: 30,
-                overflow: 'hidden',
-                marginRight: 8,
-                backgroundColor: '#E5F1F8',
-                borderWidth: isSelected ? 2 : 0,
-                borderColor: isSelected ? 'white' : 'transparent',
-              }
+              width: 64,
+              height: 64,
+              borderRadius: 30,
+              overflow: 'hidden',
+              marginRight: 8,
+              backgroundColor: colors.blueSecondary,
+              borderWidth: isSelected ? 2 : 0,
+              borderColor: isSelected ? 'white' : 'transparent',
+            }
             : {
-                paddingVertical: 6,
-                paddingHorizontal: 14,
-                backgroundColor: isSelected ? '#01416D' : '#E5F1F8',
-                borderRadius: 20,
-                marginRight: 8,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }
+              paddingVertical: 6,
+              paddingHorizontal: 14,
+              backgroundColor: isSelected ? colors.bluePrimary : colors.blueSecondary,
+              borderRadius: 20,
+              marginRight: 8,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }
         }
       >
         {isIconGroup ? (
@@ -347,13 +348,13 @@ function FilterGroup({ title, options, selected, onSelect }) {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ color: 'white', fontWeight: isSelected ? '700' : '600', fontSize: 10, fontFamily: isSelected ? 'Poppins_700Bold' : 'Poppins_600SemiBold'}}>
+              <Text style={{ color: 'white', fontSize: 10, fontFamily: isSelected ? 'Poppins_700Bold' : 'Poppins_600SemiBold' }}>
                 {item.label}
               </Text>
             </View>
           </>
         ) : (
-          <Text style={{ color: isSelected ? 'white' : '#01416D', fontWeight: '500' , fontFamily: isSelected ? 'Poppins_600SemiBold' : 'Poppins_400Regular'}}>{item}</Text>
+          <Text style={{ color: isSelected ? 'white' : colors.bluePrimary, fontFamily: isSelected ? 'Poppins_600SemiBold' : 'Poppins_400Regular' }}>{item}</Text>
         )}
       </TouchableOpacity>
     );
@@ -361,7 +362,7 @@ function FilterGroup({ title, options, selected, onSelect }) {
 
   return (
     <View style={{ marginVertical: 10 }}>
-      <Text style={{ fontFamily: 'Poppins_600SemiBold', fontWeight: '600', color: '#01416D', marginBottom: 6 }}>{title}</Text>
+      <Text style={{ fontFamily: 'Poppins_600SemiBold', color: colors.bluePrimary, marginBottom: 6 }}>{title}</Text>
       <FlatList
         data={options}
         renderItem={renderItem}
@@ -378,7 +379,7 @@ function FilterGroup({ title, options, selected, onSelect }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
   },
   header: {
     marginTop: 45,
@@ -392,8 +393,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontFamily: 'Poppins_600SemiBold',
-    fontWeight: '600',
-    color: '#01416D',
+    color: colors.bluePrimary,
   },
   tabsRow: {
     flexDirection: 'row',
@@ -406,12 +406,11 @@ const styles = StyleSheet.create({
   tabText: {
     fontSize: 16,
     fontFamily: 'Poppins_400Regular',
-    color: '#487696',
+    color: colors.blueTertiary,
   },
   activeTab: {
-    color: '#01416D',
+    color: colors.bluePrimary,
     fontFamily: 'Poppins_600SemiBold',
-    fontWeight: '700',
   },
   list: {
     paddingHorizontal: 16,
@@ -432,22 +431,20 @@ const styles = StyleSheet.create({
   sectionTitleActivities: {
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
-    fontWeight: '600',
-    color: '#01416D',
+    color: colors.bluePrimary,
   },
   sectionTitleRecipes: {
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
-    fontWeight: '600',
-    color: '#FF7C12',
+    color: colors.orangePrimary,
   },
   viewAll: {
     fontSize: 14,
     fontFamily: 'Poppins_400Regular',
-    color: '#FF7C12',
+    color: colors.orangePrimary,
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
     borderRadius: 12,
     marginBottom: 16,
     elevation: 2,
@@ -480,13 +477,12 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
-    fontWeight: '600',
-    color: '#01416D',
+    color: colors.bluePrimary,
   },
   cardSubtitle: {
     fontSize: 14,
     fontFamily: 'Poppins_400Regular',
-    color: '#487696',
+    color: colors.blueTertiary,
     marginTop: 4,
   },
 
@@ -494,7 +490,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 25,
     right: 3,
-    width: 32,          
+    width: 32,
     height: 32,
     backgroundColor: 'transparent',
     justifyContent: 'center',
