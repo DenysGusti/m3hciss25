@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
@@ -7,19 +7,61 @@ import HubsScreen from '../screens/HubsScreen';
 import IdeasScreen from '../screens/IdeasScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { colors } from '../theme/colors';
+import {
+  useFonts,
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+} from '@expo-google-fonts/poppins';
 
 const Tab = createBottomTabNavigator();
 
 function PlusButton({ onPress }) {
   return (
     <TouchableOpacity style={styles.plusButton} onPress={onPress}>
-      <Text style={styles.plusIcon}>＋</Text>
+      <Ionicons name="add" size={48} color="white" />
     </TouchableOpacity>
   );
 }
 
 export default function TabNavigation() {
   const [modalVisible, setModalVisible] = useState(false);
+
+  let [] = useFonts({
+    Poppins_100Thin,
+    Poppins_100Thin_Italic,
+    Poppins_200ExtraLight,
+    Poppins_200ExtraLight_Italic,
+    Poppins_300Light,
+    Poppins_300Light_Italic,
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
+    Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    Poppins_600SemiBold,
+    Poppins_600SemiBold_Italic,
+    Poppins_700Bold,
+    Poppins_700Bold_Italic,
+    Poppins_800ExtraBold,
+    Poppins_800ExtraBold_Italic,
+    Poppins_900Black,
+    Poppins_900Black_Italic
+  });
 
   return (
     <>
@@ -36,7 +78,8 @@ function NavigationTab({ setModalVisible }) {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarShowLabel: true,
-        tabBarLabelStyle: { fontSize: 12 },
+        tabBarLabelStyle: styles.tabBarLabel,
+        tabBarItemStyle: { minWidth: 79 },
         tabBarActiveTintColor: colors.bluePrimary,
         tabBarInactiveTintColor: colors.blueTertiary,
         headerShown: false,
@@ -81,7 +124,7 @@ function PopupMenu({ modalVisible, setModalVisible }) {
       visible={modalVisible}
       onRequestClose={closePopup}
     >
-      <View style={styles.modalOverlay}>
+      <SafeAreaView style={styles.modalOverlay}>
         <View style={styles.styledModal}>
           <View style={styles.modalHeader}>
             <TouchableOpacity onPress={closePopup}>
@@ -113,7 +156,7 @@ function PopupMenu({ modalVisible, setModalVisible }) {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     </Modal >
   );
 }
@@ -130,10 +173,9 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 35,
   },
-  plusIcon: {
-    color: 'white',
-    fontSize: 36,
-    lineHeight: 36,
+  tabBarLabel: {
+    fontSize: 12,
+    fontFamily: 'Poppins_500Medium',
   },
   modalOverlay: {
     flex: 1,
@@ -144,10 +186,12 @@ const styles = StyleSheet.create({
   styledModal: {
     backgroundColor: '#fff',
     width: '100%',
-    height: 400,
-    borderRadius: 20,
+    height: 420,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     padding: 20,
-    marginBottom: -480,
+    position: 'absolute',
+    bottom: 0,
   },
   modalHeader: {
     flexDirection: 'row',
@@ -156,9 +200,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
     color: colors.bluePrimary,
+    fontSize: 16,
+    fontFamily: 'Poppins_700Bold',
   },
   modalContent: {
     flex: 1,
@@ -180,8 +224,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    fontWeight: 'bold',
-    marginLeft: 12,
     fontSize: 16,
+    fontFamily: 'Poppins_700Bold',
+    marginLeft: 12,
   },
 });

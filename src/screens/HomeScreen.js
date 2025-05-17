@@ -4,6 +4,27 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { colors } from '../theme/colors';
 import { ScrollView } from 'react-native-gesture-handler';
+import {
+  useFonts,
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+} from '@expo-google-fonts/poppins';
 
 const metrics = [
   {
@@ -90,6 +111,27 @@ export default function HomeScreen() {
     0
   );
 
+  let [] = useFonts({
+    Poppins_100Thin,
+    Poppins_100Thin_Italic,
+    Poppins_200ExtraLight,
+    Poppins_200ExtraLight_Italic,
+    Poppins_300Light,
+    Poppins_300Light_Italic,
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
+    Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    Poppins_600SemiBold,
+    Poppins_600SemiBold_Italic,
+    Poppins_700Bold,
+    Poppins_700Bold_Italic,
+    Poppins_800ExtraBold,
+    Poppins_800ExtraBold_Italic,
+    Poppins_900Black,
+    Poppins_900Black_Italic
+  });
+
   return (
     <ScrollView style={styles.container}>
       <Header />
@@ -154,7 +196,7 @@ function RingsMetrics() {
               <Text style={styles.metricLabel}>{m.label}</Text>
               <Text style={[styles.metricValue, { color: colors.bluePrimary }]}>
                 {m.value}
-                <Text style={[styles.metricValue, { color: colors.blueTertiary }]}> / {m.goal} {m.unit}</Text>
+                <Text style={[styles.metricValue, { color: colors.blueTertiary }]}>/{m.goal} {m.unit}</Text>
               </Text>
             </View>
           ))}
@@ -286,13 +328,13 @@ function CaloriesCounter() {
                     style={[styles.dishContainer, { borderTopWidth: j !== 0 ? 1 : 0 }]}
                   >
                     <View style={styles.dishRow}>
-                      <Text style={{ color: colors.bluePrimary }}>{dish.name}</Text>
-                      <Text style={{ color: colors.bluePrimary }}>{dish.kcal} kcal</Text>
+                      <Text style={styles.dishLabel}>{dish.name}</Text>
+                      <Text style={styles.dishLabel}>{dish.kcal} kcal</Text>
                     </View>
-                    <Text style={styles.dishMacros}>
-                      <Text style={{ fontWeight: 'bold' }}>Protein:</Text> {dish.protein} gr{'   '}
-                      <Text style={{ fontWeight: 'bold' }}>Carbs:</Text> {dish.carbs} gr{'   '}
-                      <Text style={{ fontWeight: 'bold' }}>Fat:</Text> {dish.fat} gr
+                    <Text style={styles.nutritionText}>
+                      <Text style={styles.nutritionLabel}>Protein:</Text> {dish.protein} gr{'   '}
+                      <Text style={styles.nutritionLabel}>Carbs:</Text> {dish.carbs} gr{'   '}
+                      <Text style={styles.nutritionLabel}>Fat:</Text> {dish.fat} gr
                     </Text>
                   </View>
                 ))}
@@ -320,8 +362,8 @@ const styles = StyleSheet.create({
     paddingBottom: 16
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: 16,
+    fontFamily: 'Poppins_700Bold',
     color: colors.bluePrimary
   },
   dateRow: {
@@ -338,8 +380,8 @@ const styles = StyleSheet.create({
     borderRadius: 14,
   },
   dateText: {
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     color: '#fff',
   },
   wrapper: {
@@ -375,14 +417,14 @@ const styles = StyleSheet.create({
     width: 110,
   },
   metricLabel: {
-    fontSize: 14,
     color: colors.bluePrimary,
-    fontWeight: 'bold',
+    fontSize: 12,
+    fontFamily: 'Poppins_600SemiBold',
     marginTop: 2,
   },
   metricValue: {
     fontSize: 14,
-    fontWeight: '600',
+    fontFamily: 'Poppins_500Medium',
     marginTop: 1,
   },
   todayXpSection: {
@@ -408,9 +450,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   todayXpLabel: {
-    fontSize: 14,
-    fontWeight: '600',
     color: colors.bluePrimary,
+    fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
     marginBottom: 6,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -445,11 +487,12 @@ const styles = StyleSheet.create({
     paddingRight: 8,
   },
   todayXpTextOnBar: {
+    color: colors.bluePrimary,
+    fontSize: 12,
+    fontFamily: 'Poppins_500Medium',
     position: 'absolute',
     right: 30,
-    fontSize: 12,
-    color: colors.bluePrimary,
-    fontWeight: '600',
+    marginTop: 4,
   },
   sectionCard: {
     backgroundColor: '#fff',
@@ -479,8 +522,8 @@ const styles = StyleSheet.create({
   },
   sectionHeaderText: {
     color: colors.bluePrimary,
-    fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
   },
   sectionContent: {
     padding: 11,
@@ -493,14 +536,18 @@ const styles = StyleSheet.create({
     borderTopColor: colors.blueTertiary,
   },
   taskText: {
+    color: colors.bluePrimary,
+    fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     flex: 1,
     marginLeft: 10,
-    fontSize: 16,
-    color: colors.bluePrimary,
+    marginTop: 4,
   },
   taskXp: {
     color: colors.orangePrimary,
-    fontSize: 16,
+    fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
+    marginTop: 4,
   },
   iconWrapper: {
     width: 48,
@@ -512,15 +559,18 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   mealText: {
-    flex: 1,
-    fontSize: 16,
     color: colors.bluePrimary,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
+    flex: 1,
+    marginTop: 4,
     marginLeft: 8,
   },
   kcalText: {
-    fontSize: 16,
     color: colors.orangePrimary,
+    fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
+    marginTop: 4,
     marginRight: 8,
   },
   expandedSectionContent: {
@@ -538,9 +588,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  dishMacros: {
-    fontSize: 12,
+  dishLabel: {
     color: colors.bluePrimary,
+    fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
+  },
+  nutritionLabel: {
+    color: colors.bluePrimary,
+    fontSize: 10,
+    fontFamily: 'Poppins_500Medium',
+    marginTop: 2,
+  },
+  nutritionText: {
+    color: colors.bluePrimary,
+    fontSize: 10,
+    fontFamily: 'Poppins_400Regular',
     marginTop: 2,
   },
 });
