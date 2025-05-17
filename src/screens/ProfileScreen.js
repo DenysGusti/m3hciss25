@@ -1,5 +1,6 @@
 // ProfileScreen.js
 import React, { useState } from 'react';
+import AntDesign from '@expo/vector-icons/AntDesign';
 import { ScrollView, View, Text, Image, TouchableOpacity, StyleSheet, LayoutAnimation } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold, Poppins_500Medium } from '@expo-google-fonts/poppins';
@@ -200,7 +201,7 @@ export default function ProfileScreen({ navigation }) {
                   <Text style={styles.itemTitle}>{item.title}</Text>
                   <Text style={styles.itemSubtitle}>{item.kcal} kcal   {item.time}</Text>
                 </View>
-                <Ionicons name="heart" size={20} color={colors.orangePrimary} />
+                <AntDesign name="heart" size={20} color={colors.orangePrimary} />
               </View>
             ))}
           </View>
@@ -237,7 +238,7 @@ export default function ProfileScreen({ navigation }) {
                   <Text style={styles.itemTitle}>{item.title}</Text>
                   <Text style={styles.itemSubtitle}>{item.time}</Text>
                 </View>
-                <Ionicons name="heart" size={20} color={colors.bluePrimary} />
+                <AntDesign name="heart" size={20} color={colors.bluePrimary} />
               </View>
             ))}
           </View>

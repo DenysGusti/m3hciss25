@@ -1,5 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { colors } from '../theme/colors';
+import { shadow } from '../theme/shadow';
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import React, { useState } from 'react';
 import {
@@ -11,8 +13,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { colors } from '../theme/colors';
-import { shadow } from '../theme/shadow';
 
 const TABS = ['Recipes', 'Activities'];
 
@@ -52,14 +52,14 @@ const dinner = [
 
 const activities = {
   pilates: [
-    { id: 'a1', title: 'Pilates Ball Worout', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Arm'], image: require('../../assets/IdeasImages/pilates.jpg') },
-    { id: 'a2', title: 'Pilates Sculpt', subtitle: '30 minutes', level: 'Advanced', duration: '20–30 min', bodyFocus: ['Abs'], image: require('../../assets/IdeasImages/pilates_2.jpg') },
+    { id: 'a1', title: 'Pilates Ball Worout', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Arm'], image: require('../../assets/IdeasImages/pilates.jpg')},
+    { id: 'a2',title: 'Pilates Sculpt',subtitle: '30 minutes',level: 'Advanced',duration: '20–30 min',bodyFocus: ['Abs'],image: require('../../assets/IdeasImages/pilates_2.jpg') },
     { id: 'a3', title: 'Dynamic Pilates', subtitle: '30 minutes', level: 'Beginner', duration: '20–30 min', bodyFocus: ['Back'], image: require('../../assets/IdeasImages/pilates_3.jpg') },
   ],
-  yoga: [
+  yoga: [ 
     { id: 'a4', title: 'Sunrise Yoga', subtitle: '25 minutes', level: 'Beginner', duration: '20–30 min', bodyFocus: ['Abs', 'Back'], image: require('../../assets/IdeasImages/Yoga.jpg') },
     { id: 'a5', title: 'Night Meditation', subtitle: '20 minutes', level: 'Expert', duration: '15–20 min', bodyFocus: ['Face'], image: require('../../assets/IdeasImages/yoga2.jpg') },
-    { id: 'a6', title: 'Stretch & Flow', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Back'], image: require('../../assets/IdeasImages/yoga3.jpg') },
+    { id: 'a6',title: 'Stretch & Flow', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Back'], image: require('../../assets/IdeasImages/yoga3.jpg') },
   ],
 };
 
@@ -75,18 +75,18 @@ export default function IdeasScreen({ navigation }) {
   }
 
   const filterActivities = (list) => {
-    return list.filter(item => {
-      const matchesLevel =
-        selectedLevel.length === 0 || selectedLevel.includes(item.level);
-      const matchesDuration =
-        selectedDuration.length === 0 || selectedDuration.includes(item.duration);
-      const matchesBodyFocus =
-        selectedBodyFocus.length === 0 ||
-        selectedBodyFocus.some(focus => item.bodyFocus.includes(focus));
+  return list.filter(item => {
+    const matchesLevel =
+      selectedLevel.length === 0 || selectedLevel.includes(item.level);
+    const matchesDuration =
+      selectedDuration.length === 0 || selectedDuration.includes(item.duration);
+    const matchesBodyFocus =
+      selectedBodyFocus.length === 0 ||
+      selectedBodyFocus.some(focus => item.bodyFocus.includes(focus));
 
-      return matchesLevel && matchesDuration && matchesBodyFocus;
-    });
-  };
+    return matchesLevel && matchesDuration && matchesBodyFocus;
+  });
+};
 
   const handleViewAll = (category) => {
     setExpandedCategory(category === expandedCategory ? null : category);
@@ -97,23 +97,24 @@ export default function IdeasScreen({ navigation }) {
   };
 
   const allRecipeSections = [
-    { title: 'Breakfast', data: breakfast },
-    { title: 'Snack', data: snack },
-    { title: 'Lunch', data: lunch },
-    { title: 'Dinner', data: dinner },
-  ];
+  { title: 'Breakfast', data: breakfast },
+  { title: 'Snack', data: snack },
+  { title: 'Lunch', data: lunch },
+  { title: 'Dinner', data: dinner },
+];
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity><MaterialIcons name="search" size={24} color={colors.bluePrimary} /></TouchableOpacity>
+        <TouchableOpacity><MaterialIcons name="search" size={24} color="#01416D" /></TouchableOpacity>
         <Text style={styles.headerTitle} >Ideas</Text>
-        <TouchableOpacity><MaterialIcons name="tune" size={24} color={colors.bluePrimary} /></TouchableOpacity>
+        <TouchableOpacity><MaterialIcons name="tune" size={24} color="#01416D" /></TouchableOpacity>
       </View>
 
       <View style={styles.tabsRow}>
         {TABS.map(tab => (
-          <TouchableOpacity key={tab} onPress={() => setActiveTab(tab)}>
+          <TouchableOpacity key={tab} onPress={() => setActiveTab(tab)}
+          style={styles.tab_button}>
             <Text style={[styles.tabText, activeTab === tab && styles.activeTab]}>
               {tab}
             </Text>
@@ -121,109 +122,153 @@ export default function IdeasScreen({ navigation }) {
         ))}
       </View>
 
-      <ScrollView contentContainerStyle={styles.list}>
+     <ScrollView contentContainerStyle={styles.list}>
         {activeTab === 'Recipes' && (
-          <>
-            {expandedCategory === null && (
-              <>
-                <SectionHeaderRecipes title="Breakfast" onPress={() => handleViewAll('Breakfast')} />
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  {breakfast.map(item => (
-                    <ClubCard key={item.id} {...item} type="recipes" />
-                  ))}
-                </ScrollView>
+        <>
+        {expandedCategory === null && (
+        <>
+            <SectionHeaderRecipes title="Breakfast" onPress={() => handleViewAll('Breakfast')} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {  breakfast.map(item => (
+                <IdeasCard key={item.id} {...item} type="recipes" />
+              ))}
+            </ScrollView>
 
-                <SectionHeaderRecipes title="Snack" onPress={() => handleViewAll('Snack')} />
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  {snack.map(item => (
-                    <ClubCard key={item.id} {...item} type="recipes" />
-                  ))}
-                </ScrollView>
+            <SectionHeaderRecipes title="Snack" onPress={() => handleViewAll('Snack')} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {snack.map(item => (
+                <IdeasCard key={item.id} {...item} type="recipes" />
+              ))}
+            </ScrollView>
 
-                <SectionHeaderRecipes title="Lunch" onPress={() => handleViewAll('Lunch')} />
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  {lunch.map(item => (
-                    <ClubCard key={item.id} {...item} type="recipes" />
-                  ))}
-                </ScrollView>
+            <SectionHeaderRecipes title="Lunch" onPress={() => handleViewAll('Lunch')} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {lunch.map(item => (
+                <IdeasCard key={item.id} {...item} type="recipes" />
+              ))}
+            </ScrollView>
 
-                <SectionHeaderRecipes title="Dinner" onPress={() => handleViewAll('Dinner')} />
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  {dinner.map(item => (
-                    <ClubCard key={item.id} {...item} type="recipes" />
-                  ))}
-                </ScrollView>
-              </>
-            )}
-
-            {expandedCategory === 'Breakfast' && (
-              <>
-                <SectionHeaderRecipes title="Breakfast" onPress={handleGoBack} back />
-                {breakfast.map(item => (
-                  <ClubCard key={item.id} {...item} type="recipes" />
-                ))}
-              </>
-            )}
-
-            {expandedCategory === 'Snack' && (
-              <>
-                <SectionHeaderRecipes title="Snack" onPress={handleGoBack} back />
-                {snack.map(item => (
-                  <ClubCard key={item.id} {...item} type="recipes" />
-                ))}
-              </>
-            )}
-
-            {expandedCategory === 'Lunch' && (
-              <>
-                <SectionHeaderRecipes title="Lunch" onPress={handleGoBack} back />
-                {lunch.map(item => (
-                  <ClubCard key={item.id} {...item} type="recipes" />
-                ))}
-              </>
-            )}
-
-            {expandedCategory === 'Dinner' && (
-              <>
-                <SectionHeaderRecipes title="Dinner" onPress={handleGoBack} back />
-                {dinner.map(item => (
-                  <ClubCard key={item.id} {...item} type="recipes" />
-                ))}
-              </>
-            )}
+            <SectionHeaderRecipes title="Dinner" onPress={() => handleViewAll('Dinner')} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {dinner.map(item => (
+                <IdeasCard key={item.id} {...item} type="recipes" />
+             ))}
+            </ScrollView>
           </>
         )}
+
+        {expandedCategory === 'Breakfast' && (
+          <>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
+              <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
+                <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
+              </TouchableOpacity>
+
+              <View style={{ flex: 1, alignItems: 'center' }}>
+              <Text style={[styles.sectionTitleRecipes, { fontFamily: 'Poppins_600SemiBold' }]}>Breakfast</Text>
+            </View>
+
+            <View style={{ width: 60 }} />
+            </View>
+
+                {breakfast.map(item => (
+              <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
+              ))}
+          </>
+        )}
+
+        {expandedCategory === 'Snack' && (
+          <>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
+              <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
+                <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
+              </TouchableOpacity>
+
+              <View style={{ flex: 1, alignItems: 'center' }}>
+              <Text style={[styles.sectionTitleRecipes, { fontFamily: 'Poppins_600SemiBold' }]}>Snack</Text>
+            </View>
+
+            <View style={{ width: 60 }} />
+            </View>
+
+                {snack.map(item => (
+              <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
+              ))}
+          </>
+        )}
+
+        {expandedCategory === 'Lunch' && (
+          <>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
+              <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
+                <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
+              </TouchableOpacity>
+
+              <View style={{ flex: 1, alignItems: 'center' }}>
+              <Text style={[styles.sectionTitleRecipes, { fontFamily: 'Poppins_600SemiBold' }]}>Lunch</Text>
+            </View>
+
+            <View style={{ width: 60 }} />
+            </View>
+
+                {lunch.map(item => (
+              <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
+              ))}
+          </>
+        )}
+
+        {expandedCategory === 'Dinner' && (
+          <>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
+              <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
+                <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
+              </TouchableOpacity>
+
+              <View style={{ flex: 1, alignItems: 'center' }}>
+              <Text style={[styles.sectionTitleRecipes, { fontFamily: 'Poppins_600SemiBold' }]}>Dinner</Text>
+            </View>
+
+            <View style={{ width: 60 }} />
+            </View>
+
+                {dinner.map(item => (
+              <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
+              ))}
+          </>
+        )}
+      </>
+    )}
 
         {activeTab === 'Activities' && (
           <>
-            <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
-            <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
-            <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
+        <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
+        <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
+        <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
+    
+      <SectionHeaderActivities title="Pilates" />
+      <View style={{ marginTop: 10 }}>
+      <FlatList
+        data={filterActivities(activities.pilates)}
+        keyExtractor={item => item.id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => <IdeasCard {...item} type="activities" />}
+      />
+      </View>
 
-            <SectionHeaderActivities title="Pilates" />
-            <View style={{ marginTop: 10 }}>
-              <FlatList
-                data={filterActivities(activities.pilates)}
-                keyExtractor={item => item.id}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => <ClubCard {...item} type="activities" />}
-              />
-            </View>
-
-            <SectionHeaderActivities title="Yoga" />
-            <View style={{ marginTop: 10 }}>
-              <FlatList
-                data={filterActivities(activities.yoga)}
-                keyExtractor={item => item.id}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => <ClubCard {...item} type="activities" />}
-              />
-            </View>
-          </>
-        )}
-      </ScrollView>
+      <SectionHeaderActivities title="Yoga" />
+      <View style={{ marginTop: 10 }}>
+      <FlatList
+        data={filterActivities(activities.yoga)}
+        keyExtractor={item => item.id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => <IdeasCard {...item} type="activities" />}
+      />
+      </View>
+    </>
+  )}
+    </ScrollView>
     </View>
   );
 }
@@ -241,13 +286,13 @@ function SectionHeaderRecipes({ title, onPress, back = false }) {
 
 function SectionHeaderActivities({ title, onPress }) {
   return (
-    <View style={styles.sectionHeader}>
+    <View style={styles.SectionHeader}>
       <Text style={styles.sectionTitleActivities}>{title}</Text>
     </View>
   );
 }
 
-function ClubCard({ title, subtitle, image, type = "recipes" }) {
+function IdeasCard({ title, subtitle, image, type = "recipes" }) {
   const [liked, setLiked] = useState(false);
 
   const toggleLike = () => {
@@ -257,7 +302,40 @@ function ClubCard({ title, subtitle, image, type = "recipes" }) {
   const heartColor = type === "recipes" ? colors.orangePrimary : colors.bluePrimary;
 
   return (
-    <View style={[styles.card, styles.clubCard]}>
+    <View style={[styles.card, styles.ideasCard]}>
+      <View style={styles.imageWrapper}>
+        <Image source={image} style={styles.cardImage} resizeMode="cover" />
+      </View>
+
+      <View style={styles.cardFooter}>
+        <View style={styles.textContainer}>
+          <Text style={styles.cardTitle}>{title}</Text>
+          <Text style={styles.cardSubtitle}>{subtitle}</Text>
+        </View>
+
+        <TouchableOpacity style={styles.heartIconContainer} onPress={toggleLike}>
+          <AntDesign
+            name={liked ? "heart" : "hearto"}
+            size={20}
+            color={heartColor}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+function ViewAllRecipesCard({ title, subtitle, image, type = "recipes" }) {
+  const [liked, setLiked] = useState(false);
+
+  const toggleLike = () => {
+    setLiked(prev => !prev);
+  };
+
+  const heartColor = type === "recipes" ? colors.orangePrimary : colors.bluePrimary;
+
+  return (
+    <View style={[styles.card]}>
       <View style={styles.imageWrapper}>
         <Image source={image} style={styles.cardImage} resizeMode="cover" />
       </View>
@@ -298,7 +376,7 @@ function FilterGroup({ title, options, selected, onSelect }) {
           onSelect([...(selected || []), value]);
         }
       } else {
-        onSelect(selected === value ? null : value);
+        onSelect(selected === value ? null : value); 
       }
     };
 
@@ -308,24 +386,24 @@ function FilterGroup({ title, options, selected, onSelect }) {
         style={
           isIconGroup
             ? {
-              width: 64,
-              height: 64,
-              borderRadius: 30,
-              overflow: 'hidden',
-              marginRight: 8,
-              backgroundColor: colors.blueSecondary,
-              borderWidth: isSelected ? 2 : 0,
-              borderColor: isSelected ? 'white' : 'transparent',
-            }
+                width: 64,
+                height: 64,
+                borderRadius: 30,
+                overflow: 'hidden',
+                marginRight: 8,
+                backgroundColor: colors.background,
+                borderWidth: isSelected ? 2 : 0,
+                borderColor: isSelected ? 'white' : 'transparent',
+              }
             : {
-              paddingVertical: 6,
-              paddingHorizontal: 14,
-              backgroundColor: isSelected ? colors.bluePrimary : colors.blueSecondary,
-              borderRadius: 20,
-              marginRight: 8,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }
+                paddingVertical: 6,
+                paddingHorizontal: 14,
+                backgroundColor: isSelected ? '#01416D' : '#E5F1F8',
+                borderRadius: 20,
+                marginRight: 8,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }
         }
       >
         {isIconGroup ? (
@@ -349,13 +427,13 @@ function FilterGroup({ title, options, selected, onSelect }) {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ color: 'white', fontSize: 10, fontFamily: isSelected ? 'Poppins_700Bold' : 'Poppins_600SemiBold' }}>
+              <Text style={{ color: 'white', fontWeight: isSelected ? '700' : '600', fontSize: 10, fontFamily: isSelected ? 'Poppins_700Bold' : 'Poppins_600SemiBold'}}>
                 {item.label}
               </Text>
             </View>
           </>
         ) : (
-          <Text style={{ color: isSelected ? 'white' : colors.bluePrimary, fontFamily: isSelected ? 'Poppins_600SemiBold' : 'Poppins_400Regular' }}>{item}</Text>
+          <Text style={{ color: isSelected ? 'white' : '#01416D', fontWeight: '500' , fontFamily: isSelected ? 'Poppins_600SemiBold' : 'Poppins_400Regular'}}>{item}</Text>
         )}
       </TouchableOpacity>
     );
@@ -363,7 +441,7 @@ function FilterGroup({ title, options, selected, onSelect }) {
 
   return (
     <View style={{ marginVertical: 10 }}>
-      <Text style={{ fontFamily: 'Poppins_600SemiBold', color: colors.bluePrimary, marginBottom: 6 }}>{title}</Text>
+      <Text style={{ fontFamily: 'Poppins_600SemiBold', fontWeight: '600', color: '#01416D', marginBottom: 6 }}>{title}</Text>
       <FlatList
         data={options}
         renderItem={renderItem}
@@ -392,9 +470,9 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   headerTitle: {
-    fontSize: 18,
-    fontFamily: 'Poppins_600SemiBold',
-    color: colors.bluePrimary,
+    fontSize: 16,
+    fontFamily: 'Poppins_700Bold',
+    color: colors.bluePrimary
   },
   tabsRow: {
     flexDirection: 'row',
@@ -406,22 +484,20 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 16,
-    fontFamily: 'Poppins_400Regular',
-    color: colors.blueTertiary,
+    fontFamily: 'Poppins_600SemiBold',
+    color: colors.blueTertiary
   },
   activeTab: {
     color: colors.bluePrimary,
     fontFamily: 'Poppins_600SemiBold',
+    fontSize: 16,
   },
   list: {
     paddingHorizontal: 16,
     paddingTop: 16,
     paddingBottom: 24,
   },
-  clubCard: {
-    width: 200,
-    marginRight: 12,
-  },
+ 
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -432,7 +508,7 @@ const styles = StyleSheet.create({
   sectionTitleActivities: {
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
-    color: colors.bluePrimary,
+    color: colors.bluePrimary
   },
   sectionTitleRecipes: {
     fontSize: 16,
@@ -440,8 +516,8 @@ const styles = StyleSheet.create({
     color: colors.orangePrimary,
   },
   viewAll: {
-    fontSize: 14,
-    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
+    fontFamily: 'Poppins_600SemiBold',
     color: colors.orangePrimary,
   },
   card: {
@@ -450,15 +526,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     ...shadow,
   },
+   ideasCard: {
+    width: 200,
+    marginRight: 12,
+  },
   imageWrapper: {
-    height: 100,
+    height: 140,
     overflow: 'hidden',
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
-    position: 'relative',
-    backgroundColor: '#eee',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   cardImage: {
     width: '100%',
@@ -472,13 +548,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   cardTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Poppins_600SemiBold',
-    color: colors.bluePrimary,
+    color: colors.bluePrimary
   },
   cardSubtitle: {
-    fontSize: 14,
-    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
+    fontFamily: 'Poppins_500Regular',
     color: colors.blueTertiary,
     marginTop: 4,
   },
@@ -487,7 +563,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 25,
     right: 3,
-    width: 32,
+    width: 32,          
     height: 32,
     backgroundColor: 'transparent',
     justifyContent: 'center',
@@ -497,5 +573,11 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
     marginRight: 8,
+  },
+
+  tab_button: {
+    flex: 1,                  
+    alignItems: 'center',     
+    paddingVertical: 12,
   },
 });
