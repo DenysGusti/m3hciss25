@@ -97,13 +97,24 @@ export default function ProfileScreen({navigation}) {
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 {/* Header */}
                 <View style={styles.headerRow}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                        <Ionicons name="arrow-back" size={24} color={colors.bluePrimary}/>
-                    </TouchableOpacity>
+                    <View style={styles.headerSide}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                                <Ionicons name="arrow-back" size={24} color={colors.bluePrimary}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { /* scan action */  }} style={styles.iconSpacing}>
+                            <Ionicons name="qr-code-outline" size={24} color={colors.bluePrimary}/>
+                        </TouchableOpacity>
+                    </View>
                     <Text style={styles.headerTitle}>Profile</Text>
-                    <TouchableOpacity>
-                        <Ionicons name="settings-outline" size={24} color={colors.bluePrimary}/>
-                    </TouchableOpacity>
+                    <View style={styles.headerSide}>
+                        <TouchableOpacity onPress={() => { /* share action */ }}>
+                            <Ionicons name="share-outline" size={24} color={colors.bluePrimary}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Ionicons name="settings-outline" size={24} color={colors.bluePrimary} style={styles.iconSpacing}/>
+                        </TouchableOpacity>
+                    </View>
+                    
                 </View>
 
                 {/* Profile Info */}
@@ -291,12 +302,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginBottom: 16,
-        marginTop: 40
+        marginTop: 40,
+        
     },
     headerTitle: {
         fontSize: 20,
         color: colors.bluePrimary,
         fontFamily: 'Poppins_600SemiBold',
+    },
+    headerSide: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    iconSpacing: {
+        marginLeft: 16,
     },
     profileSection: {
         flexDirection: 'row',
