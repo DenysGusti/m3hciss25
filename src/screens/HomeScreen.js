@@ -268,34 +268,31 @@ function TodayTasks({ tasks, setTasks }) {
 }
 
 function CaloriesCounter() {
-  const [expandedMeal, setExpandedMeal] = useState(null);
-  const [animations] = useState(
-    mealData.map(() => new Animated.Value(0))
-  );
+  const [expandedMeals, setExpandedMeals] = useState(new Set());
+  const [animations] = useState(mealData.map(() => new Animated.Value(0)));
 
   const toggleMeal = (index) => {
-    const isExpanding = expandedMeal !== index;
+    const isExpanded = expandedMeals.has(index);
+    const newSet = new Set(expandedMeals);
 
     Animated.timing(animations[index], {
-      toValue: isExpanding ? 1 : 0,
+      toValue: isExpanded ? 0 : 1,
       duration: 300,
       useNativeDriver: false,
-    }).start(() => {
-      setExpandedMeal(isExpanding ? index : null);
-    });
+    }).start();
 
-    // Collapse other panels (if only one should be open)
-    mealData.forEach((_, i) => {
-      if (i !== index) {
-        animations[i].setValue(0);
-      }
-    });
+    if (isExpanded) {
+      newSet.delete(index);
+    } else {
+      newSet.add(index);
+    }
+
+    setExpandedMeals(newSet);
   };
 
   return (
     <View style={[styles.sectionCard, { marginTop: 20, marginBottom: 20 }]}>
-      <View style={[styles.sectionHeader, { backgroundColor: colors.orangePrimary }]}>
-      </View>
+      <View style={[styles.sectionHeader, { backgroundColor: colors.orangePrimary }]} />
       <View style={styles.headerContent}>
         <Text style={styles.sectionHeaderText}>Calories counter</Text>
       </View>
@@ -304,9 +301,11 @@ function CaloriesCounter() {
         {mealData.map((item, i) => {
           const animatedHeight = animations[i].interpolate({
             inputRange: [0, 1],
-            outputRange: [0, item.dishes.length * 55], // Approx height per dish
+            outputRange: [0, item.dishes.length * 55],
             extrapolate: 'clamp',
           });
+
+          const isOpen = expandedMeals.has(i);
 
           return (
             <View key={i}>
@@ -318,9 +317,11 @@ function CaloriesCounter() {
                   <MaterialCommunityIcons name={item.icon} size={32} color={colors.orangePrimary} />
                 </View>
                 <Text style={styles.mealText}>{item.label}</Text>
-                <Text style={styles.kcalText}>{item.dishes.reduce((sum, dish) => sum + dish.kcal, 0)} kcal</Text>
+                <Text style={styles.kcalText}>
+                  {item.dishes.reduce((sum, dish) => sum + dish.kcal, 0)} kcal
+                </Text>
                 <Ionicons
-                  name={expandedMeal === i ? 'chevron-up' : 'chevron-down'}
+                  name={isOpen ? 'chevron-up' : 'chevron-down'}
                   size={24}
                   color={colors.orangePrimary}
                 />
