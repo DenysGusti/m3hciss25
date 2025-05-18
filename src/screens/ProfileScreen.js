@@ -439,7 +439,7 @@ const styles = StyleSheet.create({
   },
   statsTabText: {
     fontSize: 16,
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600'
   },
   tabUnderline: {
