@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingTop: 16,
-    paddingBottom: 8
+    //paddingBottom: 2
   },
   hubs_title: {
     fontSize: 16,
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     borderBottomWidth: 1,
     borderColor: '#ECECEC',
-    paddingVertical: 12,
+    //paddingVertical: 1,
     
     marginTop: 16
 
