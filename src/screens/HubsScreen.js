@@ -426,9 +426,9 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
     },
     listContainer: {
-        marginLeft: -8,
+        marginLeft: -6,
     },
     contentContainer: {
-        marginLeft: 8,
+        marginLeft: 6,
     },
 });
