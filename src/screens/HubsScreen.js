@@ -9,6 +9,7 @@ import {
     Image,
 } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
+import {Ionicons} from '@expo/vector-icons';
 import {
     useFonts,
     Poppins_100Thin,
@@ -36,7 +37,7 @@ import {shadow} from '../theme/shadow';
 const TABS = ['Joined', 'Challenges', 'Clubs', 'Forum'];
 
 
-const challengesData = [
+const challenges_info = [
     {
         id: '1',
         title: 'Morning Sip – A 21-Day Ritual',
@@ -76,7 +77,7 @@ const challengesData = [
 ];
 
 
-const recommendedClubs = [
+const recommended_clubs = [
     {
         id: 'r1',
         title: 'Along the trails of Vienna',
@@ -97,7 +98,7 @@ const recommendedClubs = [
     },
 ];
 
-const nearbyClubs = [
+const nearby_clubs = [
     {
         id: 'n1',
         title: 'Morning joggers',
@@ -118,7 +119,7 @@ const nearbyClubs = [
     },
 ];
 
-const trendingClubs = [
+const trending_clubs = [
     {
         id: 't1',
         title: 'Calisthenic health',
@@ -164,9 +165,9 @@ export default function HubsScreen() {
         <View style={styles.screen_background}>
 
             <View style={styles.hubs_title_location}>
-                <TouchableOpacity><MaterialIcons name="search" size={24} color={colors.bluePrimary}/></TouchableOpacity>
+                <TouchableOpacity><Ionicons name="search-outline" size={24} color={colors.bluePrimary}/></TouchableOpacity>
                 <Text style={styles.hubs_title}>Hubs</Text>
-                <TouchableOpacity><MaterialIcons name="chat-bubble-outline" size={24}
+                <TouchableOpacity><Ionicons name="chatbox-outline" size={24}
                                                  color={colors.bluePrimary}/></TouchableOpacity>
             </View>
 
@@ -187,7 +188,7 @@ export default function HubsScreen() {
 
             {activeTab === 'Challenges' && (
                 <FlatList
-                    data={challengesData}
+                    data={challenges_info}
                     keyExtractor={item => item.id}
                     renderItem={({item}) => <ChallengesCard {...item} />}
                     contentContainerStyle={styles.scroll}
@@ -197,12 +198,11 @@ export default function HubsScreen() {
             {activeTab === 'Clubs' && (
                 <ScrollView contentContainerStyle={styles.scroll}>
 
-                    <SectionHeader title="Recommended Clubs" onPress={() => {/* future list */
-                    }}/>
+                    <CatagoryTitle title="Recommended Clubs"/>
                     <View style={styles.listContainer}>
                         <FlatList
                             contentContainerStyle={styles.contentContainer}
-                            data={recommendedClubs}
+                            data={recommended_clubs}
                             keyExtractor={item => item.id}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -210,12 +210,11 @@ export default function HubsScreen() {
                         />
                     </View>
 
-                    <SectionHeader title="Clubs near me" onPress={() => {/* future list*/
-                    }}/>
+                    <CatagoryTitle title="Clubs near me" />
                     <View style={styles.listContainer}>
                         <FlatList
                             contentContainerStyle={styles.contentContainer}
-                            data={nearbyClubs}
+                            data={nearby_clubs}
                             keyExtractor={item => item.id}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -223,12 +222,11 @@ export default function HubsScreen() {
                         />
                     </View>
 
-                    <SectionHeader title="Trending Clubs" onPress={() => {/* future list */
-                    }}/>
+                    <CatagoryTitle title="Trending Clubs" />
                     <View style={styles.listContainer}>
                         <FlatList
                             contentContainerStyle={styles.contentContainer}
-                            data={trendingClubs}
+                            data={trending_clubs}
                             keyExtractor={item => item.id}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -242,7 +240,7 @@ export default function HubsScreen() {
     );
 }
 
-function SectionHeader({title, onPress}) {
+function CatagoryTitle({title, onPress}) {
     return (
         <View style={styles.space_between_cat}>
             <Text style={styles.category_club_title}>{title}</Text>
@@ -282,7 +280,7 @@ function ClubCard({title, subtitle, image}) {
 
             </View>
             <View style={styles.text_coordination}>
-                <View style={styles.textContainer}>
+                <View style={styles.text_location}>
                     <Text style={styles.card_text_title}>{title}</Text>
                     <Text style={styles.card_text_subtitle}>{subtitle}</Text>
                 </View>
@@ -417,7 +415,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
-    textContainer: {
+    text_location: {
         flex: 1,
         marginRight: 8,
     },
