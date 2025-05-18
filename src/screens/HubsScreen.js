@@ -168,39 +168,42 @@ export default function HubsScreen() {
         <ScrollView contentContainerStyle={styles.scroll}>
 
           <SectionHeader title="Recommended Clubs" onPress={() => {/* future list */ }} />
-          <FlatList
-            data={recommendedClubs}
-            keyExtractor={item => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingLeft: 5 }}
-            renderItem={({ item }) => <ClubCard {...item} />}
-          />
-
+          <View style={styles.listContainer}>
+            <FlatList
+              contentContainerStyle={styles.contentContainer}
+              data={recommendedClubs}
+              keyExtractor={item => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => <ClubCard {...item} />}
+            />
+          </View>
 
           <SectionHeader title="Clubs near me" onPress={() => {/* future list*/ }} />
-          <FlatList
-            data={nearbyClubs}
-            keyExtractor={item => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingLeft: 5 }}
-            renderItem={({ item }) => <ClubCard {...item} />}
-          />
-
+          <View style={styles.listContainer}>
+            <FlatList
+              contentContainerStyle={styles.contentContainer}
+              data={nearbyClubs}
+              keyExtractor={item => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => <ClubCard {...item} />}
+            />
+          </View>
 
           <SectionHeader title="Trending Clubs" onPress={() => {/* future list */ }} />
-          <FlatList
-            data={trendingClubs}
-            keyExtractor={item => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingLeft: 5 }}
-            renderItem={({ item }) => <ClubCard {...item} />}
-          />
+          <View style={styles.listContainer}>
+            <FlatList
+              contentContainerStyle={styles.contentContainer}
+              data={trendingClubs}
+              keyExtractor={item => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => <ClubCard {...item} />}
+            />
+          </View>
         </ScrollView>
       )}
-
 
     </View>
   );
@@ -230,7 +233,6 @@ function ChallengesCard({ title, subtitle, image }) {
           <Text style={styles.card_text_subtitle}>{subtitle}</Text>
         </View>
 
-
         <TouchableOpacity style={styles.plus_button}>
           <MaterialIcons name="add" size={20} color={colors.background} />
         </TouchableOpacity>
@@ -245,8 +247,6 @@ function ClubCard({ title, subtitle, image }) {
       <View style={styles.image_design}>
         <Image source={image} style={styles.insert_image} resizeMode="cover" />
 
-
-
       </View>
       <View style={styles.text_coordination}>
         <View style={styles.textContainer}>
@@ -257,9 +257,6 @@ function ClubCard({ title, subtitle, image }) {
           <MaterialIcons name="add" size={20} color={colors.background} />
         </TouchableOpacity>
       </View>
-
-
-
 
     </View>
   );
@@ -293,9 +290,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ECECEC',
     //paddingVertical: 1,
-    
     marginTop: 16
-
   },
 
   tab_title: {
@@ -322,14 +317,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
     marginTop: 16,
-    paddingHorizontal: 5
   },
 
   category_club_title: {
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
-    
-
     color: colors.bluePrimary
   },
 
@@ -398,8 +390,13 @@ const styles = StyleSheet.create({
   },
 
   tab_button: {
-    alignItems: 'center',    
+    alignItems: 'center',
     paddingVertical: 12,
   },
-
+  listContainer: {
+    marginLeft: -8,
+  },
+  contentContainer: {
+    marginLeft: 8,
+  },
 });

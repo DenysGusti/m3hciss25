@@ -128,32 +128,52 @@ export default function IdeasScreen({ navigation }) {
             {expandedCategory === null && (
               <>
                 <SectionHeaderRecipes title="Breakfast" onPress={() => handleViewAll('Breakfast')} />
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  {breakfast.map(item => (
-                    <IdeasCard key={item.id} {...item} type="recipes" />
-                  ))}
-                </ScrollView>
+                <View style={styles.listContainer}>
+                  <FlatList
+                    data={breakfast}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => <IdeasCard {...item} type="recipes" />}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.contentContainer}
+                  />
+                </View>
 
                 <SectionHeaderRecipes title="Snack" onPress={() => handleViewAll('Snack')} />
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  {snack.map(item => (
-                    <IdeasCard key={item.id} {...item} type="recipes" />
-                  ))}
-                </ScrollView>
+                <View style={styles.listContainer}>
+                  <FlatList
+                    data={snack}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => <IdeasCard {...item} type="recipes" />}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.contentContainer}
+                  />
+                </View>
 
                 <SectionHeaderRecipes title="Lunch" onPress={() => handleViewAll('Lunch')} />
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  {lunch.map(item => (
-                    <IdeasCard key={item.id} {...item} type="recipes" />
-                  ))}
-                </ScrollView>
+                <View style={styles.listContainer}>
+                  <FlatList
+                    data={lunch}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => <IdeasCard {...item} type="recipes" />}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.contentContainer}
+                  />
+                </View>
 
                 <SectionHeaderRecipes title="Dinner" onPress={() => handleViewAll('Dinner')} />
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  {dinner.map(item => (
-                    <IdeasCard key={item.id} {...item} type="recipes" />
-                  ))}
-                </ScrollView>
+                <View style={styles.listContainer}>
+                  <FlatList
+                    data={dinner}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => <IdeasCard {...item} type="recipes" />}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.contentContainer}
+                  />
+                </View>
               </>
             )}
 
@@ -218,8 +238,9 @@ export default function IdeasScreen({ navigation }) {
             <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
 
             <SectionHeaderActivities title="Pilates" />
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.listContainer}>
               <FlatList
+                contentContainerStyle={styles.contentContainer}
                 data={filterActivities(activities.pilates)}
                 keyExtractor={item => item.id}
                 horizontal
@@ -229,8 +250,9 @@ export default function IdeasScreen({ navigation }) {
             </View>
 
             <SectionHeaderActivities title="Yoga" />
-            <View style={{ marginTop: 10 }}>
+            <View style={styles.listContainer}>
               <FlatList
+                contentContainerStyle={styles.contentContainer}
                 data={filterActivities(activities.yoga)}
                 keyExtractor={item => item.id}
                 horizontal
@@ -549,5 +571,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingVertical: 12,
+  },
+  listContainer: {
+    marginTop: 10,
+    marginLeft: -8,
+  },
+  contentContainer: {
+    marginLeft: 8,
   },
 });
