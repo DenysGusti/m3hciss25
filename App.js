@@ -1,12 +1,10 @@
-// App.js
-import 'react-native-gesture-handler';      // ПЕРШИМ
-import React from 'react';
+import 'react-native-gesture-handler';
 import {enableScreens} from 'react-native-screens';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import TabNavigation from './src/navigation/TabNavigation';
 
-enableScreens();                            // І відразу після імпорту
+enableScreens();
 
 export default function App() {
     return (

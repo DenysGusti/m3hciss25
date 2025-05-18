@@ -21,22 +21,16 @@ Externe Libraries und Frameworks:
 - @expo/vector-icons
 - @react-navigation/bottom-tabs
 - @react-navigation/native
-- @react-navigation/stack 
-- expo 
-- expo-app-loading 
-- expo-font 
-- expo-status-bar 
-- react 
-- react-native 
-- react-native-circular-progress 
-- react-native-gesture-handler 
-- react-native-reanimated 
-- react-native-safe-area-context 
-- react-native-screens 
-- react-native-svg 
-- react-native-vector-icons 
-- @babel/core 
-- react-native-svg-transformer
+- expo
+- expo-font
+- react
+- react-native
+- react-native-circular-progress
+- react-native-gesture-handler
+- react-native-safe-area-context
+- react-native-screens
+- react-native-svg
+- react-native-vector-icons
 
 Dauer der Entwicklung:
 160 Stunden
