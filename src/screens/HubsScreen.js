@@ -173,6 +173,7 @@ export default function HubsScreen() {
             keyExtractor={item => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingLeft: 5 }}
             renderItem={({ item }) => <ClubCard {...item} />}
           />
 
@@ -183,6 +184,7 @@ export default function HubsScreen() {
             keyExtractor={item => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingLeft: 5 }}
             renderItem={({ item }) => <ClubCard {...item} />}
           />
 
@@ -193,6 +195,7 @@ export default function HubsScreen() {
             keyExtractor={item => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingLeft: 5 }}
             renderItem={({ item }) => <ClubCard {...item} />}
           />
         </ScrollView>
@@ -290,7 +293,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ECECEC',
     paddingVertical: 12,
-    //paddingHorizontal: 16,  
+    
     marginTop: 16
 
   },
@@ -318,12 +321,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 8,
-    marginTop: 16
+    marginTop: 16,
+    paddingHorizontal: 5
   },
 
   category_club_title: {
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
+    
 
     color: colors.bluePrimary
   },
@@ -393,8 +398,7 @@ const styles = StyleSheet.create({
   },
 
   tab_button: {
-    flex: 1,                  // кожна кнопка займає по рівному шматку
-    alignItems: 'center',     // текст по центру всередині цього шматка
+    alignItems: 'center',    
     paddingVertical: 12,
   },
 
