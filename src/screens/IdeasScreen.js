@@ -573,7 +573,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   listContainer: {
-    marginTop: 10,
     marginLeft: -8,
   },
   contentContainer: {
