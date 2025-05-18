@@ -1,5 +1,4 @@
-import {Ionicons} from '@expo/vector-icons';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import {Ionicons, AntDesign} from '@expo/vector-icons';
 import {colors} from '../theme/colors';
 import {shadow} from '../theme/shadow';
 import {useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold} from '@expo-google-fonts/poppins';

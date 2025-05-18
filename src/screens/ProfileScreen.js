@@ -1,6 +1,5 @@
-// ProfileScreen.js
 import React, {useState} from 'react';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import {Ionicons, AntDesign} from '@expo/vector-icons';
 import {ScrollView, View, Text, Image, TouchableOpacity, StyleSheet, LayoutAnimation} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context'
 import {
@@ -10,7 +9,6 @@ import {
     Poppins_700Bold,
     Poppins_500Medium
 } from '@expo-google-fonts/poppins';
-import {Ionicons} from '@expo/vector-icons';
 import {colors} from '../theme/colors';
 import {shadow} from '../theme/shadow';
 
