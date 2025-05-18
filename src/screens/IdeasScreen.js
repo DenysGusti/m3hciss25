@@ -1,4 +1,4 @@
-import {MaterialIcons} from '@expo/vector-icons';
+import {Ionicons} from '@expo/vector-icons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import {colors} from '../theme/colors';
 import {shadow} from '../theme/shadow';
@@ -207,9 +207,11 @@ export default function IdeasScreen({}) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity><MaterialIcons name="search" size={24} color={colors.bluePrimary}/></TouchableOpacity>
+                <TouchableOpacity><Ionicons name="search-outline" size={24}
+                                            color={colors.bluePrimary}/></TouchableOpacity>
                 <Text style={styles.headerTitle}>Ideas</Text>
-                <TouchableOpacity><MaterialIcons name="tune" size={24} color={colors.bluePrimary}/></TouchableOpacity>
+                <TouchableOpacity><Ionicons name="options-outline" size={24}
+                                            color={colors.bluePrimary}/></TouchableOpacity>
             </View>
 
             <View style={styles.tabsRow}>

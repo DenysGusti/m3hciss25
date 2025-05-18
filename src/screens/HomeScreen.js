@@ -153,7 +153,7 @@ function Header() {
     return (<View style={styles.header}>
         <Text style={styles.headerTitle}>Day 1</Text>
         <TouchableOpacity>
-            <MaterialCommunityIcons name="calendar-month-outline" size={24} color={colors.bluePrimary}/>
+            <Ionicons name="calendar-outline" size={24} color={colors.bluePrimary}/>
         </TouchableOpacity>
     </View>);
 }
