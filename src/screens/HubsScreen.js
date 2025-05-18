@@ -165,10 +165,11 @@ export default function HubsScreen() {
         <View style={styles.screen_background}>
 
             <View style={styles.hubs_title_location}>
-                <TouchableOpacity><Ionicons name="search-outline" size={24} color={colors.bluePrimary}/></TouchableOpacity>
+                <TouchableOpacity><Ionicons name="search-outline" size={24}
+                                            color={colors.bluePrimary}/></TouchableOpacity>
                 <Text style={styles.hubs_title}>Hubs</Text>
                 <TouchableOpacity><Ionicons name="chatbox-outline" size={24}
-                                                 color={colors.bluePrimary}/></TouchableOpacity>
+                                            color={colors.bluePrimary}/></TouchableOpacity>
             </View>
 
 
@@ -210,7 +211,7 @@ export default function HubsScreen() {
                         />
                     </View>
 
-                    <CatagoryTitle title="Clubs near me" />
+                    <CatagoryTitle title="Clubs near me"/>
                     <View style={styles.listContainer}>
                         <FlatList
                             contentContainerStyle={styles.contentContainer}
@@ -222,7 +223,7 @@ export default function HubsScreen() {
                         />
                     </View>
 
-                    <CatagoryTitle title="Trending Clubs" />
+                    <CatagoryTitle title="Trending Clubs"/>
                     <View style={styles.listContainer}>
                         <FlatList
                             contentContainerStyle={styles.contentContainer}
