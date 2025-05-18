@@ -98,7 +98,7 @@ export default function ProfileScreen({navigation}) {
                 {/* Header */}
                 <View style={styles.headerRow}>
                     <View style={styles.headerSide}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                        <TouchableOpacity onPress={() => navigation.navigate("  Home  ")}>
                                 <Ionicons name="arrow-back" size={24} color={colors.bluePrimary}/>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { /* scan action */  }} style={styles.iconSpacing}>
