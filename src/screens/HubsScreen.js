@@ -34,7 +34,7 @@ import {
 import {colors} from '../theme/colors';
 import {shadow} from '../theme/shadow';
 
-const TABS = ['Joined', 'Challenges', 'Clubs', 'Forum'];
+const tabs = ['Joined', 'Challenges', 'Clubs', 'Forum'];
 
 
 const challenges_info = [
@@ -174,7 +174,7 @@ export default function HubsScreen() {
 
 
             <View style={styles.tab_location}>
-                {TABS.map(tab => (
+                {tabs.map(tab => (
                     <TouchableOpacity key={tab}
                                       onPress={() => setActiveTab(tab)}
                                       style={styles.tab_button}
