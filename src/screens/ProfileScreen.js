@@ -11,6 +11,8 @@ import {
 } from '@expo-google-fonts/poppins';
 import {colors} from '../theme/colors';
 import {shadow} from '../theme/shadow';
+import {useAppContext} from '../context/AppContext';
+import {breakfast, snack, lunch, dinner, activities} from './IdeasScreen';
 
 // Dummy data for charts and lists
 const chartData = {
@@ -38,39 +40,17 @@ const CATEGORY_COLORS = {
     Hydration: colors.cyanPrimary,
 };
 
-const favoriteRecipes = [
-    {
-        id: 1,
-        title: 'Scrambled Egg & Avocado Tacos',
-        kcal: '400',
-        image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg')
-    },
-    {
-        id: 2,
-        title: 'Tomato-lentil   Soup & Bread',
-        kcal: '270',
-        image: require('../../assets/IdeasImages/Lunch_Soup.jpg')
-    },
-    {
-        id: 3,
-        title: 'Chia Pudding with Berries',
-        kcal: '200',
-        image: require('../../assets/IdeasImages/Chia_Pudding.jpg')
-    },
-    {id: 4, title: 'Quiche with Mushrooms', kcal: '490', image: require('../../assets/IdeasImages/dinner1.jpg')},
-    {id: 5, title: 'Ceaser Salad with Chicken', kcal: '370', image: require('../../assets/IdeasImages/dinner3.jpg')},
-];
-const favoriteActivities = [
-    {id: 1, title: 'Pilates Ball Workout', time: '20 min', image: require('../../assets/IdeasImages/pilates.jpg')},
-    {id: 2, title: 'Sunrise Yoga', time: '25 min', image: require('../../assets/IdeasImages/Yoga.jpg')},
-    {id: 3, title: 'Stretch & Flow', time: '20 min', image: require('../../assets/IdeasImages/yoga3.jpg')},
-];
-
-
 export default function ProfileScreen({navigation}) {
     const [selectedCategory, setSelectedCategory] = useState('Calories');
     const [showAllRecipes, setShowAllRecipes] = useState(false);
     const [showAllActivities, setShowAllActivities] = useState(false);
+    const {
+        todayXP,
+        favoriteRecipes,
+        toggleFavoriteRecipe,
+        favoriteActivities,
+        toggleFavoriteActivity,
+    } = useAppContext();
     const [fontsLoaded] = useFonts({Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold});
     if (!fontsLoaded) {
         return null;
@@ -84,6 +64,17 @@ export default function ProfileScreen({navigation}) {
 
     const maxChartValue = Math.max(...currentData);
     const chartHeight = 100;
+
+    const baseXP = 500;
+    const xpForNextLevel = 1200;
+
+    const allRecipes = [...breakfast, ...snack, ...lunch, ...dinner];
+    const favoriteRecipeItems = allRecipes.filter(item => favoriteRecipes.has(item.id));
+
+    const allActivities = [...activities.pilates, ...activities.yoga];
+    const favoriteActivityItems = allActivities.filter(item => favoriteActivities.has(item.id));
+
+    const favoritesSize = 2;
 
     const handleCategoryPress = (category) => {
         if (category !== selectedCategory) {
@@ -99,22 +90,24 @@ export default function ProfileScreen({navigation}) {
                 <View style={styles.headerRow}>
                     <View style={styles.headerSide}>
                         <TouchableOpacity onPress={() => navigation.navigate("  Home  ")}>
-                                <Ionicons name="arrow-back" size={24} color={colors.bluePrimary}/>
+                            <Ionicons name="arrow-back" size={24} color={colors.bluePrimary}/>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { /* scan action */  }} style={styles.iconSpacing}>
+                        <TouchableOpacity onPress={() => { /* scan action */
+                        }} style={styles.iconSpacing}>
                             <Ionicons name="qr-code-outline" size={24} color={colors.bluePrimary}/>
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.headerTitle}>Profile</Text>
                     <View style={styles.headerSide}>
-                        <TouchableOpacity onPress={() => { /* share action */ }}>
+                        <TouchableOpacity onPress={() => { /* share action */
+                        }}>
                             <Ionicons name="share-outline" size={24} color={colors.bluePrimary}/>
                         </TouchableOpacity>
                         <TouchableOpacity>
-                            <Ionicons name="settings-outline" size={24} color={colors.bluePrimary} style={styles.iconSpacing}/>
+                            <Ionicons name="settings-outline" size={24} color={colors.bluePrimary}
+                                      style={styles.iconSpacing}/>
                         </TouchableOpacity>
                     </View>
-                    
                 </View>
 
                 {/* Profile Info */}
@@ -153,8 +146,9 @@ export default function ProfileScreen({navigation}) {
                         <View style={styles.xpBarContainer}>
                             <View style={styles.xpBarBackground}>
                                 <View style={styles.xpBarInner}>
-                                    <View style={[styles.xpBarFill, {width: `${(500 / 1200) * 100}%`}]}/>
-                                    <Text style={styles.xpTextOnBar}>500 / 1200 xp</Text>
+                                    <View
+                                        style={[styles.xpBarFill, {width: `${(baseXP + todayXP) / xpForNextLevel * 100}%`}]}/>
+                                    <Text style={styles.xpTextOnBar}>{baseXP + todayXP} / {xpForNextLevel} xp</Text>
                                 </View>
                             </View>
                         </View>
@@ -216,75 +210,94 @@ export default function ProfileScreen({navigation}) {
 
                 {/* Favorite Recipes Section */}
                 <View style={[styles.sectionCard, {marginTop: 16}]}>
-                    <View style={[styles.sectionRecipesHeader]}>
-                    </View>
+                    <View style={[styles.sectionRecipesHeader]}/>
                     <View style={styles.headerContent}>
                         <Text style={styles.sectionHeaderTextRecipes}>Favorite recipes</Text>
                     </View>
                     <View style={styles.sectionRecipesHeaderUnderline}/>
                     <View style={styles.sectionContent}>
-                        {(showAllRecipes ? favoriteRecipes : favoriteRecipes.slice(0, 3)).map(item => (
-                            <View key={item.id} style={styles.favoriteItem}>
-                                <Image
-                                    source={item.image}
-                                    style={styles.recipeImage}
-                                    resizeMode="cover"
-                                />
-                                <View style={styles.itemInfo}>
-                                    <Text style={styles.itemTitle}>{item.title}</Text>
-                                    <Text style={styles.itemSubtitle}>{item.kcal} kcal {item.time}</Text>
+                        {favoriteRecipeItems.length === 0 ? (
+                            <Text style={[styles.noFavoritesText, {color: colors.orangePrimary}]}>You have no favorite
+                                recipes yet.</Text>
+                        ) : (
+                            (showAllRecipes ? favoriteRecipeItems : favoriteRecipeItems.slice(0, favoritesSize)).map(item => (
+                                <View key={item.id} style={styles.favoriteItem}>
+                                    <Image
+                                        source={item.image}
+                                        style={styles.recipeImage}
+                                        resizeMode="cover"
+                                    />
+                                    <View style={styles.itemInfo}>
+                                        <Text style={styles.itemTitle}>{item.title}</Text>
+                                        <Text style={styles.itemSubtitle}>{item.subtitle}</Text>
+                                    </View>
+                                    <TouchableOpacity onPress={() => toggleFavoriteRecipe(item.id)}>
+                                        <AntDesign name="heart" size={20} color={colors.orangePrimary}/>
+                                    </TouchableOpacity>
                                 </View>
-                                <AntDesign name="heart" size={20} color={colors.orangePrimary}/>
-                            </View>
-                        ))}
+                            ))
+                        )}
                     </View>
-                    <TouchableOpacity
-                        style={[styles.showAllButton, {backgroundColor: colors.orangeSecondary}]}
-                        onPress={() => {
-                            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                            setShowAllRecipes(!showAllRecipes);
-                        }}
-                    >
-                        <Text style={[styles.showAllButtonText, {color: colors.orangePrimary}]}>
-                            {showAllRecipes ? 'Show less' : 'Show all favorite Recipes'}
-                        </Text>
-                    </TouchableOpacity>
+
+                    {favoriteRecipeItems.length > favoritesSize && (
+                        <TouchableOpacity
+                            style={[styles.showAllButton, {backgroundColor: colors.orangeSecondary}]}
+                            onPress={() => {
+                                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+                                setShowAllRecipes(!showAllRecipes);
+                            }}
+                        >
+                            <Text style={[styles.showAllButtonText, {color: colors.orangePrimary}]}>
+                                {showAllRecipes ? 'Show less' : 'Show all favorite Recipes'}
+                            </Text>
+                        </TouchableOpacity>
+                    )}
                 </View>
 
                 {/* Favorite Sport Activities Section */}
-                <View style={[styles.sectionCard, {marginTop: 16, marginBottom: 24}]}>
-                    <View style={[styles.sectionActivitiesHeader]}>
-                    </View>
+                <View style={[styles.sectionCard, {marginTop: 16, marginBottom: 8}]}>
+                    <View style={[styles.sectionActivitiesHeader]}/>
                     <View style={styles.headerContent}>
                         <Text style={styles.sectionHeaderTextActivities}>Favorite sport activities</Text>
                     </View>
                     <View style={styles.sectionActivitiesHeaderUnderline}/>
                     <View style={styles.sectionContent}>
-                        {(showAllActivities ? favoriteActivities : favoriteActivities.slice(0, 2)).map(item => (
-                            <View key={item.id} style={styles.favoriteItem}>
-                                <Image
-                                    source={item.image}
-                                    style={styles.activitiesImage}
-                                    resizeMode="cover"
-                                />
-                                <View style={styles.itemInfo}>
-                                    <Text style={styles.itemTitle}>{item.title}</Text>
-                                    <Text style={styles.itemSubtitle}>{item.time}</Text>
+                        {favoriteActivityItems.length === 0 ? (
+                            <Text style={[styles.noFavoritesText, {color: colors.bluePrimary}]}>You have no favorite
+                                activities yet.</Text>
+                        ) : (
+                            (showAllActivities ? favoriteActivityItems : favoriteActivityItems.slice(0, favoritesSize)).map(item => (
+                                <View key={item.id} style={styles.favoriteItem}>
+                                    <Image
+                                        source={item.image}
+                                        style={styles.activitiesImage}
+                                        resizeMode="cover"
+                                    />
+                                    <View style={styles.itemInfo}>
+                                        <Text style={styles.itemTitle}>{item.title}</Text>
+                                        <Text style={styles.itemSubtitle}>{item.subtitle}</Text>
+                                    </View>
+                                    <TouchableOpacity onPress={() => toggleFavoriteActivity(item.id)}>
+                                        <AntDesign name="heart" size={20} color={colors.bluePrimary}/>
+                                    </TouchableOpacity>
                                 </View>
-                                <AntDesign name="heart" size={20} color={colors.bluePrimary}/>
-                            </View>
-                        ))}
+                            ))
+                        )}
                     </View>
-                    <TouchableOpacity
-                        style={[styles.showAllButton, {backgroundColor: colors.blueSecondary}]}
-                        onPress={() => {
-                            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                            setShowAllActivities(!showAllActivities);
-                        }}
-                    >
-                        <Text style={[styles.showAllButtonText, {color: colors.bluePrimary}]}>
-                            {showAllActivities ? 'Show less' : 'Show all favorite Recipes'}</Text>
-                    </TouchableOpacity>
+
+                    {favoriteActivityItems.length > favoritesSize && (
+                        <TouchableOpacity
+                            style={[styles.showAllButton, {backgroundColor: colors.blueSecondary}]}
+                            onPress={() => {
+                                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+                                setShowAllActivities(!showAllActivities);
+                            }}
+                        >
+                            <Text style={[styles.showAllButtonText, {color: colors.bluePrimary}]}>
+                                {showAllActivities ? 'Show less' : 'Show all favorite Activities'}
+                            </Text>
+                        </TouchableOpacity>
+                    )}
                 </View>
             </ScrollView>
         </SafeAreaProvider>
@@ -295,7 +308,7 @@ const styles = StyleSheet.create({
     scrollContainer: {
         backgroundColor: colors.background,
         paddingHorizontal: 16,
-        paddingVertical: 16
+        paddingVertical: 16,
     },
     headerRow: {
         flexDirection: 'row',
@@ -303,12 +316,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginBottom: 16,
         marginTop: 40,
-        
     },
     headerTitle: {
-        fontSize: 20,
+        fontSize: 18,
         color: colors.bluePrimary,
-        fontFamily: 'Poppins_600SemiBold',
+        fontFamily: 'Poppins_700Bold',
     },
     headerSide: {
         flexDirection: 'row',
@@ -603,5 +615,8 @@ const styles = StyleSheet.create({
     },
     showAllButtonText: {
         fontFamily: 'Poppins_600SemiBold',
+    },
+    noFavoritesText: {
+        fontFamily: 'Poppins_400Regular',
     },
 });

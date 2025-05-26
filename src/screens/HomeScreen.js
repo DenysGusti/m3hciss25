@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Animated} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import {Ionicons, MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons';
 import {colors} from '../theme/colors';
 import {shadow} from '../theme/shadow';
-import {ScrollView} from 'react-native-gesture-handler';
+import {useAppContext} from '../context/AppContext';
 import {
     useFonts,
     Poppins_100Thin,
@@ -106,11 +107,16 @@ const mealData = [
 ];
 
 export default function HomeScreen() {
+    const {todayXP, setTodayXP} = useAppContext();
     const [tasks, setTasks] = useState(initialTasks);
-    const totalXp = tasks.reduce(
-        (acc, task) => acc + (task.completed ? task.xp : 0),
-        0
-    );
+
+    useEffect(() => {
+        const totalXp = tasks.reduce(
+            (acc, task) => acc + (task.completed ? task.xp : 0),
+            0
+        );
+        setTodayXP(totalXp);
+    }, [tasks]);
 
     let [fontsLoaded] = useFonts({
         Poppins_100Thin,
@@ -138,12 +144,12 @@ export default function HomeScreen() {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={{paddingBottom: 4}}>
             <Header/>
             <Date/>
             <RingsMetrics/>
-            <XPSection totalXp={totalXp}/>
-            <TodayTasks tasks={tasks} setTasks={setTasks}/>
+            <XPSection todayXP={todayXP}/>
+            <TodayTasks tasks={tasks} setTasks={setTasks} todayXP={todayXP} setTodayXP={setTodayXP}/>
             <CaloriesCounter/>
         </ScrollView>
     );
@@ -212,8 +218,8 @@ function RingsMetrics() {
     );
 }
 
-function XPSection({totalXp}) {
-    const xpFillPercent = Math.max((totalXp / XP_GOAL) * 100, 7.5);
+function XPSection({todayXP}) {
+    const xpFillPercent = Math.max((todayXP / XP_GOAL) * 100, 7.5);
 
     return (
         <View style={styles.todayXpSection}>
@@ -226,7 +232,7 @@ function XPSection({totalXp}) {
                 <View style={styles.todayXpBarBackground}>
                     <View style={styles.todayXpBarInner}>
                         <View style={[styles.todayXpBarFill, {width: `${xpFillPercent}%`}]}/>
-                        <Text style={styles.todayXpTextOnBar}>{totalXp} / {XP_GOAL} xp</Text>
+                        <Text style={styles.todayXpTextOnBar}>{todayXP} / {XP_GOAL} xp</Text>
                     </View>
                 </View>
             </View>
@@ -234,7 +240,7 @@ function XPSection({totalXp}) {
     );
 }
 
-function TodayTasks({tasks, setTasks}) {
+function TodayTasks({tasks, setTasks, setTodayXP}) {
     return (
         <View style={[styles.sectionCard]}>
             <View style={[styles.sectionHeader, {backgroundColor: colors.bluePrimary}]}>
@@ -248,8 +254,12 @@ function TodayTasks({tasks, setTasks}) {
                         key={i}
                         onPress={() => {
                             const updated = [...tasks];
-                            updated[i].completed = !updated[i].completed;
+                            const wasCompleted = updated[i].completed;
+                            updated[i].completed = !wasCompleted;
                             setTasks(updated);
+
+                            const deltaXP = wasCompleted ? -task.xp : task.xp;
+                            setTodayXP(prevXP => prevXP + deltaXP);
                         }}
                         style={styles.sectionRow}
                     >
@@ -362,14 +372,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 16,
-        paddingTop: 16,
-        paddingBottom: 16,
+        padding: 16,
     },
     headerTitle: {
-        fontSize: 16,
+        fontSize: 18,
         fontFamily: 'Poppins_700Bold',
-        color: colors.bluePrimary
+        color: colors.bluePrimary,
     },
     dateRow: {
         flexDirection: 'row',

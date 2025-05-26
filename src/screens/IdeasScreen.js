@@ -1,6 +1,7 @@
 import {Ionicons, AntDesign} from '@expo/vector-icons';
 import {colors} from '../theme/colors';
 import {shadow} from '../theme/shadow';
+import {useAppContext} from '../context/AppContext';
 import {useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold} from '@expo-google-fonts/poppins';
 import React, {useState} from 'react';
 import {
@@ -26,7 +27,7 @@ const bodyFocusOptions = [
 const levelOptions = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 const durationOptions = ['5–10 min', '10–15 min', '15–20 min', '20–30 min'];
 
-const breakfast = [
+export const breakfast = [
     {
         id: 'r1',
         title: 'Scrambled Egg & Avocado Tacos',
@@ -47,7 +48,7 @@ const breakfast = [
     },
 ];
 
-const snack = [
+export const snack = [
     {
         id: 'n1',
         title: 'Mango Salsa Dips with Veggis',
@@ -68,7 +69,7 @@ const snack = [
     },
 ];
 
-const lunch = [
+export const lunch = [
     {
         id: 'b1',
         title: 'Tomato-lentil   Soup & Bread',
@@ -88,7 +89,7 @@ const lunch = [
         image: require('../../assets/IdeasImages/Lunch_Chickpea_Quinoa_Salad_8.jpg')
     },
 ];
-const dinner = [
+export const dinner = [
     {
         id: 'c1',
         title: 'Quiche with Mushrooms',
@@ -109,7 +110,7 @@ const dinner = [
     },
 ];
 
-const activities = {
+export const activities = {
     pilates: [
         {
             id: 'a1',
@@ -415,11 +416,21 @@ function SectionHeaderActivities({title}) {
     );
 }
 
-function IdeasCard({title, subtitle, image, type = "recipes"}) {
-    const [liked, setLiked] = useState(false);
+function IdeasCard({id, title, subtitle, image, type = "recipes"}) {
+    const {
+        favoriteRecipes,
+        favoriteActivities,
+        toggleFavoriteRecipe,
+        toggleFavoriteActivity,
+    } = useAppContext();
+
+    const liked = type === 'recipes' ? favoriteRecipes.has(id) : favoriteActivities.has(id);
 
     const toggleLike = () => {
-        setLiked(prev => !prev);
+        if (type === 'recipes')
+            toggleFavoriteRecipe(id);
+        else
+            toggleFavoriteActivity(id);
     };
 
     const heartColor = type === "recipes" ? colors.orangePrimary : colors.bluePrimary;
@@ -448,11 +459,21 @@ function IdeasCard({title, subtitle, image, type = "recipes"}) {
     );
 }
 
-function ViewAllRecipesCard({title, subtitle, image, type = "recipes"}) {
-    const [liked, setLiked] = useState(false);
+function ViewAllRecipesCard({id, title, subtitle, image, type = "recipes"}) {
+    const {
+        favoriteRecipes,
+        favoriteActivities,
+        toggleFavoriteRecipe,
+        toggleFavoriteActivity,
+    } = useAppContext();
+
+    const liked = type === 'recipes' ? favoriteRecipes.has(id) : favoriteActivities.has(id);
 
     const toggleLike = () => {
-        setLiked(prev => !prev);
+        if (type === 'recipes')
+            toggleFavoriteRecipe(id);
+        else
+            toggleFavoriteActivity(id);
     };
 
     const heartColor = type === "recipes" ? colors.orangePrimary : colors.bluePrimary;
@@ -588,6 +609,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.background,
+        marginBottom: -16,
     },
     header: {
         marginTop: 45,
@@ -598,7 +620,7 @@ const styles = StyleSheet.create({
         paddingTop: 16,
     },
     headerTitle: {
-        fontSize: 16,
+        fontSize: 18,
         fontFamily: 'Poppins_700Bold',
         color: colors.bluePrimary
     },

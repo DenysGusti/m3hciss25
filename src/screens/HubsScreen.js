@@ -298,7 +298,8 @@ const styles = StyleSheet.create({
 
     screen_background: {
         flex: 1,
-        backgroundColor: colors.background
+        backgroundColor: colors.background,
+        marginBottom: -16,
     },
 
     hubs_title_location: {
@@ -308,10 +309,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 16,
         paddingTop: 16,
-        //paddingBottom: 2
     },
     hubs_title: {
-        fontSize: 16,
+        fontSize: 18,
         fontFamily: 'Poppins_700Bold',
         color: colors.bluePrimary
     },
@@ -321,7 +321,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         borderBottomWidth: 1,
         borderColor: '#ECECEC',
-        //paddingVertical: 1,
         marginTop: 16
     },
 
