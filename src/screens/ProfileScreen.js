@@ -248,7 +248,7 @@ export default function ProfileScreen({navigation}) {
                             }}
                         >
                             <Text style={[styles.showAllButtonText, {color: colors.orangePrimary}]}>
-                                {showAllRecipes ? 'Show less' : 'Show all favorite Recipes'}
+                                {showAllRecipes ? 'Show Less' : 'Show All Favorite Recipes'}
                             </Text>
                         </TouchableOpacity>
                     )}
@@ -294,7 +294,7 @@ export default function ProfileScreen({navigation}) {
                             }}
                         >
                             <Text style={[styles.showAllButtonText, {color: colors.bluePrimary}]}>
-                                {showAllActivities ? 'Show less' : 'Show all favorite Activities'}
+                                {showAllActivities ? 'Show Less' : 'Show All Favorite Activities'}
                             </Text>
                         </TouchableOpacity>
                     )}
