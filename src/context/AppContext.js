@@ -1,12 +1,12 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, {createContext, useState, useContext} from 'react';
 
 const AppContext = createContext();
 
-export const AppProvider = ({ children }) => {
+export const AppProvider = ({children}) => {
     const [todayXP, setTodayXP] = useState(0);
 
-    const [favoriteRecipes, setFavoriteRecipes] = useState(new Set());
-    const [favoriteActivities, setFavoriteActivities] = useState(new Set());
+    const [favoriteRecipes, setFavoriteRecipes] = useState(new Set(['r1', 'n2', 'b1']));
+    const [favoriteActivities, setFavoriteActivities] = useState(new Set(['a1', 'a4']));
 
     const toggleFavoriteRecipe = (id) => {
         setFavoriteRecipes(prev => {
