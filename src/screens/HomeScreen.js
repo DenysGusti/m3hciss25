@@ -149,7 +149,7 @@ export default function HomeScreen() {
             <Date/>
             <RingsMetrics/>
             <XPSection todayXP={todayXP}/>
-            <TodayTasks tasks={tasks} setTasks={setTasks} todayXP={todayXP} setTodayXP={setTodayXP}/>
+            <TodayTasks tasks={tasks} setTasks={setTasks} setTodayXP={setTodayXP}/>
             <CaloriesCounter/>
         </ScrollView>
     );
