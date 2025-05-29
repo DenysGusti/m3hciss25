@@ -311,6 +311,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: colors.bluePrimary,
         fontFamily: 'Poppins_700Bold',
+        marginLeft: 17,
     },
     headerSide: {
         flexDirection: 'row',
@@ -575,12 +576,12 @@ const styles = StyleSheet.create({
     itemTitle: {
         fontSize: 14,
         marginBottom: 2,
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: 'Poppins_600SemiBold',
         color: colors.bluePrimary
     },
     itemSubtitle: {
         fontSize: 12,
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: 'Poppins_600SemiBold',
         color: colors.bluePrimary
     },
     recipeImage: {

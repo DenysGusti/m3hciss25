@@ -58,18 +58,18 @@ const styles = StyleSheet.create({
   itemInfo: { flex: 1 },
   itemTitle: {
     fontSize: 16,
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: 'Poppins_600SemiBold',
     color: colors.bluePrimary,
   },
   itemSubtitle: {
     fontSize: 14,
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: 'Poppins_600SemiBold',
     color: colors.bluePrimary,
   },
   noFavoritesText: {
     textAlign: 'center',
     marginTop: 32,
-    fontFamily: 'Poppins_500Medium',
+    fontFamily: 'Poppins_600SemiBold',
     color: colors.orangePrimary,
   },
 });
