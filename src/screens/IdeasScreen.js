@@ -665,7 +665,7 @@ const styles = StyleSheet.create({
         color: colors.orangePrimary,
     },
     viewAll: {
-        fontSize: 20,
+        fontSize: 12,
         fontFamily: 'Poppins_600SemiBold',
         color: colors.orangePrimary,
     },
