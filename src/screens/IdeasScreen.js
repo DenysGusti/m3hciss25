@@ -285,7 +285,7 @@ export default function IdeasScreen({}) {
                                 <View style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    marginTop: 16,
+                                    marginTop: 1,
                                     marginBottom: 8
                                 }}>
                                     <TouchableOpacity onPress={handleGoBack} style={{paddingHorizontal: 8}}>
@@ -304,7 +304,7 @@ export default function IdeasScreen({}) {
                                 <View style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    marginTop: 16,
+                                    marginTop: 1,
                                     marginBottom: 8
                                 }}>
                                     <TouchableOpacity onPress={handleGoBack} style={{paddingHorizontal: 8}}>
@@ -323,7 +323,7 @@ export default function IdeasScreen({}) {
                                 <View style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    marginTop: 16,
+                                    marginTop: 1,
                                     marginBottom: 8
                                 }}>
                                     <TouchableOpacity onPress={handleGoBack} style={{paddingHorizontal: 8}}>
@@ -342,7 +342,7 @@ export default function IdeasScreen({}) {
                                 <View style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    marginTop: 16,
+                                    marginTop: 1,
                                     marginBottom: 8
                                 }}>
                                     <TouchableOpacity onPress={handleGoBack} style={{paddingHorizontal: 8}}>
@@ -652,7 +652,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 8,
-        marginTop: 16,
+        marginTop: 1,
     },
     sectionTitleActivities: {
         fontSize: 16,
@@ -665,7 +665,7 @@ const styles = StyleSheet.create({
         color: colors.orangePrimary,
     },
     viewAll: {
-        fontSize: 12,
+        fontSize: 20,
         fontFamily: 'Poppins_600SemiBold',
         color: colors.orangePrimary,
     },
