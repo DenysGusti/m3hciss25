@@ -21,6 +21,7 @@ Externe Libraries und Frameworks:
 - @expo/vector-icons
 - @react-navigation/bottom-tabs
 - @react-navigation/native
+- @react-navigation/stack
 - expo
 - expo-font
 - react
