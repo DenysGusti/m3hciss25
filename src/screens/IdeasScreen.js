@@ -401,7 +401,7 @@ function SectionHeaderRecipes({title, onPress, back = false}) {
     return (
         <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitleRecipes}>{title}</Text>
-            <TouchableOpacity onPress={onPress}>
+            <TouchableOpacity onPress={onPress} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
                 <Text style={styles.viewAll}>{back ? '‹ Back' : 'View all ›'}</Text>
             </TouchableOpacity>
         </View>
