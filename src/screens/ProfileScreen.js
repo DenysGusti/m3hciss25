@@ -42,7 +42,6 @@ const CATEGORY_COLORS = {
 
 export default function ProfileScreen({navigation}) {
     const [selectedCategory, setSelectedCategory] = useState('Calories');
-    const [showAllRecipes, setShowAllRecipes] = useState(false);
     const [showAllActivities, setShowAllActivities] = useState(false);
     const {
         todayXP,
@@ -74,7 +73,7 @@ export default function ProfileScreen({navigation}) {
     const allActivities = [...activities.pilates, ...activities.yoga];
     const favoriteActivityItems = allActivities.filter(item => favoriteActivities.has(item.id));
 
-    const favoritesSize = 2;
+    const previewSize = 3;
 
     const handleCategoryPress = (category) => {
         if (category !== selectedCategory) {
@@ -89,9 +88,6 @@ export default function ProfileScreen({navigation}) {
                 {/* Header */}
                 <View style={styles.headerRow}>
                     <View style={styles.headerSide}>
-                        <TouchableOpacity onPress={() => navigation.navigate("  Home  ")}>
-                            <Ionicons name="arrow-back" size={24} color={colors.bluePrimary}/>
-                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => { /* scan action */
                         }} style={styles.iconSpacing}>
                             <Ionicons name="qr-code-outline" size={24} color={colors.bluePrimary}/>
@@ -220,7 +216,7 @@ export default function ProfileScreen({navigation}) {
                             <Text style={[styles.noFavoritesText, {color: colors.orangePrimary}]}>You have no favorite
                                 recipes yet.</Text>
                         ) : (
-                            (showAllRecipes ? favoriteRecipeItems : favoriteRecipeItems.slice(0, favoritesSize)).map(item => (
+                            favoriteRecipeItems.slice(0, previewSize).map(item => (
                                 <View key={item.id} style={styles.favoriteItem}>
                                     <Image
                                         source={item.image}
@@ -239,17 +235,14 @@ export default function ProfileScreen({navigation}) {
                         )}
                     </View>
 
-                    {favoriteRecipeItems.length > favoritesSize && (
+                    {favoriteRecipeItems.length > previewSize && (
                         <TouchableOpacity
-                            style={[styles.showAllButton, {backgroundColor: colors.orangeSecondary}]}
-                            onPress={() => {
-                                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                                setShowAllRecipes(!showAllRecipes);
-                            }}
+                        style={[styles.showAllButton, { backgroundColor: colors.orangeSecondary }]}
+                        onPress={() => navigation.navigate('FavoriteRecipes')}
                         >
-                            <Text style={[styles.showAllButtonText, {color: colors.orangePrimary}]}>
-                                {showAllRecipes ? 'Show Less' : 'Show All Favorite Recipes'}
-                            </Text>
+                        <Text style={[styles.showAllButtonText, { color: colors.orangePrimary }]}>
+                            View All Favorite Recipes
+                        </Text>
                         </TouchableOpacity>
                     )}
                 </View>
@@ -266,7 +259,7 @@ export default function ProfileScreen({navigation}) {
                             <Text style={[styles.noFavoritesText, {color: colors.bluePrimary}]}>You have no favorite
                                 activities yet.</Text>
                         ) : (
-                            (showAllActivities ? favoriteActivityItems : favoriteActivityItems.slice(0, favoritesSize)).map(item => (
+                            favoriteActivityItems.slice(0, previewSize).map(item => (
                                 <View key={item.id} style={styles.favoriteItem}>
                                     <Image
                                         source={item.image}
@@ -285,16 +278,13 @@ export default function ProfileScreen({navigation}) {
                         )}
                     </View>
 
-                    {favoriteActivityItems.length > favoritesSize && (
+                    {favoriteActivityItems.length > previewSize && (
                         <TouchableOpacity
                             style={[styles.showAllButton, {backgroundColor: colors.blueSecondary}]}
-                            onPress={() => {
-                                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                                setShowAllActivities(!showAllActivities);
-                            }}
+                            onPress={() => navigation.navigate('FavoriteActivities')}
                         >
                             <Text style={[styles.showAllButtonText, {color: colors.bluePrimary}]}>
-                                {showAllActivities ? 'Show Less' : 'Show All Favorite Activities'}
+                                View All Favorite Recipes
                             </Text>
                         </TouchableOpacity>
                     )}

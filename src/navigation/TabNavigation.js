@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {Modal, View, Text, TouchableOpacity, StyleSheet, SafeAreaView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
 import HubsScreen from '../screens/HubsScreen';
 import IdeasScreen from '../screens/IdeasScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import RecipesNavigation from '../navigation/RecipesNavigation';
 import {colors} from '../theme/colors';
 import {shadow} from '../theme/shadow';
 import {
@@ -31,6 +32,7 @@ import {
 } from '@expo-google-fonts/poppins';
 
 const Tab = createBottomTabNavigator();
+
 
 function PlusButton({onPress}) {
     return (
@@ -112,7 +114,7 @@ function NavigationTab({setModalVisible}) {
                 }}
             />
             <Tab.Screen name="  Ideas  " component={IdeasScreen}/>
-            <Tab.Screen name="  Profile  " component={ProfileScreen}/>
+            <Tab.Screen name="  Profile  " component={RecipesNavigation} />
         </Tab.Navigator>
     );
 }
@@ -163,6 +165,8 @@ function PopupMenu({modalVisible, setModalVisible}) {
         </Modal>
     );
 }
+
+
 
 const styles = StyleSheet.create({
     plusButton: {
