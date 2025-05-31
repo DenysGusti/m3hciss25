@@ -3,7 +3,6 @@ import {enableScreens} from 'react-native-screens';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import TabNavigation from './src/navigation/TabNavigation';
-import RecipesNavigation from './src/navigation/RecipesNavigation';
 import {AppProvider} from './src/context/AppContext';
 
 enableScreens();

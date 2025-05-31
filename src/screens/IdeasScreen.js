@@ -204,6 +204,20 @@ export default function IdeasScreen({}) {
         setExpandedCategory(null);
     };
 
+    const renderExpandedCategory = (categoryName, items) => (
+        <>
+            <View style={styles.sectionHeader}>
+                <Text style={styles.viewAll}>{categoryName}</Text>
+                <TouchableOpacity onPress={handleGoBack}>
+                    <Text style={styles.viewAll}>‹ Back</Text>
+                </TouchableOpacity>
+            </View>
+            {items.map(item => (
+                <ViewAllRecipesCard key={item.id} {...item} type="recipes"/>
+            ))}
+        </>
+    );
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -280,81 +294,10 @@ export default function IdeasScreen({}) {
                             </>
                         )}
 
-                        {expandedCategory === 'Breakfast' && (
-                            <>
-                                <View style={{
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    marginTop: 1,
-                                    marginBottom: 8
-                                }}>
-                                    <TouchableOpacity onPress={handleGoBack} style={{paddingHorizontal: 8}}>
-                                        <Text style={[styles.viewAll, {fontFamily: 'Poppins_600SemiBold'}]}>‹
-                                            Back</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                {breakfast.map(item => (
-                                    <ViewAllRecipesCard key={item.id} {...item} type="recipes"/>
-                                ))}
-                            </>
-                        )}
-
-                        {expandedCategory === 'Snack' && (
-                            <>
-                                <View style={{
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    marginTop: 1,
-                                    marginBottom: 8
-                                }}>
-                                    <TouchableOpacity onPress={handleGoBack} style={{paddingHorizontal: 8}}>
-                                        <Text style={[styles.viewAll, {fontFamily: 'Poppins_600SemiBold'}]}>‹
-                                            Back</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                {snack.map(item => (
-                                    <ViewAllRecipesCard key={item.id} {...item} type="recipes"/>
-                                ))}
-                            </>
-                        )}
-
-                        {expandedCategory === 'Lunch' && (
-                            <>
-                                <View style={{
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    marginTop: 1,
-                                    marginBottom: 8
-                                }}>
-                                    <TouchableOpacity onPress={handleGoBack} style={{paddingHorizontal: 8}}>
-                                        <Text style={[styles.viewAll, {fontFamily: 'Poppins_600SemiBold'}]}>‹
-                                            Back</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                {lunch.map(item => (
-                                    <ViewAllRecipesCard key={item.id} {...item} type="recipes"/>
-                                ))}
-                            </>
-                        )}
-
-                        {expandedCategory === 'Dinner' && (
-                            <>
-                                <View style={{
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    marginTop: 1,
-                                    marginBottom: 8
-                                }}>
-                                    <TouchableOpacity onPress={handleGoBack} style={{paddingHorizontal: 8}}>
-                                        <Text style={[styles.viewAll, {fontFamily: 'Poppins_600SemiBold'}]}>‹
-                                            Back</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                {dinner.map(item => (
-                                    <ViewAllRecipesCard key={item.id} {...item} type="recipes"/>
-                                ))}
-                            </>
-                        )}
+                        {expandedCategory === 'Breakfast' && renderExpandedCategory('Breakfast', breakfast)}
+                        {expandedCategory === 'Snack' && renderExpandedCategory('Snack', snack)}
+                        {expandedCategory === 'Lunch' && renderExpandedCategory('Lunch', lunch)}
+                        {expandedCategory === 'Dinner' && renderExpandedCategory('Dinner', dinner)}
                     </>
                 )}
 
@@ -401,7 +344,7 @@ function SectionHeaderRecipes({title, onPress, back = false}) {
     return (
         <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitleRecipes}>{title}</Text>
-            <TouchableOpacity onPress={onPress} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <TouchableOpacity onPress={onPress} hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
                 <Text style={styles.viewAll}>{back ? '‹ Back' : 'View all ›'}</Text>
             </TouchableOpacity>
         </View>
@@ -665,7 +608,7 @@ const styles = StyleSheet.create({
         color: colors.orangePrimary,
     },
     viewAll: {
-        fontSize: 12,
+        fontSize: 16,
         fontFamily: 'Poppins_600SemiBold',
         color: colors.orangePrimary,
     },

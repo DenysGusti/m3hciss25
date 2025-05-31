@@ -42,7 +42,6 @@ const CATEGORY_COLORS = {
 
 export default function ProfileScreen({navigation}) {
     const [selectedCategory, setSelectedCategory] = useState('Calories');
-    const [showAllActivities, setShowAllActivities] = useState(false);
     const {
         todayXP,
         favoriteRecipes,
@@ -237,12 +236,12 @@ export default function ProfileScreen({navigation}) {
 
                     {favoriteRecipeItems.length > previewSize && (
                         <TouchableOpacity
-                        style={[styles.showAllButton, { backgroundColor: colors.orangeSecondary }]}
-                        onPress={() => navigation.navigate('FavoriteRecipes')}
+                            style={[styles.showAllButton, {backgroundColor: colors.orangeSecondary}]}
+                            onPress={() => navigation.navigate('FavoriteRecipes')}
                         >
-                        <Text style={[styles.showAllButtonText, { color: colors.orangePrimary }]}>
-                            View All Favorite Recipes
-                        </Text>
+                            <Text style={[styles.showAllButtonText, {color: colors.orangePrimary}]}>
+                                View All Favorite Recipes
+                            </Text>
                         </TouchableOpacity>
                     )}
                 </View>

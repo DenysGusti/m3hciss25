@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/HomeScreen';
 import HubsScreen from '../screens/HubsScreen';
 import IdeasScreen from '../screens/IdeasScreen';
-import RecipesNavigation from '../navigation/RecipesNavigation';
+import FavoriteNavigation from './FavoriteNavigation';
 import {colors} from '../theme/colors';
 import {shadow} from '../theme/shadow';
 import {
@@ -114,7 +114,7 @@ function NavigationTab({setModalVisible}) {
                 }}
             />
             <Tab.Screen name="  Ideas  " component={IdeasScreen}/>
-            <Tab.Screen name="  Profile  " component={RecipesNavigation} />
+            <Tab.Screen name="  Profile  " component={FavoriteNavigation} />
         </Tab.Navigator>
     );
 }
