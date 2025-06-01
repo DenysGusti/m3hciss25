@@ -572,8 +572,8 @@ const styles = StyleSheet.create({
 },
 
 viewAllImage: {
-  width: 80,
-  height: 80,
+  width: 170,
+  height: 170,
   borderRadius: 8,
   marginRight: 12,
 },
