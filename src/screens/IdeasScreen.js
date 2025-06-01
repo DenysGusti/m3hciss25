@@ -415,7 +415,7 @@ function IdeasCard({id, title, subtitle, image, type = "recipes"}) {
                     <Text style={styles.cardSubtitle}>{subtitle}</Text>
                 </View>
 
-                <TouchableOpacity style={styles.heartIconContainer} onPress={toggleLike}>
+                <TouchableOpacity style={styles.heartIconContainer} onPress={toggleLike} hitSlop={styles.hitSlop}>
                     <AntDesign
                         name={liked ? "heart" : "hearto"}
                         size={20}
@@ -462,7 +462,7 @@ function ViewAllRecipesCard({id, title, subtitle, image, gramsPerPortion = '---'
                     </View>
                 </View>
 
-                <TouchableOpacity onPress={toggleLike} style={styles.viewAllHeartIcon}>
+                <TouchableOpacity onPress={toggleLike} style={styles.viewAllHeartIcon} hitSlop={styles.hitSlop}>
                     <AntDesign name={liked ? "heart" : "hearto"} size={20} color={heartColor}/>
                 </TouchableOpacity>
             </View>
@@ -721,6 +721,8 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background,
         borderRadius: 12,
         marginBottom: 8,
+        paddingVertical: 8,
+        paddingHorizontal: 8,
         ...shadow,
     },
 
@@ -767,7 +769,7 @@ const styles = StyleSheet.create({
 
     infoText: {
         fontSize: 12,
-        fontFamily: 'Poppins_500Regular',
+        fontFamily: 'Poppins_500Medium',
         color: colors.blueTertiary,
     },
 
