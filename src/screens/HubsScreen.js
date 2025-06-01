@@ -398,7 +398,7 @@ const styles = StyleSheet.create({
     },
 
     text_view_all: {
-        fontSize: 12,
+        fontSize: 14,
         fontFamily: 'Poppins_600SemiBold',
         color: colors.blueTertiary
     },
