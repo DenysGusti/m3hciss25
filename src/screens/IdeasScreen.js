@@ -22,6 +22,7 @@ const bodyFocusOptions = [
   { label: 'Abs', image: require('../../assets/IdeasImages/abs.jpg') },
   { label: 'Arm', image: require('../../assets/IdeasImages/Arm.jpg') },
   { label: 'Leg', image: require('../../assets/IdeasImages/leg1.jpg') },
+  { label: 'Full Body', image: require('../../assets/IdeasImages/body1.jpg') },
 ];
 
 const levelOptions = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
@@ -53,13 +54,13 @@ export const dinner = [
 export const activities = {
   pilates: [
     { id: 'a1', title: 'Pilates Ball Worout', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Arm'], image: require('../../assets/IdeasImages/pilates.jpg')},
-    { id: 'a2',title: 'Pilates Sculpt',subtitle: '30 minutes',level: 'Advanced',duration: '20–30 min',bodyFocus: ['Abs'],image: require('../../assets/IdeasImages/pilates_2.jpg') },
+    { id: 'a2',title: 'Pilates Sculpt',subtitle: '30 minutes',level: 'Advanced',duration: '20–30 min',bodyFocus: ['Abs', 'Full Body'],image: require('../../assets/IdeasImages/pilates_2.jpg') },
     { id: 'a3', title: 'Dynamic Pilates', subtitle: '30 minutes', level: 'Beginner', duration: '20–30 min', bodyFocus: ['Back'], image: require('../../assets/IdeasImages/pilates_3.jpg') },
   ],
   yoga: [ 
-    { id: 'a4', title: 'Sunrise Yoga', subtitle: '25 minutes', level: 'Beginner', duration: '20–30 min', bodyFocus: ['Abs', 'Back'], image: require('../../assets/IdeasImages/Yoga.jpg') },
+    { id: 'a4', title: 'Sunrise Yoga', subtitle: '25 minutes', level: 'Beginner', duration: '20–30 min', bodyFocus: ['Abs', 'Back', 'Full Body'], image: require('../../assets/IdeasImages/Yoga.jpg') },
     { id: 'a5', title: 'Night Meditation', subtitle: '20 minutes', level: 'Expert', duration: '15–20 min', bodyFocus: ['Face'], image: require('../../assets/IdeasImages/yoga2.jpg') },
-    { id: 'a6',title: 'Stretch & Flow', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Back'], image: require('../../assets/IdeasImages/yoga3.jpg') },
+    { id: 'a6',title: 'Stretch & Flow', subtitle: '20 minutes', level: 'Intermediate', duration: '15–20 min', bodyFocus: ['Leg', 'Full Body'], image: require('../../assets/IdeasImages/yoga3.jpg') },
   ],
 };
 
