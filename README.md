@@ -24,6 +24,7 @@ Externe Libraries und Frameworks:
 - @react-navigation/stack
 - expo
 - expo-font
+- expo-app-loading
 - react
 - react-native
 - react-native-circular-progress
