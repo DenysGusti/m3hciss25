@@ -103,6 +103,8 @@ export const lunch = [
         id: 'b3',
         title: 'Chickpea Quinoa Salad',
         subtitle: '350 kcal',
+        gramsPerPortion: '250 g', 
+        cookTime: '20 min',
         image: require('../../assets/IdeasImages/Lunch_Chickpea_Quinoa_Salad_8.jpg')
     },
 ];
@@ -263,16 +265,16 @@ export default function IdeasScreen({ }) {
             </View>
 
             <ScrollView contentContainerStyle={styles.list}>
-                {activeTab === 'Recipes' && (
-                    <>
-                        {expandedCategory === null && (
-                            <>
-                               <SectionHeaderRecipes title="Breakfast" onPress={() => handleViewAll('Breakfast')} />
-                                  <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                                  {  breakfast.map(item => (
-                                    <IdeasCard key={item.id} {...item} type="recipes" />
-                                  ))}
-                                </ScrollView>
+              {activeTab === 'Recipes' && (
+                <>
+                {expandedCategory === null && (
+                <>
+               <SectionHeaderRecipes title="Breakfast" onPress={() => handleViewAll('Breakfast')} />
+                  <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                   {  breakfast.map(item => (
+                    <IdeasCard key={item.id} {...item} type="recipes" />
+                   ))}
+               </ScrollView>
 
             <SectionHeaderRecipes title="Snack" onPress={() => handleViewAll('Snack')} />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -300,28 +302,24 @@ export default function IdeasScreen({ }) {
         {expandedCategory === 'Breakfast' && (
           <>
             <View style={styles.viewAllHeader}>
-    <Text style={styles.viewAllHeaderTitle}>Breakfast</Text>
-    <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
-        <Text style={styles.viewAll}>‹ Back</Text>
-    </TouchableOpacity>
-</View>
-
+              <Text style={styles.viewAllHeaderTitle}>Breakfast</Text>
+              <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
+            <Text style={styles.viewAll}>‹ Back</Text>
+          </TouchableOpacity>
+        </View>
               {breakfast.map(item => (
             <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
             ))}
           </>
         )}
-
         {expandedCategory === 'Snack' && (
           <>
             <View style={styles.viewAllHeader}>
-                <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
-              <Text style={styles.viewAll}>‹ Back</Text>
-                </TouchableOpacity>
               <Text style={styles.viewAllHeaderTitle}>Snack</Text>
-                <View style={styles.viewAllBackButton} />
-            </View>
-
+              <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
+            <Text style={styles.viewAll}>‹ Back</Text>
+          </TouchableOpacity>
+        </View>
               {snack.map(item => (
             <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
             ))}
@@ -331,13 +329,11 @@ export default function IdeasScreen({ }) {
         {expandedCategory === 'Lunch' && (
           <>
             <View style={styles.viewAllHeader}>
-                <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
-              <Text style={styles.viewAll}>‹ Back</Text>
-                </TouchableOpacity>
               <Text style={styles.viewAllHeaderTitle}>Lunch</Text>
-                <View style={styles.viewAllBackButton} />
-            </View>
-
+              <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
+            <Text style={styles.viewAll}>‹ Back</Text>
+          </TouchableOpacity>
+        </View>
               {lunch.map(item => (
             <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
             ))}
@@ -347,13 +343,11 @@ export default function IdeasScreen({ }) {
         {expandedCategory === 'Dinner' && (
           <>
             <View style={styles.viewAllHeader}>
-                <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
-              <Text style={styles.viewAll}>‹ Back</Text>
-                </TouchableOpacity>
               <Text style={styles.viewAllHeaderTitle}>Dinner</Text>
-                <View style={styles.viewAllBackButton} />
-            </View>
-
+              <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
+            <Text style={styles.viewAll}>‹ Back</Text>
+          </TouchableOpacity>
+        </View>
               {dinner.map(item => (
             <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
             ))}
@@ -749,13 +743,13 @@ const styles = StyleSheet.create({
         left: 10,
         right: 10,
     },
+
     viewAllCardContainer: {
   flexDirection: 'row',
   alignItems: 'center',
   backgroundColor: colors.background,
   borderRadius: 12,
   marginBottom: 8,
-  padding: 10,
   ...shadow,
 },
 
@@ -779,9 +773,8 @@ viewAllHeader: {
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
-  marginTop: 16,
+  marginLeft: 1,
   marginBottom: 8,
-  paddingHorizontal: 8,
 },
 
 viewAllBackButton: {
@@ -794,7 +787,6 @@ viewAllHeaderTitle: {
   fontSize: 16,
   fontFamily: 'Poppins_600SemiBold',
   color: colors.orangePrimary,
-  flex: 1,
 },
 viewAllInfoRow: {
   flexDirection: 'row',
