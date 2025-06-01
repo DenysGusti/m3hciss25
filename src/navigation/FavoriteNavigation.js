@@ -4,6 +4,7 @@ import FavoriteScreen from '../screens/FavoriteScreen';
 import {useAppContext} from '../context/AppContext';
 import {breakfast, snack, lunch, dinner, activities} from '../screens/IdeasScreen';
 import {colors} from '../theme/colors';
+import {StyleSheet} from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -34,7 +35,10 @@ export default function FavoriteNavigation() {
             />
             <Stack.Screen
                 name="FavoriteRecipes"
-                options={{title: 'My favorite recipes'}}
+                options={{
+                    title: 'My favorite recipes',
+                    headerTitleStyle: styles.headerTitle,
+                }}
             >
                 {() => (
                     <FavoriteScreen
@@ -47,7 +51,10 @@ export default function FavoriteNavigation() {
             </Stack.Screen>
             <Stack.Screen
                 name="FavoriteActivities"
-                options={{title: 'My favorite activities'}}
+                options={{
+                    title: 'My favorite activities',
+                    headerTitleStyle: styles.headerTitle,
+                }}
             >
                 {() => (
                     <FavoriteScreen
@@ -61,3 +68,12 @@ export default function FavoriteNavigation() {
         </Stack.Navigator>
     );
 }
+
+const styles = StyleSheet.create({
+    headerTitle: {
+        fontSize: 18,
+        fontFamily: 'Poppins_700Bold',
+        color: colors.bluePrimary,
+        marginTop: 4,
+    },
+});
