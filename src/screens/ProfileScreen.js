@@ -226,7 +226,7 @@ export default function ProfileScreen({navigation}) {
                                         <Text style={styles.itemTitle}>{item.title}</Text>
                                         <Text style={styles.itemSubtitle}>{item.subtitle}</Text>
                                     </View>
-                                    <TouchableOpacity onPress={() => toggleFavoriteRecipe(item.id)}>
+                                    <TouchableOpacity onPress={() => toggleFavoriteRecipe(item.id)} hitSlop={styles.hitSlop}>
                                         <AntDesign name="heart" size={20} color={colors.orangePrimary}/>
                                     </TouchableOpacity>
                                 </View>
@@ -608,5 +608,11 @@ const styles = StyleSheet.create({
     },
     noFavoritesText: {
         fontFamily: 'Poppins_400Regular',
+    },
+    hitSlop: {
+        top: 10,
+        bottom: 10,
+        left: 10,
+        right: 10,
     },
 });
