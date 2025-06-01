@@ -604,7 +604,7 @@ const styles = StyleSheet.create({
   alignItems: 'center',
   backgroundColor: colors.background,
   borderRadius: 12,
-  marginBottom: 16,
+  marginBottom: 8,
   padding: 10,
   ...shadow,
 },
