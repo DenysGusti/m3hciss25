@@ -63,7 +63,7 @@ export const snack = [
     },
     {
         id: 'n3',
-        title: 'Homemade Oat    Bars',
+        title: 'Homemade Oat Bars',
         subtitle: '190 kcal',
         image: require('../../assets/IdeasImages/Snack_Bars.jpg')
     },
@@ -72,7 +72,7 @@ export const snack = [
 export const lunch = [
     {
         id: 'b1',
-        title: 'Tomato-lentil   Soup & Bread',
+        title: 'Tomato-lentil Soup & Bread',
         subtitle: '270 kcal',
         image: require('../../assets/IdeasImages/Lunch_Soup.jpg')
     },
@@ -98,7 +98,7 @@ export const dinner = [
     },
     {
         id: 'c2',
-        title: 'Lasagna with     Beef',
+        title: 'Lasagna with Beef',
         subtitle: '510 kcal',
         image: require('../../assets/IdeasImages/dinner2.jpg')
     },
@@ -651,7 +651,7 @@ const styles = StyleSheet.create({
     },
     cardSubtitle: {
         fontSize: 12,
-        fontFamily: 'Poppins_500Regular',
+        fontFamily: 'Poppins_500Medium',
         color: colors.blueTertiary,
         marginTop: 4,
     },
