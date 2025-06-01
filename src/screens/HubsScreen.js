@@ -148,7 +148,6 @@ const trending_clubs = [
 
 export default function HubsScreen() {
 
-
     let [] = useFonts({
         Poppins_100Thin,
         Poppins_100Thin_Italic,
@@ -264,48 +263,43 @@ function CatagoryTitle({title, onPress}) {
     );
 }
 
+function ChallengesCard({title, subtitle, image, days, participants}) {
+    return (
+        <View style={styles.horizontal_card}>
+
+            <View style={styles.image_design_2}>
+                <Image source={image} style={styles.insert_image} resizeMode="cover"/>
+            </View>
 
 
-function ChallengesCard({ title, subtitle, image , days, participants }) {
-  return (
-    <View style={styles.horizontal_card}>
+            <View style={styles.text_location_2}>
 
-      <View style={styles.image_design_2}>
-        <Image source={image} style={styles.insert_image} resizeMode="cover" />
-      </View>
-
-   
-      <View style={styles.text_location_2}>
-
-        <Text style={styles.card_text_title}>{title}</Text>
+                <Text style={styles.card_text_title}>{title}</Text>
 
 
-        <View style={styles.icon_row}>
-          
-          <View style={styles.icon_with_text}>
-            <Ionicons name="calendar-outline" size={16} color={colors.blueTertiary} />
-            <Text style={styles.icon_text}>{days} days</Text>
-          </View>
-        
-          <View style={[styles.icon_with_text, { marginLeft: 16 }]}>
-            <Ionicons name="people-outline" size={16} color={colors.blueTertiary} />
-            <Text style={styles.icon_text}>{participants}</Text>
-          </View>
+                <View style={styles.icon_row}>
+
+                    <View style={styles.icon_with_text}>
+                        <Ionicons name="calendar-outline" size={16} color={colors.blueTertiary}/>
+                        <Text style={styles.icon_text}>{days} days</Text>
+                    </View>
+
+                    <View style={[styles.icon_with_text, {marginLeft: 16}]}>
+                        <Ionicons name="people-outline" size={16} color={colors.blueTertiary}/>
+                        <Text style={styles.icon_text}>{participants}</Text>
+                    </View>
+                </View>
+
+
+                <Text style={[styles.card_text_subtitle, {marginTop: 8}]}>{subtitle}</Text>
+            </View>
+
+            <TouchableOpacity style={styles.plus_button}>
+                <MaterialIcons name="add" size={20} color={colors.background}/>
+            </TouchableOpacity>
         </View>
-
-       
-        <Text style={[styles.card_text_subtitle, { marginTop: 8 }]}>{subtitle}</Text>
-      </View>
-
-      <TouchableOpacity style={styles.plus_button}>
-        <MaterialIcons name="add" size={20} color={colors.background} />
-      </TouchableOpacity>
-    </View>
-  );
+    );
 }
-
-
-
 
 function ClubCard({title, subtitle, image}) {
     return (
@@ -328,40 +322,32 @@ function ClubCard({title, subtitle, image}) {
     );
 }
 
-
-
-
-
-
-
 const styles = StyleSheet.create({
+    screen_background: {
+        flex: 1,
+        backgroundColor: colors.background,
+        marginBottom: -8,
+    },
 
-  screen_background: {
-    flex: 1,
-    backgroundColor: colors.background,
-    marginBottom: -16,
-  },
-  
-  hubs_title_location: {
-    marginTop: 45,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  hubs_title: {
-    fontSize: 18,
-    fontFamily: 'Poppins_700Bold',
-    color: colors.bluePrimary
-  },
+    hubs_title_location: {
+        marginTop: 45,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 16,
+        paddingTop: 16,
+    },
+    hubs_title: {
+        fontSize: 18,
+        fontFamily: 'Poppins_700Bold',
+        color: colors.bluePrimary
+    },
 
     tab_location: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         borderBottomWidth: 1,
         borderColor: '#ECECEC',
-        //paddingVertical: 1,
         marginTop: 16
     },
 
@@ -472,42 +458,41 @@ const styles = StyleSheet.create({
         marginLeft: 6,
     },
     horizontal_card: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      backgroundColor: colors.background,
-      borderRadius: 12,
-      marginBottom: 8,
-      paddingVertical: 8,
-      paddingHorizontal: 8,
-      ...shadow, 
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: colors.background,
+        borderRadius: 12,
+        marginBottom: 8,
+        paddingVertical: 8,
+        paddingHorizontal: 8,
+        ...shadow,
     },
     image_design_2: {
-      width: 120,
-      height: 120,
-      borderRadius: 12,
-      overflow: 'hidden',
-      marginRight: 12,
+        width: 120,
+        height: 120,
+        borderRadius: 12,
+        overflow: 'hidden',
+        marginRight: 12,
     },
 
     text_location_2: {
-      flex: 1,
-      justifyContent: 'center',
+        flex: 1,
+        justifyContent: 'center',
     },
     icon_with_text: {
-      flexDirection: 'row',
-      alignItems: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     icon_text: {
-      fontSize: 12,
-      fontFamily: 'Poppins_500Medium',
-      color: colors.blueTertiary,
-      marginLeft: 4,
+        fontSize: 12,
+        fontFamily: 'Poppins_500Medium',
+        color: colors.blueTertiary,
+        marginLeft: 4,
     },
     icon_row: {
-      flexDirection: 'row',
-      alignItems: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
-
 });
 
 
