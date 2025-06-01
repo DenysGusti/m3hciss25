@@ -42,37 +42,49 @@ const challenges_info = [
         id: '1',
         title: 'Morning Sip – A 21-Day Ritual',
         subtitle: '+120 xp',
-        image: require('../../assets/HubsImages/sip.jpg')
+        image: require('../../assets/HubsImages/sip.jpg'),
+        days: 21,
+        participants: 1234,
     },
     {
         id: '2',
         title: '7 days of protein breakfast',
         subtitle: '+70 xp',
-        image: require('../../assets/HubsImages/protein_breakfast.jpg')
+        image: require('../../assets/HubsImages/protein_breakfast.jpg'),
+        days: 7,
+        participants: 3874,
     },
     {
         id: '3',
         title: '21 floors for 21 days',
         subtitle: '+240 xp',
-        image: require('../../assets/HubsImages/stairs.jpg')
+        image: require('../../assets/HubsImages/stairs.jpg'),
+        days: 21,
+        participants: 342,
     },
     {
         id: '4',
         title: '7 Days of Salad Creation',
         subtitle: '+60 xp',
-        image: require('../../assets/HubsImages/salads.jpg')
+        image: require('../../assets/HubsImages/salads.jpg'),
+        days: 5,
+        participants: 1765,
     },
     {
         id: '5',
         title: '10 days of morning walks',
         subtitle: '+100 xp',
-        image: require('../../assets/HubsImages/morning_walk.jpg')
+        image: require('../../assets/HubsImages/morning_walk.jpg'),
+        days: 10,
+        participants: 6230,
     },
     {
         id: '6',
         title: '5 days 5 vegetables or fruits daily',
         subtitle: '+60 xp',
-        image: require('../../assets/HubsImages/fruits_vegetables.jpg')
+        image: require('../../assets/HubsImages/fruits_vegetables.jpg'),
+        days: 5,
+        participants: 6123,
     },
 ];
 
@@ -252,26 +264,48 @@ function CatagoryTitle({title, onPress}) {
     );
 }
 
-function ChallengesCard({title, subtitle, image}) {
-    return (
-        <View style={styles.basic_card}>
-            <View style={styles.image_design}>
-                <Image source={image} style={styles.insert_image} resizeMode="cover"/>
 
-            </View>
-            <View style={styles.text_coordination}>
-                <View>
-                    <Text style={styles.card_text_title}>{title}</Text>
-                    <Text style={styles.card_text_subtitle}>{subtitle}</Text>
-                </View>
 
-                <TouchableOpacity style={styles.plus_button}>
-                    <MaterialIcons name="add" size={20} color={colors.background}/>
-                </TouchableOpacity>
-            </View>
+function ChallengesCard({ title, subtitle, image , days, participants }) {
+  return (
+    <View style={styles.horizontal_card}>
+
+      <View style={styles.image_design_2}>
+        <Image source={image} style={styles.insert_image} resizeMode="cover" />
+      </View>
+
+   
+      <View style={styles.text_location_2}>
+
+        <Text style={styles.card_text_title}>{title}</Text>
+
+
+        <View style={styles.icon_row}>
+          
+          <View style={styles.icon_with_text}>
+            <Ionicons name="calendar-outline" size={16} color={colors.blueTertiary} />
+            <Text style={styles.icon_text}>{days} days</Text>
+          </View>
+        
+          <View style={[styles.icon_with_text, { marginLeft: 16 }]}>
+            <Ionicons name="people-outline" size={16} color={colors.blueTertiary} />
+            <Text style={styles.icon_text}>{participants}</Text>
+          </View>
         </View>
-    );
+
+       
+        <Text style={[styles.card_text_subtitle, { marginTop: 8 }]}>{subtitle}</Text>
+      </View>
+
+      <TouchableOpacity style={styles.plus_button}>
+        <MaterialIcons name="add" size={20} color={colors.background} />
+      </TouchableOpacity>
+    </View>
+  );
 }
+
+
+
 
 function ClubCard({title, subtitle, image}) {
     return (
@@ -294,33 +328,40 @@ function ClubCard({title, subtitle, image}) {
     );
 }
 
+
+
+
+
+
+
 const styles = StyleSheet.create({
 
-    screen_background: {
-        flex: 1,
-        backgroundColor: colors.background,
-        marginBottom: -16,
-    },
-
-    hubs_title_location: {
-        marginTop: 45,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingHorizontal: 16,
-        paddingTop: 16,
-    },
-    hubs_title: {
-        fontSize: 18,
-        fontFamily: 'Poppins_700Bold',
-        color: colors.bluePrimary
-    },
+  screen_background: {
+    flex: 1,
+    backgroundColor: colors.background,
+    marginBottom: -16,
+  },
+  
+  hubs_title_location: {
+    marginTop: 45,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingTop: 16,
+  },
+  hubs_title: {
+    fontSize: 18,
+    fontFamily: 'Poppins_700Bold',
+    color: colors.bluePrimary
+  },
 
     tab_location: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         borderBottomWidth: 1,
         borderColor: '#ECECEC',
+        //paddingVertical: 1,
         marginTop: 16
     },
 
@@ -430,4 +471,55 @@ const styles = StyleSheet.create({
     contentContainer: {
         marginLeft: 6,
     },
+    horizontal_card: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: colors.background,
+      borderRadius: 12,
+      marginBottom: 8,
+      paddingVertical: 8,
+      paddingHorizontal: 8,
+      ...shadow, 
+    },
+    image_design_2: {
+      width: 120,
+      height: 120,
+      borderRadius: 12,
+      overflow: 'hidden',
+      marginRight: 12,
+    },
+
+    text_location_2: {
+      flex: 1,
+      justifyContent: 'center',
+    },
+    icon_with_text: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    icon_text: {
+      fontSize: 12,
+      fontFamily: 'Poppins_500Medium',
+      color: colors.blueTertiary,
+      marginLeft: 4,
+    },
+    icon_row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
