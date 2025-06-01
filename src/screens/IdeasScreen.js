@@ -123,7 +123,7 @@ export default function IdeasScreen({ navigation }) {
       <View style={styles.header}>
         <TouchableOpacity><Ionicons name="search" size={24} color="#01416D" /></TouchableOpacity>
         <Text style={styles.headerTitle} >Ideas</Text>
-        <TouchableOpacity><Ionicons name="tune" size={24} color="#01416D" /></TouchableOpacity>
+        <TouchableOpacity><Ionicons name="options-outline" size={24} color="#01416D" /></TouchableOpacity>
       </View>
 
       <View style={styles.tabsRow}>
