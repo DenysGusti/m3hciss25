@@ -581,7 +581,7 @@ const styles = StyleSheet.create({
     itemSubtitle: {
         fontSize: 12,
         fontFamily: 'Poppins_500Medium',
-        color: colors.bluePrimary
+        color: colors.blueTertiary,
     },
     recipeImage: {
         width: 48,

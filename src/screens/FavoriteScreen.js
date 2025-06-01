@@ -64,9 +64,9 @@ const styles = StyleSheet.create({
         color: colors.bluePrimary,
     },
     itemSubtitle: {
-        fontSize: 14,
+        fontSize: 12,
         fontFamily: 'Poppins_500Medium',
-        color: colors.bluePrimary,
+        color: colors.blueTertiary,
     },
     noFavoritesText: {
         textAlign: 'center',
