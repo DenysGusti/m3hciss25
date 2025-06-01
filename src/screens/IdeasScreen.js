@@ -208,8 +208,8 @@ export default function IdeasScreen({}) {
         <>
             <View style={styles.sectionHeader}>
                 <Text style={styles.viewAll}>{categoryName}</Text>
-                <TouchableOpacity onPress={handleGoBack}>
-                    <Text style={styles.viewAll}>‹ Back</Text>
+                <TouchableOpacity onPress={handleGoBack} hitSlop={styles.hitSlop}>
+                    <Text style={styles.viewAllRight}>‹ Back</Text>
                 </TouchableOpacity>
             </View>
             {items.map(item => (
@@ -344,8 +344,8 @@ function SectionHeaderRecipes({title, onPress, back = false}) {
     return (
         <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitleRecipes}>{title}</Text>
-            <TouchableOpacity onPress={onPress} hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-                <Text style={styles.viewAll}>{back ? '‹ Back' : 'View all ›'}</Text>
+            <TouchableOpacity onPress={onPress} hitSlop={styles.hitSlop}>
+                <Text style={styles.viewAllRight}>{back ? '‹ Back' : 'View all ›'}</Text>
             </TouchableOpacity>
         </View>
     );
@@ -612,6 +612,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins_600SemiBold',
         color: colors.orangePrimary,
     },
+    viewAllRight: {
+        fontSize: 14,
+        fontFamily: 'Poppins_600SemiBold',
+        color: colors.orangePrimary,
+    },
     card: {
         backgroundColor: colors.background,
         borderRadius: 12,
@@ -677,5 +682,11 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         marginLeft: 6,
+    },
+    hitSlop: {
+        top: 10,
+        bottom: 10,
+        left: 10,
+        right: 10,
     },
 });
