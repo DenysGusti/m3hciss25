@@ -159,53 +159,65 @@ export default function IdeasScreen({ navigation }) {
 
         {expandedCategory === 'Breakfast' && (
           <>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
-              <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
-                <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
-              </TouchableOpacity>
+            <View style={styles.viewAllHeader}>
+                <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
+              <Text style={styles.viewAll}>‹ Back</Text>
+                </TouchableOpacity>
+              <Text style={styles.viewAllHeaderTitle}>Breakfast</Text>
+                <View style={styles.viewAllBackButton} />
             </View>
-                {breakfast.map(item => (
-              <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
-              ))}
+
+              {breakfast.map(item => (
+            <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
+            ))}
           </>
         )}
 
         {expandedCategory === 'Snack' && (
           <>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
-              <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
-                <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
-              </TouchableOpacity>
+            <View style={styles.viewAllHeader}>
+                <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
+              <Text style={styles.viewAll}>‹ Back</Text>
+                </TouchableOpacity>
+              <Text style={styles.viewAllHeaderTitle}>Snack</Text>
+                <View style={styles.viewAllBackButton} />
             </View>
-                {snack.map(item => (
-              <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
-              ))}
+
+              {snack.map(item => (
+            <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
+            ))}
           </>
         )}
 
         {expandedCategory === 'Lunch' && (
           <>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
-              <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
-                <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
-              </TouchableOpacity>
+            <View style={styles.viewAllHeader}>
+                <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
+              <Text style={styles.viewAll}>‹ Back</Text>
+                </TouchableOpacity>
+              <Text style={styles.viewAllHeaderTitle}>Lunch</Text>
+                <View style={styles.viewAllBackButton} />
             </View>
-                {lunch.map(item => (
-              <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
-              ))}
+
+              {lunch.map(item => (
+            <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
+            ))}
           </>
         )}
 
         {expandedCategory === 'Dinner' && (
           <>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
-              <TouchableOpacity onPress={handleGoBack} style={{ paddingHorizontal: 8 }}>
-                <Text style={[styles.viewAll, { fontFamily: 'Poppins_600SemiBold' }]}>‹ Back</Text>
-              </TouchableOpacity>
+            <View style={styles.viewAllHeader}>
+                <TouchableOpacity onPress={handleGoBack} style={styles.viewAllBackButton}>
+              <Text style={styles.viewAll}>‹ Back</Text>
+                </TouchableOpacity>
+              <Text style={styles.viewAllHeaderTitle}>Dinner</Text>
+                <View style={styles.viewAllBackButton} />
             </View>
-                {dinner.map(item => (
-              <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
-              ))}
+
+              {dinner.map(item => (
+            <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
+            ))}
           </>
         )}
       </>
@@ -307,18 +319,14 @@ function ViewAllRecipesCard({ title, subtitle, image, type = "recipes" }) {
   const heartColor = type === "recipes" ? colors.orangePrimary : colors.bluePrimary;
 
   return (
-    <View style={[styles.card]}>
-      <View style={styles.imageWrapper}>
-        <Image source={image} style={styles.cardImage} resizeMode="cover" />
-      </View>
-
-      <View style={styles.cardFooter}>
-        <View style={styles.textContainer}>
+    <View style={styles.viewAllCardContainer}>
+      <Image source={image} style={styles.viewAllImage} resizeMode="cover" />
+      <View style={styles.viewAllTextContainer}>
+        <View style={{ flex: 1 }}>
           <Text style={styles.cardTitle}>{title}</Text>
           <Text style={styles.cardSubtitle}>{subtitle}</Text>
         </View>
-
-        <TouchableOpacity style={styles.heartIconContainer} onPress={toggleLike}>
+        <TouchableOpacity onPress={toggleLike} style={styles.viewAllHeartIcon}>
           <AntDesign
             name={liked ? "heart" : "hearto"}
             size={20}
@@ -552,4 +560,52 @@ const styles = StyleSheet.create({
     alignItems: 'center',     
     paddingVertical: 12,
   },
+
+  viewAllCardContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  backgroundColor: colors.background,
+  borderRadius: 12,
+  marginBottom: 16,
+  padding: 10,
+  ...shadow,
+},
+
+viewAllImage: {
+  width: 80,
+  height: 80,
+  borderRadius: 8,
+  marginRight: 12,
+},
+
+viewAllTextContainer: {
+  flex: 1,
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+},
+viewAllHeartIcon: {
+  padding: 4,
+},
+viewAllHeader: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  marginTop: 16,
+  marginBottom: 8,
+  paddingHorizontal: 8,
+},
+
+viewAllBackButton: {
+  width: 60, 
+  alignItems: 'flex-start',
+},
+
+viewAllHeaderTitle: {
+  fontSize: 16,
+  fontFamily: 'Poppins_600SemiBold',
+  color: colors.orangePrimary,
+  textAlign: 'center',
+  flex: 1,
+},
 });
