@@ -226,7 +226,8 @@ export default function ProfileScreen({navigation}) {
                                         <Text style={styles.itemTitle}>{item.title}</Text>
                                         <Text style={styles.itemSubtitle}>{item.subtitle}</Text>
                                     </View>
-                                    <TouchableOpacity onPress={() => toggleFavoriteRecipe(item.id)} hitSlop={styles.hitSlop}>
+                                    <TouchableOpacity onPress={() => toggleFavoriteRecipe(item.id)}
+                                                      hitSlop={styles.hitSlop}>
                                         <AntDesign name="heart" size={20} color={colors.orangePrimary}/>
                                     </TouchableOpacity>
                                 </View>
@@ -269,7 +270,8 @@ export default function ProfileScreen({navigation}) {
                                         <Text style={styles.itemTitle}>{item.title}</Text>
                                         <Text style={styles.itemSubtitle}>{item.subtitle}</Text>
                                     </View>
-                                    <TouchableOpacity onPress={() => toggleFavoriteActivity(item.id)}>
+                                    <TouchableOpacity onPress={() => toggleFavoriteActivity(item.id)}
+                                                      hitSlop={styles.hitSlop}>
                                         <AntDesign name="heart" size={20} color={colors.bluePrimary}/>
                                     </TouchableOpacity>
                                 </View>
@@ -595,7 +597,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         marginRight: 12,
     },
-    showAllButton: { 
+    showAllButton: {
         marginHorizontal: 12,
         paddingVertical: 10,
         borderRadius: 16,
