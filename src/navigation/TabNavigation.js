@@ -114,7 +114,7 @@ function NavigationTab({setModalVisible}) {
                 }}
             />
             <Tab.Screen name="  Ideas  " component={IdeasScreen}/>
-            <Tab.Screen name="  Profile  " component={FavoriteNavigation} />
+            <Tab.Screen name="  Profile  " component={FavoriteNavigation}/>
         </Tab.Navigator>
     );
 }
@@ -165,8 +165,6 @@ function PopupMenu({modalVisible, setModalVisible}) {
         </Modal>
     );
 }
-
-
 
 const styles = StyleSheet.create({
     plusButton: {
