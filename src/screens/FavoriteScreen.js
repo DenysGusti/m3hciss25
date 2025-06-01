@@ -18,6 +18,16 @@ export default function FavoriteScreen({title, items, toggleFavorite, iconColor}
                         <View style={styles.itemInfo}>
                             <Text style={styles.itemTitle}>{item.title}</Text>
                             <Text style={styles.itemSubtitle}>{item.subtitle}</Text>
+                            <View style={styles.viewAllInfoRow}>
+                                {item.gramsPerPortion != null && (
+                                    <>
+                                        <Text style={styles.itemSubtitle}>{item.gramsPerPortion}</Text>
+                                        <Text style={styles.infoSeparator}> · </Text>
+                                        <Text style={styles.itemSubtitle}>{item.cookTime}</Text>
+                                    </>
+                                )}
+                            </View>
+
                         </View>
                         <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
                             <AntDesign name="heart" size={20} color={iconColor}/>
@@ -50,10 +60,10 @@ const styles = StyleSheet.create({
         ...shadow,
     },
     itemImage: {
-        width: 60,
-        height: 60,
-        borderRadius: 12,
-        marginRight: 16,
+        width: 120,
+        height: 120,
+        borderRadius: 8,
+        marginRight: 12,
     },
     itemInfo: {
         flex: 1,
@@ -72,5 +82,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 32,
         fontFamily: 'Poppins_600SemiBold',
+    },
+    viewAllInfoRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 6,
     },
 });
