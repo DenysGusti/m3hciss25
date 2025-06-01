@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
     itemSubtitle: {
         fontSize: 14,
-        fontFamily: 'Poppins_600SemiBold',
+        fontFamily: 'Poppins_500Medium',
         color: colors.bluePrimary,
     },
     noFavoritesText: {
