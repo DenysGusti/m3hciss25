@@ -29,7 +29,7 @@ export default function FavoriteScreen({title, items, toggleFavorite, iconColor}
                             </View>
 
                         </View>
-                        <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
+                        <TouchableOpacity onPress={() => toggleFavorite(item.id)} hitSlop={styles.hitSlop}>
                             <AntDesign name="heart" size={20} color={iconColor}/>
                         </TouchableOpacity>
                     </View>
@@ -87,5 +87,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 6,
+    },
+    hitSlop: {
+        top: 10,
+        bottom: 10,
+        left: 10,
+        right: 10,
     },
 });

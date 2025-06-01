@@ -4,9 +4,20 @@ import FavoriteScreen from '../screens/FavoriteScreen';
 import {useAppContext} from '../context/AppContext';
 import {breakfast, snack, lunch, dinner, activities} from '../screens/IdeasScreen';
 import {colors} from '../theme/colors';
-import {StyleSheet} from "react-native";
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Ionicons} from '@expo/vector-icons'; // or any icon lib you use
+import {useNavigation} from '@react-navigation/native';
 
 const Stack = createStackNavigator();
+
+function CustomBackButton() {
+    const navigation = useNavigation();
+    return (
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{marginLeft: 16}}>
+            <Ionicons name="arrow-back" size={24} color={colors.bluePrimary}/>
+        </TouchableOpacity>
+    );
+}
 
 export default function FavoriteNavigation() {
     const {favoriteRecipes, toggleFavoriteRecipe, favoriteActivities, toggleFavoriteActivity} = useAppContext();
@@ -25,9 +36,13 @@ export default function FavoriteNavigation() {
             screenOptions={{
                 cardStyle: {backgroundColor: colors.background},
                 headerTintColor: colors.bluePrimary,
-                headerTitleStyle: {color: colors.bluePrimary},
+                headerTitleStyle: styles.headerTitle,
+                headerBackTitleVisible: false,
+                headerTitleAlign: 'center',
+                headerRight: () => <View style={{ width: 40 }} />,
             }}
-            id="1">
+            id="1"
+        >
             <Stack.Screen
                 name="Profile"
                 component={ProfileScreen}
@@ -38,6 +53,7 @@ export default function FavoriteNavigation() {
                 options={{
                     title: 'My favorite recipes',
                     headerTitleStyle: styles.headerTitle,
+                    headerLeft: () => <CustomBackButton/>,
                 }}
             >
                 {() => (
@@ -54,6 +70,7 @@ export default function FavoriteNavigation() {
                 options={{
                     title: 'My favorite activities',
                     headerTitleStyle: styles.headerTitle,
+                    headerLeft: () => <CustomBackButton/>,
                 }}
             >
                 {() => (

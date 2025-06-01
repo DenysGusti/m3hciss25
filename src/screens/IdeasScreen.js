@@ -327,44 +327,47 @@ export default function IdeasScreen({}) {
                 )}
 
                 {activeTab === 'Activities' && (
-                  <>
-                      <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus} onSelect={setSelectedBodyFocus} />
-                      <FilterGroup title="Level" options={levelOptions} selected={selectedLevel} onSelect={setSelectedLevel} />
-                      <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration} onSelect={setSelectedDuration} />
+                    <>
+                        <FilterGroup title="Body Focus" options={bodyFocusOptions} selected={selectedBodyFocus}
+                                     onSelect={setSelectedBodyFocus}/>
+                        <FilterGroup title="Level" options={levelOptions} selected={selectedLevel}
+                                     onSelect={setSelectedLevel}/>
+                        <FilterGroup title="Duration" options={durationOptions} selected={selectedDuration}
+                                     onSelect={setSelectedDuration}/>
 
-                    {filterActivities(activities.pilates).length > 0 && (
-                  <>
-                    <SectionHeaderActivities title="Pilates" />
-                        <View style={styles.listContainer}>
-                    <FlatList
-                        contentContainerStyle={styles.contentContainer}
-                        data={filterActivities(activities.pilates)}
-                        keyExtractor={item => item.id}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        renderItem={({ item }) => <IdeasCard {...item} type="activities" />}
-                    />
-                      </View>
+                        {filterActivities(activities.pilates).length > 0 && (
+                            <>
+                                <SectionHeaderActivities title="Pilates"/>
+                                <View style={styles.listContainer}>
+                                    <FlatList
+                                        contentContainerStyle={styles.contentContainer}
+                                        data={filterActivities(activities.pilates)}
+                                        keyExtractor={item => item.id}
+                                        horizontal
+                                        showsHorizontalScrollIndicator={false}
+                                        renderItem={({item}) => <IdeasCard {...item} type="activities"/>}
+                                    />
+                                </View>
+                            </>
+                        )}
+
+                        {filterActivities(activities.yoga).length > 0 && (
+                            <>
+                                <SectionHeaderActivities title="Yoga"/>
+                                <View style={styles.listContainer}>
+                                    <FlatList
+                                        contentContainerStyle={styles.contentContainer}
+                                        data={filterActivities(activities.yoga)}
+                                        keyExtractor={item => item.id}
+                                        horizontal
+                                        showsHorizontalScrollIndicator={false}
+                                        renderItem={({item}) => <IdeasCard {...item} type="activities"/>}
+                                    />
+                                </View>
+                            </>
+                        )}
                     </>
                 )}
-
-              {filterActivities(activities.yoga).length > 0 && (
-                <>
-                  <SectionHeaderActivities title="Yoga" />
-                  <View style={styles.listContainer}>
-                  <FlatList
-                    contentContainerStyle={styles.contentContainer}
-                    data={filterActivities(activities.yoga)}
-                    keyExtractor={item => item.id}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => <IdeasCard {...item} type="activities" />}
-                  />
-                </View>
-                </>
-              )}
-            </>
-          )}
             </ScrollView>
         </View>
     );
