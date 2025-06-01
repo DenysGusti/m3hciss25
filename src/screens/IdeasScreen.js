@@ -28,26 +28,26 @@ const levelOptions = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 const durationOptions = ['5–10 min', '10–15 min', '15–20 min', '20–30 min'];
 
 const breakfast = [
-  { id: 'r1', title: 'Scrambled Egg & Avocado Tacos', subtitle: '400 kcal', image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg') },
-  { id: 'r2', title: 'Apple-Cranberry Oatmeal with Pecans', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Breakfast_Oatmeal.jpg') },
-  { id: 'r3', title: 'Cottage Cheese Bowl with Berries', subtitle: '300 kcal', image: require('../../assets/IdeasImages/Breakfast_Cottage_Cheese_Fruit_Bowl.jpg') },
+  { id: 'r1', title: 'Scrambled Egg & Avocado Tacos', subtitle: '400 kcal', gramsPerPortion: '250 g', cookTime: '20 min', image: require('../../assets/IdeasImages/Breakfast_Tortillas.jpg') },
+  { id: 'r2', title: 'Apple-Cranberry Oatmeal with Pecans', subtitle: '350 kcal', gramsPerPortion: '170 g', cookTime: '10 min', image: require('../../assets/IdeasImages/Breakfast_Oatmeal.jpg') },
+  { id: 'r3', title: 'Cottage Cheese Bowl with Berries', subtitle: '300 kcal', gramsPerPortion: '188 g', cookTime: '10 min', image: require('../../assets/IdeasImages/Breakfast_Cottage_Cheese_Fruit_Bowl.jpg') },
 ];
 
 const snack = [
-  { id: 'n1', title: 'Mango Salsa Dips with Veggis', subtitle: '130 kcal', image: require('../../assets/IdeasImages/Snack_Salsa.jpg') },
-  { id: 'n2', title: 'Chia Pudding with Berries', subtitle: '200 kcal', image: require('../../assets/IdeasImages/Chia_Pudding.jpg') },
-  { id: 'n3', title: 'Homemade Oat    Bars', subtitle: '190 kcal', image: require('../../assets/IdeasImages/Snack_Bars.jpg') },
+  { id: 'n1', title: 'Mango Salsa Dips with Veggis', subtitle: '130 kcal', gramsPerPortion: '100 g', cookTime: '5 min', image: require('../../assets/IdeasImages/Snack_Salsa.jpg') },
+  { id: 'n2', title: 'Chia Pudding with Berries', subtitle: '200 kcal', gramsPerPortion: '250 g', cookTime: '20 min', image: require('../../assets/IdeasImages/Chia_Pudding.jpg') },
+  { id: 'n3', title: 'Homemade Oat    Bars', subtitle: '190 kcal', gramsPerPortion: '250 g', cookTime: '20 min', image: require('../../assets/IdeasImages/Snack_Bars.jpg') },
 ];
 
 const lunch = [
-  { id: 'b1', title: 'Tomato-lentil   Soup & Bread', subtitle: '270 kcal', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
-  { id: 'b2', title: 'Teriyaki Chicken Rice Bowl', subtitle: '470 kcal', image: require('../../assets/IdeasImages/Lunch_Rice_Bowl.jpg') },
+  { id: 'b1', title: 'Tomato-lentil   Soup & Bread', subtitle: '270 kcal', gramsPerPortion: '250 g', cookTime: '20 min', image: require('../../assets/IdeasImages/Lunch_Soup.jpg') },
+  { id: 'b2', title: 'Teriyaki Chicken Rice Bowl', subtitle: '470 kcal', gramsPerPortion: '250 g', cookTime: '20 min',  image: require('../../assets/IdeasImages/Lunch_Rice_Bowl.jpg') },
   { id: 'b3', title: 'Chickpea Quinoa Salad', subtitle: '350 kcal', image: require('../../assets/IdeasImages/Lunch_Chickpea_Quinoa_Salad_8.jpg') },
 ];
 const dinner = [
-  { id: 'c1', title: 'Quiche with Mushrooms', subtitle: '490 kcal', image: require('../../assets/IdeasImages/dinner1.jpg') },
-  { id: 'c2', title: 'Lasagna with     Beef', subtitle: '510 kcal', image: require('../../assets/IdeasImages/dinner2.jpg') },
-  { id: 'c3', title: 'Ceaser Salad with Chicken', subtitle: '370 kcal', image: require('../../assets/IdeasImages/dinner3.jpg') },
+  { id: 'c1', title: 'Quiche with Mushrooms', subtitle: '490 kcal', gramsPerPortion: '250 g', cookTime: '20 min', image: require('../../assets/IdeasImages/dinner1.jpg') },
+  { id: 'c2', title: 'Lasagna with     Beef', subtitle: '510 kcal', gramsPerPortion: '250 g', cookTime: '20 min', image: require('../../assets/IdeasImages/dinner2.jpg') },
+  { id: 'c3', title: 'Ceaser Salad with Chicken', subtitle: '370 kcal', gramsPerPortion: '250 g', cookTime: '20 min', image: require('../../assets/IdeasImages/dinner3.jpg') },
 ];
 
 const activities = {
@@ -168,7 +168,14 @@ export default function IdeasScreen({ navigation }) {
             </View>
 
               {breakfast.map(item => (
-            <ViewAllRecipesCard key={item.id} {...item} type="recipes" />
+            <ViewAllRecipesCard  
+              key={item.id}
+              title={item.title}
+              subtitle={item.subtitle}
+              image={item.image}
+              gramsPerPortion={item.gramsPerPortion}
+              cookTime={item.cookTime}
+              type="recipes" />
             ))}
           </>
         )}
@@ -309,7 +316,7 @@ function IdeasCard({ title, subtitle, image, type = "recipes" }) {
   );
 }
 
-function ViewAllRecipesCard({ title, subtitle, image, type = "recipes" }) {
+function ViewAllRecipesCard({ title, subtitle, image, gramsPerPortion = '---',  cookTime = '---', type = "recipes" }) {
   const [liked, setLiked] = useState(false);
 
   const toggleLike = () => {
@@ -321,17 +328,21 @@ function ViewAllRecipesCard({ title, subtitle, image, type = "recipes" }) {
   return (
     <View style={styles.viewAllCardContainer}>
       <Image source={image} style={styles.viewAllImage} resizeMode="cover" />
+      
       <View style={styles.viewAllTextContainer}>
         <View style={{ flex: 1 }}>
           <Text style={styles.cardTitle}>{title}</Text>
           <Text style={styles.cardSubtitle}>{subtitle}</Text>
+
+          <View style={styles.viewAllInfoRow}>
+            <Text style={styles.infoText}>{gramsPerPortion}</Text>
+            <Text style={styles.infoSeparator}>·</Text>
+            <Text style={styles.infoText}>{cookTime}</Text>
+          </View>
         </View>
+
         <TouchableOpacity onPress={toggleLike} style={styles.viewAllHeartIcon}>
-          <AntDesign
-            name={liked ? "heart" : "hearto"}
-            size={20}
-            color={heartColor}
-          />
+          <AntDesign name={liked ? "heart" : "hearto"} size={20} color={heartColor} />
         </TouchableOpacity>
       </View>
     </View>
@@ -607,5 +618,22 @@ viewAllHeaderTitle: {
   color: colors.orangePrimary,
   textAlign: 'center',
   flex: 1,
+},
+viewAllInfoRow: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginTop: 6,
+},
+
+infoText: {
+  fontSize: 12,
+  fontFamily: 'Poppins_500Regular',
+  color: colors.blueTertiary,
+},
+
+infoSeparator: {
+  fontSize: 12,
+  color: colors.blueTertiary,
+  marginHorizontal: 6,
 },
 });
