@@ -35,7 +35,7 @@ Externe Libraries und Frameworks:
 - react-native-vector-icons
 
 Dauer der Entwicklung:
-160 Stunden
+200 Stunden
 
 Weitere Anmerkungen:
 Keine
